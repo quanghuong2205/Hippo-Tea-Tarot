@@ -27,6 +27,12 @@ app.use(
 );
 
 /**
+ * Database connection
+ */
+const connectorInstance = require('./database/connector.database');
+connectorInstance.connect();
+
+/**
  * Routers
  */
 const initRouters = require('./routers');

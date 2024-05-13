@@ -1,5 +1,3 @@
-'use strict';
-
 const app = require('./src/app');
 const ENV = require('./config/index');
 const connectorInstance = require('./src/database/connector.database');
@@ -15,6 +13,9 @@ const server = app.listen(ENV.APP.PORT, () => {
 
 /* Press Ctrl + C to close the server */
 process.on('SIGINT', async () => {
+    /* Close the database */
+    await connectorInstance.disconnect();
+
     /* Close the server */
     server.close((error) => {
         if (error)
