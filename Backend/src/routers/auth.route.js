@@ -4,14 +4,19 @@ const AuthRouter = express.Router();
 const AuthController = require('../controllers/auth.controller');
 
 /**
+ * Middlewares
+ */
+const errorCatcher = require('../middlewares/error.middleware');
+
+/**
  * USER ROUTES
  */
 
 /* [POST] [/auth/signin] */
-AuthRouter.post('/signin', AuthController.signIn);
+AuthRouter.post('/signin', errorCatcher(AuthController.signIn));
 
 /* [POST] [/auth/signup] */
-AuthRouter.post('/signup', AuthController.signUp);
+AuthRouter.post('/signup', errorCatcher(AuthController.signUp));
 
 /* Export the router */
 module.exports = AuthRouter;
