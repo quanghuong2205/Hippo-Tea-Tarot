@@ -1,4 +1,5 @@
 'use strict';
+const { Types } = require('mongoose');
 const KeyModel = require('../models/key.model');
 
 /* Define the repo */
@@ -12,7 +13,7 @@ class KeyRepo {
      * @returns
      */
     static async saveKey({ publicKey, privateKey, refreshToken, userID }) {
-        const FILTER = { user: userID };
+        const FILTER = { user: new Types.ObjectId(userID) };
         const UPDATE = {
             user: userID,
             public_key: publicKey,
@@ -36,7 +37,7 @@ class KeyRepo {
      */
     static async findKeyByUserID({ userID }) {
         const keyObject = await KeyModel.findOne({
-            user: userID,
+            user: new Types.ObjectId(userID),
         });
 
         return keyObject;

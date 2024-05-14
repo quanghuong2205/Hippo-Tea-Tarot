@@ -21,7 +21,9 @@ class UserRepo {
     }
 
     static async findUserByID({ userID }) {
-        const userObject = await UserModel.findById(userID).lean();
+        const userObject = await UserModel.findById(
+            new Types.ObjectId(userID)
+        ).lean();
         return userObject;
     }
 

@@ -2,7 +2,7 @@
 
 const AuthServices = require('../services/auth.service');
 const { OK } = require('../helpers/success.res.helper');
-const CODES = require('../utils/code.http');
+const CODES = require('../helpers/error.res.helper');
 
 /* Define the controller */
 class AuthController {
@@ -38,6 +38,37 @@ class AuthController {
             message: 'Sign up successfully',
             code: CODES.SIGN_UP_OK,
             body,
+        }).sendResponse(res);
+    }
+
+    /**
+     *
+     * @desc Logout the account
+     */
+    static async signOut(req, res, next) {
+        const body = await AuthServices.signOut({
+            userID: req.clientID,
+        });
+
+        return new OK({
+            message: 'Sign out successfully',
+            code: CODES.SIGN_OUT_OK,
+            body,
+        }).sendResponse(res);
+    }
+
+    /**
+     * @desc Reset the token pari
+     */
+    static async refreshToken(req, res, next) {
+        const body = await AuthServices.resetToken({
+            userID: req.clientID,
+        });
+
+        return new OK({
+            message: 'Get the token pair successfully',
+            body,
+            code: CODES.JWT_SUCCESS_TO_CREATE_TOKEN_PAIR,
         }).sendResponse(res);
     }
 }

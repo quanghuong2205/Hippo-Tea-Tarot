@@ -1,14 +1,14 @@
 'use strict';
-const HTTP_HEADERS = require('../../constants/http.headers.constants');
-const KeyRepo = require('../../repositories/key.repo');
-const UserRepo = require('../../repositories/user.repo');
-const JWTServices = require('../../services/jwt.service');
-const CODES = require('../../utils/code.http');
+const HTTP_HEADERS = require('../constants/http.headers.constants');
+const KeyRepo = require('../repositories/key.repo');
+const UserRepo = require('../repositories/user.repo');
+const JWTServices = require('../services/jwt.service');
+const CODES = require('../utils/code.http');
 const {
     BadRequestError,
     UnauthorizedError,
-} = require('../../utils/error.response.util');
-const { checkID } = require('../../utils/mongoose.util');
+} = require('../helpers/error.res.helper');
+const { checkID } = require('../utils/mongoose.util');
 
 /* Define middlewares */
 const verifyClientID = async (req, res, next) => {
@@ -58,8 +58,9 @@ const verifyAccessToken = async (req, res, next) => {
      */
     let accessToken = req.headers[HTTP_HEADERS.ACCESS_TOKEN];
     if (!accessToken) {
+        console.log('not ac');
         throw new UnauthorizedError({
-            code: CODES.MISS_ACCESS_TOKEN,
+            code: CODES.JWT_MISS_ACCESS_TOKEN,
         });
     }
 
@@ -74,7 +75,7 @@ const verifyAccessToken = async (req, res, next) => {
 
     if (!keyObject) {
         throw new UnauthorizedError({
-            code: CODES.INVALID_ACCESS_TOKEN,
+            code: CODES.JWT_INVALID_ACCESS_TOKEN,
         });
     }
 
@@ -89,7 +90,7 @@ const verifyAccessToken = async (req, res, next) => {
 
     if (decodedPayload.id !== req.clientID) {
         throw new UnauthorizedError({
-            code: CODES.INVALID_ACCESS_TOKEN,
+            code: CODES.JWT_INVALID_ACCESS_TOKEN,
         });
     }
 
@@ -113,7 +114,7 @@ const verifyRefreshToken = async (req, res, next) => {
     console.log(refreshToken);
     if (!refreshToken) {
         throw new UnauthorizedError({
-            code: CODES.MISS_REFRESH_TOKEN,
+            code: CODES.JWT_MISS_REFRESH_TOKEN,
         });
     }
 
@@ -128,7 +129,7 @@ const verifyRefreshToken = async (req, res, next) => {
 
     if (!keyObject) {
         throw new UnauthorizedError({
-            code: CODES.INVALID_REFRESH_TOKEN,
+            code: CODES.JWT_INVALID_REFRESH_TOKEN,
         });
     }
 
@@ -141,9 +142,10 @@ const verifyRefreshToken = async (req, res, next) => {
         refreshToken,
     });
 
+    console.log(decodedPayload);
     if (decodedPayload.id !== req.clientID) {
         throw new UnauthorizedError({
-            code: CODES.INVALID_REFRESH_TOKEN,
+            code: CODES.JWT_INVALID_REFRESH_TOKEN,
         });
     }
 

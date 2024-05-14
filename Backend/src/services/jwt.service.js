@@ -45,7 +45,7 @@ class JWTServices {
             console.log(error);
             throw new ServerError({
                 message: 'Internal Server Error',
-                code: CODES.FAIL_TO_SIGN_ACCESS_TOKEN,
+                code: CODES.JWT_FAIL_TO_SIGN_REFRESH_TOKEN,
             });
         }
     }
@@ -74,7 +74,7 @@ class JWTServices {
         } catch (error) {
             throw new ServerError({
                 message: 'Internal Server Error',
-                code: CODES.FAIL_TO_SIGN_REFRESH_TOKEN,
+                code: CODES.JWT_FAIL_TO_SIGN_REFRESH_TOKEN,
             });
         }
     }
@@ -127,7 +127,7 @@ class JWTServices {
         } catch (error) {
             throw new UnauthorizedError({
                 message: 'Unauthorized',
-                code: CODES.INVALID_ACCESS_TOKEN,
+                code: CODES.JWT_INVALID_ACCESS_TOKEN,
             });
         }
     }
@@ -154,7 +154,7 @@ class JWTServices {
         } catch (error) {
             throw new UnauthorizedError({
                 message: 'Unauthorized',
-                code: CODES.INVALID_REFRESH_TOKEN,
+                code: CODES.JWT_INVALID_REFRESH_TOKEN,
             });
         }
     }

@@ -146,6 +146,94 @@ class AuthServices {
             }),
         };
     }
+
+    /**
+     * @desc Logout the user
+     */
+    static async signOut({ userID }) {
+        /**
+         * Verify user
+         */
+        const userObject = await UserRepo.findUserByID({
+            userID,
+        });
+
+        if (!userObject) {
+            throw new UnauthorizedError();
+        }
+
+        /**
+         * Remove key (used to verify)
+         */
+        const keyObject = await KeyRepo.removeKeyByUserID({
+            userID,
+        });
+
+        if (!keyObject) {
+            throw new ServerError({
+                code: CODES.FAIL_TO_REMOVE_DOCUMENT,
+            });
+        }
+
+        /**
+         * Return user
+         */
+        return {
+            accessToken: null,
+            refreshToken: null,
+        };
+    }
+
+    /**
+     * @desc Get a new token pair
+     */
+    static async resetToken({ userID }) {
+        /**
+         * Generate a pair of keys
+         */
+        const { publicKey, privateKey } = KeyServices.generateKeyPair();
+
+        /**
+         * Find user
+         */
+        const userObject = await UserRepo.findUserByID({
+            userID,
+        });
+
+        /**
+         * Sign tokens
+         */
+        const { accessToken, refreshToken } =
+            await JWTServices.signTokenPair({
+                publicKey,
+                privateKey,
+                payload: {
+                    id: userObject._id,
+                    email: userObject.email,
+                },
+            });
+
+        /**
+         * Save tokens to the database
+         */
+        const keyObject = await KeyRepo.saveKey({
+            publicKey,
+            privateKey,
+            refreshToken,
+            userID,
+        });
+
+        if (!keyObject) {
+            throw new ServerError({
+                code: CODES.FAIL_TO_CREATE_DOCUMENT,
+            });
+        }
+
+        return {
+            accessToken,
+            refreshToken,
+        };
+    }
 }
 
 /**

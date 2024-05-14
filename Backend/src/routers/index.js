@@ -8,7 +8,7 @@ const BASE_URL = '/api/v1';
 /**
  * Sub-routers
  */
-const AuthRouter = require('./auth');
+const AuthRouter = require('./auth.route');
 
 /**
  * Main router
