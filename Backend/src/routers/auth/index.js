@@ -6,7 +6,7 @@ const AuthController = require('../controllers/auth.controller');
 /**
  * Middlewares
  */
-const errorCatcher = require('../middlewares/error.middleware');
+const { errorCatcher } = require('../middlewares/error');
 
 /**
  * USER ROUTES

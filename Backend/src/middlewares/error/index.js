@@ -7,4 +7,4 @@ const errorCatcher = (controller) => async (req, res, next) => {
     }
 };
 
-module.exports = errorCatcher;
+module.exports = { errorCatcher };
