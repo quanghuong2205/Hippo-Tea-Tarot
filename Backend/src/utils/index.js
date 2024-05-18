@@ -50,9 +50,120 @@ const unSelectProps = (props) => {
     return Object.fromEntries(props);
 };
 
+/**
+ * @desc check subset of an array
+ */
+
+const isSubSet = ({ child = [], parent = [] }) => {
+    const childLen = child.length;
+    const parentLen = parent.length;
+
+    if (childLen > parentLen || childLen < 0 || parentLen < 0) {
+        return false;
+    }
+
+    for (let i = 0; i < childLen; i++) {
+        if (!parent.includes(child[i])) {
+            return false;
+        }
+    }
+
+    return true;
+};
+
+/**
+ * @desc Get skip index
+ */
+const getSkip = ({ page, limit }) => {
+    if (parseInt(page) === 0) return 0;
+    return (page - 1) * limit;
+};
+
+/**
+ * @desc Find max value in array
+ */
+const findMaxInArray = ({ arr }) => {
+    return Math.max(...arr);
+};
+
+/**
+ * @desc Remove null or undefined props in the object
+ */
+const removeNullOrUndefinedProps = (obj = {}) => {
+    const keys = Object.keys(obj);
+    keys.forEach((key) => {
+        if (!obj[key]) {
+            delete obj[key];
+        }
+
+        if (obj[key] && typeof obj[key] === 'object') {
+            removeNullOrUndefinedProps(obj[key]);
+        }
+    });
+
+    return obj;
+};
+
+/**
+ *
+ * @desc Append the prefxix to each prop of the object
+ */
+const appendPrefixToProps = (prefix, obj) => {
+    if (!prefix) return obj;
+
+    const keys = Object.keys(obj);
+    keys.forEach((key) => {
+        obj[`${prefix}.${key}`] = obj[key];
+        delete obj[key];
+    });
+
+    return obj;
+};
+
+/**
+ *
+ * @desc Flatten the object
+ */
+const flattenObject = ({ prefix = null, obj }) => {
+    const keys = Object.keys(obj);
+
+    for (let i = 0; i < keys.length; i++) {
+        const key = keys[i];
+
+        if (!obj[key]) continue;
+
+        if (typeof obj[key] === 'object' && !Array.isArray(obj[key])) {
+            const flatten = flattenObject({
+                prefix: key,
+                obj: obj[key],
+            });
+
+            delete obj[key];
+
+            Object.assign(obj, {
+                ...appendPrefixToProps(prefix, flatten),
+            });
+
+            continue;
+        }
+
+        if (!prefix) continue;
+
+        obj[`${prefix}.${key}`] = obj[key];
+        delete obj[key];
+    }
+
+    return obj;
+};
+
 module.exports = {
     selectPropsInObject,
     selectProps,
     unSelectProps,
     unSelectPropsInObject,
+    isSubSet,
+    getSkip,
+    findMaxInArray,
+    removeNullOrUndefinedProps,
+    flattenObject,
 };
