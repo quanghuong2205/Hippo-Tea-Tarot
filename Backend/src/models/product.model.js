@@ -15,22 +15,8 @@ const productSchema = new Schema(
 
         category: {
             type: String,
-            enum: {
-                values: [
-                    'drink',
-                    'food',
-                    'coffee',
-                    'yogurt',
-                    'machiato',
-                    'tea',
-                    'ice blend',
-                    'juice',
-                    'topping',
-                    'snack',
-                ],
-                message: '{VALUE} is not proper category',
-            },
             required: true,
+            ref: 'Category',
         },
 
         slug: {
@@ -65,11 +51,6 @@ const productSchema = new Schema(
             max: [5, 'Rating must be less 5'],
         },
 
-        is_on_sale: {
-            type: Boolean,
-            default: true,
-        },
-
         is_draft: {
             type: Boolean,
             default: false,
@@ -80,11 +61,6 @@ const productSchema = new Schema(
             type: Boolean,
             default: true,
             select: false,
-        },
-
-        is_best_seller: {
-            type: Boolean,
-            default: false,
         },
 
         attributes: {

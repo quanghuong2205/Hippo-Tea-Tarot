@@ -17,16 +17,21 @@ class ProductController {
             context: 'product',
         });
 
-        const body = await ProductServices.createProduct({
-            category: req.body.category,
-            productProps: req.body,
-            req,
-            relativePaths,
-        });
+        if (!req.body?.category) {
+            throw new BadRequestError({
+                message: 'Not provide the category of the product',
+                code: CODES.PRODUCT_CREATION_MISS_CATEGORY,
+            });
+        }
 
         return new CREATED({
             message: 'Created the product successfully',
-            body,
+            body: await ProductServices.createProduct({
+                category: req.body.category,
+                productProps: req.body,
+                req,
+                relativePaths,
+            }),
         }).sendResponse(res);
     }
 
@@ -34,6 +39,13 @@ class ProductController {
      * @route [DELETE] /product/:id
      */
     static async deleteProduct(req, res, next) {
+        if (!req.params?.id) {
+            throw new BadRequestError({
+                message: 'Not provide the id of the product',
+                code: CODES.PRODUCT_MISS_ID,
+            });
+        }
+
         const body = await ProductServices.deleteProduct({
             productID: req.params.id,
         });
@@ -81,15 +93,13 @@ class ProductController {
      * @returns
      */
     static async getPublishedProducts(req, res, next) {
-        const body = await ProductServices.getPublishedProducts({
-            filterParams: req.query,
-            page: req.query?.page,
-            limit: req.query?.limit,
-        });
-
         return new OK({
             message: 'Got all published products successfully',
-            body: body,
+            body: await ProductServices.getPublishedProducts({
+                filterParams: req.query,
+                page: req.query?.page,
+                limit: req.query?.limit,
+            }),
             code: CODES.OK,
         }).sendResponse(res);
     }
@@ -99,15 +109,13 @@ class ProductController {
      * @returns
      */
     static async getDraftProducts(req, res, next) {
-        const body = await ProductServices.getDraftProducts({
-            filterParams: req.query,
-            page: req.query?.page,
-            limit: req.query?.limit,
-        });
-
         return new OK({
             message: 'Got all draft products successfully',
-            body: body,
+            body: await ProductServices.getDraftProducts({
+                filterParams: req.query,
+                page: req.query?.page,
+                limit: req.query?.limit,
+            }),
             code: CODES.OK,
         }).sendResponse(res);
     }
@@ -123,13 +131,11 @@ class ProductController {
             });
         }
 
-        const body = await ProductServices.getPublishedProductsByCat({
-            category: req.params.cat,
-        });
-
         return new OK({
             message: 'Got all products by category successfully',
-            body,
+            body: await ProductServices.getPublishedProductsByCat({
+                category: req.params.cat,
+            }),
             code: CODES.OK,
         }).sendResponse(res);
     }
@@ -145,13 +151,11 @@ class ProductController {
             });
         }
 
-        const body = await ProductServices.getPublishedProduct({
-            productID: req.params.id,
-        });
-
         return new OK({
             message: 'Got the product successfully',
-            body,
+            body: await ProductServices.getPublishedProduct({
+                productID: req.params.id,
+            }),
             code: CODES.OK,
         }).sendResponse(res);
     }
@@ -167,13 +171,11 @@ class ProductController {
             });
         }
 
-        const body = await ProductServices.getDrafProduct({
-            productID: req.params.id,
-        });
-
         return new OK({
             message: 'Got the product successfully',
-            body,
+            body: await ProductServices.getDrafProduct({
+                productID: req.params.id,
+            }),
             code: CODES.OK,
         }).sendResponse(res);
     }

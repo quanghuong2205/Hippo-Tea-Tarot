@@ -4,7 +4,12 @@ const ProductRepo = require('../repositories/product.repo');
 const { BadRequestError } = require('../helpers/error.res.helper');
 const { checkID } = require('../utils/mongoose.util');
 const FileServices = require('./file.service');
-const { removeNullOrUndefinedProps, flattenObject } = require('../utils');
+const {
+    removeNullOrUndefinedProps,
+    flattenObject,
+    getPaginationInfor,
+} = require('../utils');
+const CommonRepo = require('../repositories/common.repo');
 
 /**
  * Product service
@@ -21,13 +26,22 @@ class ProductServices {
      * @param {object} productProps properties of the product
      */
     static async createProduct({ category, productProps, relativePaths }) {
-        if (!category) {
+        /* Check category */
+        const categoryObject = await CommonRepo.findOne({
+            filter: {
+                category,
+            },
+            model: 'category',
+        });
+
+        if (!categoryObject) {
             throw new BadRequestError({
-                message: 'Provide the product category',
-                code: CODES.MISTT_PRODUCT_CATEGORY,
+                message: 'Invalid category',
+                code: CODES.PRODUCT_INVALID_CATEGORY,
             });
         }
 
+        /* Create product without thumbs */
         if (!relativePaths) {
             return await ProductRepo.createProduct({
                 props: {
@@ -36,7 +50,7 @@ class ProductServices {
             });
         }
 
-        /* Create product */
+        /* Create product with thumbs */
         return await ProductRepo.createProduct({
             props: {
                 ...productProps,
@@ -112,6 +126,23 @@ class ProductServices {
             });
         }
 
+        /* Check category field */
+        if (productProps?.category) {
+            const categoryObject = await CommonRepo.findOne({
+                filter: {
+                    category: productProps.category,
+                },
+                model: 'category',
+            });
+
+            if (!categoryObject) {
+                throw new BadRequestError({
+                    message: 'Invalid category',
+                    code: CODES.PRODUCT_INVALID_CATEGORY,
+                });
+            }
+        }
+
         /* Unlink stale products's thumbs */
         const productThumbs = productObject?.thumbs;
         if (productThumbs) {
@@ -158,32 +189,7 @@ class ProductServices {
         delete filterParams?.limit;
         delete filterParams?.page;
 
-        /* Query products */
-        return await ProductRepo.getProductsByFilterParams({
-            selectedProps: [
-                'name',
-                'description',
-                'price',
-                'thumbs',
-                'category',
-                'rating',
-            ],
-            filterParams,
-            page: parseInt(page),
-            limit: parseInt(limit),
-        });
-    }
-
-    /**
-     * @desc get all draft products
-     * @returns all draft products
-     */
-    static async getDraftProducts({ filterParams, page = 0, limit = 50 }) {
-        delete filterParams?.limit;
-        delete filterParams?.page;
-
-        /* Query products */
-        return await ProductRepo.getProductsByFilterParams({
+        const result = await ProductRepo.getProductsByFilterParams({
             selectedProps: [
                 'name',
                 'description',
@@ -196,10 +202,69 @@ class ProductServices {
             page: parseInt(page),
             limit: parseInt(limit),
             filters: {
-                is_public: false,
-                is_draft: true,
+                is_draft: false,
+                is_public: true,
             },
         });
+
+        /* Pagination information */
+        const { nextPage, prevPage, totalPages } = getPaginationInfor({
+            currentPage: parseInt(page),
+            totalItems: result[0]?.totalCount,
+            itemsPerPage: limit,
+        });
+
+        /* Query products */
+        return {
+            products: result[0].data,
+            nextPage,
+            prevPage,
+            totalPages,
+            currentPage: page,
+        };
+    }
+
+    /**
+     * @desc get all draft products
+     * @returns all draft products
+     */
+    static async getDraftProducts({ filterParams, page = 1, limit = 50 }) {
+        delete filterParams?.limit;
+        delete filterParams?.page;
+
+        /* Query products */
+        const result = await ProductRepo.getProductsByFilterParams({
+            selectedProps: [
+                'name',
+                'description',
+                'price',
+                'thumbs',
+                'category',
+                'rating',
+            ],
+            filterParams,
+            page: parseInt(page),
+            limit: parseInt(limit),
+            filters: {
+                is_draft: true,
+                is_public: false,
+            },
+        });
+
+        /* Pagination information */
+        const { nextPage, prevPage, totalPages } = getPaginationInfor({
+            currentPage: parseInt(page),
+            totalItems: result[0]?.totalCount,
+            itemsPerPage: limit,
+        });
+
+        /* Query products */
+        return {
+            products: result[0]?.data,
+            nextPage,
+            prevPage,
+            totalPages,
+        };
     }
 
     /**
@@ -266,12 +331,41 @@ class ProductServices {
      * @desc get all products by category
      * @returns all products by target category
      */
-    static async getPublishedProductsByCat({ category, limit, page }) {
-        return await ProductRepo.getProductsByCategory({
-            category,
-            limit,
-            page,
+    static async getPublishedProductsByCat({ category }) {
+        /* Get category information */
+        const categoryObject = await CommonRepo.findOne({
+            filter: {
+                category: category,
+            },
+            model: 'category',
+            selectedProps: ['category', 'description'],
         });
+
+        if (!categoryObject) {
+            throw new BadRequestError({
+                message: 'Invalid category',
+                code: CODES.PRODUCT_INVALID_CATEGORY,
+            });
+        }
+
+        /* Get products */
+        const result = await ProductRepo.getProductsByCategory({
+            category,
+            selectedProps: [
+                'name',
+                'description',
+                'price',
+                'thumbs',
+                'category',
+                'rating',
+            ],
+        });
+
+        /* Query products */
+        return {
+            products: result[0]?.data,
+            category: categoryObject,
+        };
     }
 }
 

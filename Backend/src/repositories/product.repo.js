@@ -18,7 +18,7 @@ class ProductRepo {
      * @desc Create a new product based on the category
      * @returns
      */
-    static async createProduct({ type, props }) {
+    static async createProduct({ props }) {
         /**
          * Create product type
          */
@@ -68,59 +68,97 @@ class ProductRepo {
      */
     static async getProductsByFilterParams({
         selectedProps = [],
-        unSelectedProps = [],
         filterParams = {},
         page,
         limit,
-        filters = { is_public: true, is_draft: false },
+        filters = {},
     }) {
+        /* Get all products without filters */
         if (Object.keys(filterParams).length === 0) {
-            return ProductModel.find(filters)
-                .limit(limit)
-                .skip(getSkip({ page, limit }))
-                .select(selectProps(selectedProps))
-                .select(unSelectProps(unSelectedProps))
-                .lean();
+            return await ProductModel.aggregate([
+                {
+                    $facet: {
+                        totalCount: [
+                            {
+                                $match: filters,
+                            },
+                            {
+                                $group: {
+                                    _id: null,
+                                    count: { $sum: 1 },
+                                },
+                            },
+                        ],
+                        data: [
+                            {
+                                $match: filters,
+                            },
+                            { $skip: getSkip({ page, limit }) },
+                            { $limit: limit },
+                            { $project: selectProps(selectedProps) },
+                        ],
+                    },
+                },
+                {
+                    $project: {
+                        totalCount: {
+                            $arrayElemAt: ['$totalCount.count', 0],
+                        },
+                        data: 1,
+                    },
+                },
+            ]);
         }
+
+        /* Get products based on filters */
+        const pipeFilters = {
+            ...filters,
+
+            ...convertToMultiFilterConditions({
+                key: 'category',
+                valueString: filterParams['category'],
+            }),
+
+            ...convertToRangeCondition({
+                key: 'price',
+                minRange: filterParams['minPrice'],
+                maxRange: filterParams['maxPrice'],
+            }),
+
+            ...convertToMultiFilterConditions({
+                key: 'rating',
+                valueString: filterParams['rating'],
+                dataType: 'number',
+            }),
+        };
 
         return await ProductModel.aggregate([
             {
-                $match: {
-                    ...filters,
-
-                    ...convertToMultiFilterConditions({
-                        key: 'category',
-                        valueString: filterParams['category'],
-                    }),
-
-                    ...convertToRangeCondition({
-                        key: 'price',
-                        minRange: filterParams['minPrice'],
-                        maxRange: filterParams['maxPrice'],
-                    }),
-
-                    ...convertToRangeCondition({
-                        key: 'rating',
-                        minRange: 0,
-                        maxRange: filterParams['rating']
-                            ? findMaxInArray({
-                                  arr: filterParams['rating'].split(', '),
-                              })
-                            : null,
-                    }),
+                $facet: {
+                    totalCount: [
+                        {
+                            $match: pipeFilters,
+                        },
+                        {
+                            $group: {
+                                _id: null,
+                                count: { $sum: 1 },
+                            },
+                        },
+                    ],
+                    data: [
+                        { $match: pipeFilters },
+                        { $skip: getSkip({ page, limit }) },
+                        { $limit: limit },
+                        { $project: selectProps(selectedProps) },
+                    ],
                 },
             },
             {
-                $skip: getSkip({ page, limit }),
-            },
-            {
-                $limit: limit,
-            },
-            {
-                $project: selectProps(selectedProps),
-            },
-            {
-                $project: unSelectProps(unSelectedProps),
+                $project: {
+                    totalCount: { $arrayElemAt: ['$totalCount.count', 0] },
+                    data: 1,
+                },
             },
         ]);
     }
@@ -131,25 +169,43 @@ class ProductRepo {
      */
     static async getProductsByCategory({
         category,
-        limit,
-        page,
-        unselectedProps = [],
         selectedProps = [],
         filters = {
             is_public: true,
             is_draft: false,
         },
     }) {
-        return await await ProductModel.find({
-            category: category,
-            ...filters,
-        })
-            .sort({ updateAt: -1 })
-            .select(unSelectProps(unselectedProps))
-            .select(selectProps(selectedProps))
-            .limit(limit)
-            .skip(getSkip({ page, limit }))
-            .lean();
+        return await ProductModel.aggregate([
+            {
+                $facet: {
+                    totalCount: [
+                        {
+                            $match: { ...filters, category },
+                        },
+                        {
+                            $group: {
+                                _id: null,
+                                count: { $sum: 1 },
+                            },
+                        },
+                    ],
+                    data: [
+                        { $match: { ...filters, category } },
+                        { $sort: { updatedAt: -1 } },
+                        { $project: selectProps(selectedProps) },
+                    ],
+                },
+            },
+
+            {
+                $project: {
+                    totalCount: {
+                        $arrayElemAt: ['$totalCount.count', 0],
+                    },
+                    data: 1,
+                },
+            },
+        ]);
     }
 
     /**
@@ -192,7 +248,7 @@ class ProductRepo {
         const productObject = await ProductModel.findOne({
             _id: new Types.ObjectId(productID),
         });
-        console.log('productID::', productID);
+
         const staleRatingScore = productObject.rating;
 
         /* A new feedback is added with the rating score */

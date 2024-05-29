@@ -156,6 +156,26 @@ const flattenObject = ({ prefix = null, obj }) => {
     return obj;
 };
 
+const getPaginationInfor = ({ currentPage, totalItems, itemsPerPage }) => {
+    if (!totalItems || totalItems === 0) {
+        return {
+            nextPage: null,
+            prevPage: null,
+            totalPages: null,
+        };
+    }
+
+    const totalPages = Math.ceil(totalItems / itemsPerPage);
+    const nextPage = currentPage < totalPages ? currentPage + 1 : null;
+    const prevPage = currentPage !== 1 ? currentPage - 1 : null;
+
+    return {
+        nextPage,
+        prevPage,
+        totalPages,
+    };
+};
+
 module.exports = {
     selectPropsInObject,
     selectProps,
@@ -166,4 +186,5 @@ module.exports = {
     findMaxInArray,
     removeNullOrUndefinedProps,
     flattenObject,
+    getPaginationInfor,
 };
