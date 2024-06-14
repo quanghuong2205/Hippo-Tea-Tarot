@@ -1,0 +1,29 @@
+@use '../abstracts';
+
+.main-layout {
+    &.with-sidebar {
+        & main {
+            display: flex;
+        }
+
+        & .content {
+            display: flex;
+            justify-content: center;
+            width: calc(100% - var(--sidebar-width));
+
+            @include abstracts.mediaquery(md) {
+                width: 100%;
+            }
+        }
+
+        & .sidebar {
+            @include abstracts.mediaquery(md) {
+                display: none;
+            }
+        }
+    }
+
+    & main {
+        min-height: 100vh;
+    }
+}

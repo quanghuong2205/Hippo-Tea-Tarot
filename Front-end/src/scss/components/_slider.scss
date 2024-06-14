@@ -1,0 +1,32 @@
+.controll-btn {
+    position: absolute;
+    width: 34px;
+    height: 34px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    background-color: #000;
+    color: #fff;
+
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+
+    z-index: 2;
+
+    & svg {
+        font-size: 1.6rem;
+    }
+
+    &.next-btn {
+    }
+}
+
+.back-btn {
+    left: 12px;
+}
+
+.next-btn {
+    right: 12px;
+}

@@ -1,0 +1,123 @@
+@use '../abstracts';
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+html {
+    --header-height: 80px;
+    --sidebar-width: 96px;
+    --scrollbar-thumb-width: 4px;
+
+    @include abstracts.mediaquery(md) {
+        --header-height: 66px;
+    }
+}
+
+* {
+    box-sizing: inherit;
+    padding: 0;
+    margin: 0;
+    -webkit-tap-highlight-color: transparent;
+    scroll-behavior: smooth;
+}
+
+html {
+    box-sizing: border-box;
+    font-size: 62.5%;
+
+    min-height: -webkit-fill-available;
+}
+
+body {
+    font-family: system-ui, 'Segoe UI', 'Roboto', Helvetica, Arial,
+        sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+        'Segoe UI Symbol', 'Roboto Slab', serif;
+    font-family: 'Roboto';
+    font-size: 1.6rem;
+    line-height: 1.4;
+    color: var(--text-color);
+    background-color: var(--body-bg-color);
+
+    min-height: 100vh;
+    min-height: -webkit-fill-available;
+    -webkit-overflow-scrolling: touch;
+
+    &.scroll {
+        overflow: hidden;
+        padding-right: var(--scrollbar-thumb-width);
+        padding-left: var(--scrollbar-thumb-width);
+
+        @include abstracts.mediaquery(md) {
+            padding: 0 !important;
+        }
+    }
+}
+
+a {
+    text-decoration: none;
+    font-size: inherit;
+    color: inherit;
+}
+
+ul,
+li {
+    list-style-type: none;
+}
+
+button,
+input,
+textarea {
+    border: none;
+    outline: none;
+    background-color: transparent;
+    color: inherit;
+    font-family: inherit;
+    font-size: inherit;
+}
+
+button {
+    cursor: pointer;
+}
+
+i,
+em {
+    font-style: italic;
+}
+
+b,
+strong {
+    font-weight: 600;
+}
+
+img {
+    display: block;
+}
+
+.container {
+    @include abstracts.mediaquery(md) {
+        padding-left: 20px !important;
+        padding-right: 20px !important;
+    }
+}
+
+.line-clamp {
+    --line-clamp: 1;
+    display: -webkit-box;
+    -webkit-line-clamp: var(--line-clamp);
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.pull-right {
+    margin-left: auto;
+}
+
+.pull-bottom {
+    margin-top: auto;
+}
+
+.page {
+    padding: 30px 0 60px 0;
+    width: 100%;
+
+    @include abstracts.mediaquery(md) {
+        padding: 20px 0 30px 0;
+    }
+}

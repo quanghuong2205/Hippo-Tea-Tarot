@@ -1,0 +1,57 @@
+@use '../abstracts';
+
+.scrollList {
+    &__header {
+        align-items: baseline;
+        display: flex;
+
+        padding: 16px 0 30px 0;
+
+        @include abstracts.mediaquery(md) {
+            padding: 10px 0 16px 0;
+        }
+    }
+
+    &__title {
+        color: #242424;
+        font-size: 2.4rem;
+        font-weight: 900;
+        margin-right: auto;
+
+        @include abstracts.mediaquery(md) {
+            font-size: 1.6rem;
+        }
+    }
+
+    &__link {
+        ackground-color: transparent;
+        color: #f05123;
+        cursor: pointer;
+        font-size: 1.5rem;
+        font-weight: 600;
+        margin-right: 4px;
+        padding: 8px 0 8px 8px;
+        -webkit-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+
+        &:hover {
+            text-decoration: underline;
+        }
+
+        @include abstracts.mediaquery(md) {
+            font-size: 1.2rem;
+            text-decoration: underline;
+        }
+    }
+
+    &__content .row {
+        padding: 10px 0;
+
+        @include abstracts.mediaquery(md) {
+            flex-wrap: nowrap;
+            overflow-y: hidden;
+            overflow-x: auto;
+        }
+    }
+}

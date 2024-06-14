@@ -1,0 +1,80 @@
+@use '../abstracts';
+
+%common {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    column-gap: 10px;
+
+    height: 42px;
+    padding: 0 18px;
+    border-radius: 6px;
+
+    font-size: 1.6rem;
+    font-weight: 500;
+    white-space: nowrap;
+    user-select: none;
+
+    & svg {
+        font-size: 2.2rem;
+    }
+
+    &:hover {
+        opacity: 0.8;
+    }
+
+    @include abstracts.mediaquery(md) {
+        font-size: 1.3rem;
+        padding: 0 12px;
+
+        & svg {
+            font-size: 1.6rem;
+        }
+    }
+}
+
+/*Normal*/
+.normal-btn {
+    @extend %common;
+
+    color: #9e9da8;
+    background-color: var(--normal-btn-bg-color);
+}
+
+/*Text*/
+.text-btn {
+    @extend %common;
+
+    color: #9e9da8;
+    background-color: transparent;
+}
+
+/*Primary*/
+.pri-btn {
+    @extend %common;
+    background-color: var(--primary-color);
+    color: #1a162e;
+}
+
+/*Secondary*/
+.secondary-btn {
+    @extend %common;
+    background-color: var(--primary-color);
+    color: #1a162e;
+}
+
+/*Outline*/
+.outline-btn {
+    @extend %common;
+
+    border-radius: 10px;
+    border: 1px solid #d2d1d6;
+}
+
+/*Disable*/
+.disable-btn {
+    @extend %common;
+
+    opacity: 0.5;
+    pointer-events: none;
+}

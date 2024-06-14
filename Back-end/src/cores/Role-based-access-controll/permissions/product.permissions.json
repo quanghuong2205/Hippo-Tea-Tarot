@@ -1,0 +1,6 @@
+{
+    "admin": {
+        "products": ["createAny", "updateAny", "deleteAny"],
+        "draft products": ["readAny"]
+    }
+}

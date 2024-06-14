@@ -1,0 +1,7 @@
+@use '../abstracts';
+
+.menu {
+    &-bottom .categories {
+        margin-top: 0;
+    }
+}

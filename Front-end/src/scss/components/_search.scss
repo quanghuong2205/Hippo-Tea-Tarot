@@ -1,0 +1,136 @@
+.search {
+    &-header {
+        padding-bottom: 24px;
+    }
+
+    &-title {
+        padding: 20px 14px 32px 24px;
+        font-size: 18px;
+        font-weight: 500;
+    }
+
+    &-separator {
+        height: 0px;
+        border: none;
+        border-top: 1px solid rgb(219, 219, 219);
+    }
+}
+
+.search-box {
+    --icon-width: 40px;
+
+    &__inner {
+        height: var(--icon-width);
+        width: 100%;
+        position: relative;
+        background-color: rgb(239, 239, 239);
+        border-radius: 34px;
+    }
+
+    padding: 0 16px;
+
+    &__submit,
+    &__clear {
+        width: var(--icon-width);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        position: absolute;
+        top: 0;
+
+        height: 100%;
+        background: transparent;
+
+        cursor: pointer;
+    }
+
+    &__submit {
+        left: 0;
+        font-size: 2rem;
+    }
+
+    &__clear {
+        right: 0;
+        font-size: 1.6rem;
+    }
+
+    &__input {
+        height: 100%;
+        width: 100%;
+        background: transparent;
+        border: 0;
+        display: block;
+        width: 100%;
+        padding: 10px 32px 10px var(--icon-width);
+        font-size: 14px;
+
+        &::placeholder {
+            color: #666;
+        }
+    }
+}
+
+.search-result {
+    &__list {
+        margin: 8px 0;
+    }
+}
+
+.search-result__group {
+    &__header {
+        display: flex;
+        justify-content: space-between;
+        padding: 24px 24px 12px 24px;
+
+        & h5 {
+            text-transform: uppercase;
+            font-size: 1.3rem;
+            font-weight: 500;
+        }
+
+        & a {
+            color: #1473e6;
+            font-size: 1.3rem;
+        }
+
+        & a:hover {
+            color: red;
+        }
+    }
+
+    & .search-separator {
+        margin: 0 24px;
+    }
+}
+
+.search-card {
+    margin: 0 24px;
+    &__inner {
+        padding: 8px 10px;
+        display: flex;
+        align-items: center;
+        column-gap: 12px;
+
+        font-size: 1.4rem;
+        border-radius: 8px;
+    }
+
+    &__inner:hover {
+        background-color: #f5f5f5;
+        cursor: pointer;
+    }
+
+    &__image {
+        width: 44px;
+        height: 44px;
+        object-fit: cover;
+        border-radius: 50%;
+        border: 1px solid rgb(219, 219, 219);
+    }
+
+    &__title {
+        font-weight: 500;
+        margin-bottom: 4px;
+    }
+}

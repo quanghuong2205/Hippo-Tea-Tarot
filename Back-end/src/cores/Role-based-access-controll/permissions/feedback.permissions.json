@@ -1,0 +1,13 @@
+{
+    "admin": {
+        "feedback": ["deleteAny", "readAny"],
+        "reply": ["createAny", "updateAny", "deleteAny"],
+        "like": ["createAny", "deleteAny"]
+    },
+
+    "user": {
+        "feedback": ["deleteOwn", "createOwn", "readAny", "updateOwn"],
+        "reply": ["readAny"],
+        "like": ["createAny", "deleteAny"]
+    }
+}

@@ -1,0 +1,81 @@
+@use '../abstracts';
+
+ul {
+    list-style: none;
+}
+.footer {
+    background-color: var(--footer-bg-color);
+    // height: var(--footer-height);
+    padding: 68px 0 40px;
+
+    @include abstracts.mediaquery(md) {
+        padding: 0 16px;
+        padding-bottom: 30px;
+    }
+}
+.footer-col h4 {
+    font-size: 1.8rem;
+    color: var(--footer-title-color);
+    text-transform: capitalize;
+    margin-bottom: 35px;
+    font-weight: 500;
+    position: relative;
+
+    @include abstracts.mediaquery(md) {
+        margin-bottom: 24px;
+
+        font-size: 1.3rem;
+    }
+}
+.footer-col h4::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -10px;
+    background-color: var(--footer-title-underline-color);
+    height: 2px;
+    box-sizing: border-box;
+    width: 50px;
+}
+.footer-col ul li:not(:last-child) {
+    margin-bottom: 6px;
+}
+.footer-col ul li {
+    font-size: 1.5rem;
+    text-transform: capitalize;
+    text-decoration: none;
+    font-weight: 300;
+    color: var(--footer-text-color);
+    display: block;
+    line-height: 1.5;
+    transition: all 0.3s ease;
+
+    @include abstracts.mediaquery(md) {
+        font-size: 1.2rem;
+    }
+}
+.footer-col ul li:hover {
+    color: var(--footer-text-hover-color);
+    padding-left: 8px;
+    cursor: pointer;
+}
+
+.footer-col .social-links a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 46px;
+    width: 46px;
+    background-color: var(--footer-social-link-bg-color);
+    margin: 0 10px 10px 0;
+    text-align: center;
+    line-height: 40px;
+    border-radius: 50%;
+    color: var(--footer-social-link-icon-color);
+    font-size: 1.8rem;
+    transition: all 0.5s ease;
+}
+.footer-col .social-links a:hover {
+    color: var(--footer-social-link-icon-hover-color);
+    background-color: var(--footer-social-link-hover-bg-color);
+}

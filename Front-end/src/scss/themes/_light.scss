@@ -1,0 +1,101 @@
+@use '../abstracts';
+@use './basic';
+
+html {
+    /* PRIMARY */
+    --primary-color: rgb(255, 183, 0);
+    --light-primary-color: #ffd362;
+    --lighter-primary-color: rgb(255, 183, 0, .6);
+
+    /* BODY */
+    --text-color: var(--dark-3);
+    --body-bg-color: var(--white);
+
+    /* HEADER */
+    --header-icon-color: var(--dark-3);
+    --user-menu-hr-color: rgba(0, 0, 0, 0.05);
+    --user-menu-text-color: #666;
+    --header-bg-color: rgba(255, 255, 255, 0.8);
+
+    /* LOGO */
+    --logo-border-color: var(--white);
+
+    /* SEARCH */
+    --search-label-color: #3c4b66;
+    --search-icon-color: #657789;
+    --search-input-color: #a9b8c9;
+    --search-input-focus-color: #6d7f8f;
+    --search-top-shadow: rgba(197, 212, 227, .4);
+    --search-bottom-shadow: rgba(197, 212, 227, .1);
+    --search-icon-shadow-color-1: rgba(255, 255, 255, 0.4);
+    --search-icon-shadow-color-2: rgb(194, 215, 235, .5);
+    --search-input-focus-bg-color: rgba(255, 255, 255, .3);
+    --search-bg-color: var(--light-2);
+    --search-input-bg-color: var(--light-2);
+
+    /* NAVIGATE */
+
+
+     /* POPUP */
+    --popup-bg-color: var(--white);
+    --popup-overlay-color: rgba(0, 0, 0, 0.5);
+    --popup-close-bg-color: #0a0a0a;
+
+     /* FOOTER */
+    --footer-bg-color: #24262b;
+    --footer-title-color: var(--white);
+    --footer-title-underline-color: #e91e63;
+    --footer-text-color: #bbbbbb;
+    --footer-text-hover-color: var(--white);
+    --footer-social-link-bg-color: rgba(255, 255, 255, 0.2);
+    --footer-social-link-icon-color: var(--white);
+    --footer-social-link-icon-hover-color: #24262b;
+    --footer-social-link-hover-bg-color: var(--white);
+
+    /* LANGUAGE */
+    --language-bg-color: #f5f5f5;
+    --language-active-bg-color: var(--white);
+    --language-shadow-color: var(--light-2);
+
+    /* SIDEBAR */
+    --sidebar-item-bg-color: var(--light-2);
+    --sidebar-item-active-bg-color: var(--light-primary-color);
+    --sidebar-shadow-color: var(--light-2);
+    --sidebar-panel-bg-color: var(--white);
+    --sidebar-panel-shadow: rgba(0, 0, 0, 0.15);
+
+    /* ICON */
+    --icon-color: brightness(0) saturate(100%) invert(8%)
+        sepia(7%) saturate(6038%) hue-rotate(213deg)
+        brightness(99%) contrast(95%);
+
+    /* BUTTONS */
+    --filter-btn-bg-color: var(--white);
+    --filter-btn-text-color: #6c6c72;
+    --normal-btn-bg-color: #f8f8fb;
+
+    /* FORM */
+    --form-link-hover: var(--dark-blue);
+    --auth-form-left-bg-color: var(--lighter-primary-color);
+    --auth-form-right-bg-color: var(--white);
+    --auth-form-left-desc-color: var(--text-color);
+    --form-text-input-error-color: var(--error-color)
+
+    /* CHECKBOX */
+    --checkbox-border-color: #1a162e;
+
+    /* CATEGORY */
+    --category-title-color: #53382c;
+    --category-desc-color: #53382c;
+
+    /*PRODUCT-CARD*/
+    --product-card-bg-color: #fff;
+    --product-card-shadow: rgba(99, 99, 99, 0.2);
+    --product-card-love-bg-color: #fff;
+
+    /*PRODUCT-DETAIL*/
+    --product-infor-bg-color: #f8f8f8;
+    --product-infor-desc-color: #53382c;
+    --product-infor-size-bg-color: #ededf6;
+    --product-infor-size-color: #9e9da8;
+}

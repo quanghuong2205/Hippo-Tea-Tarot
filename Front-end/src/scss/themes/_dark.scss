@@ -1,0 +1,27 @@
+@use './basic';
+
+html.dark {
+    /*BODY*/
+    --text-color: var(--white);
+    --body-bg-color: var(--dark-2);
+
+    /*ICON*/
+    --icon-color: brightness(0) saturate(100%) invert(100%)
+        sepia(0%) saturate(0%) hue-rotate(342deg)
+        brightness(102%) contrast(102%);
+
+    /*BUTTONS*/
+    --filter-btn-bg-color: var(--dark-2);
+    --filter-btn-text-color: var(--white);
+    --normal-btn-bg-color: var(--dark-2);
+
+    /*FORM*/
+    --form-link-hover: var(--white);
+    --auth-form-left-bg-color: var(--dark-1);
+    --auth-form-right-bg-color: var(--dark-2);
+
+    --auth-form-heading-color: var(--light-1);
+
+    /*CHECKBOX*/
+    --checkbox-border-color: #b9babe;
+}

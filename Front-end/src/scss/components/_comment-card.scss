@@ -1,0 +1,120 @@
+.commentCard {
+    display: flex;
+    align-items: flex-start;
+    column-gap: 12px;
+    padding: 15px 0;
+
+    &__replies & {
+        padding: 8px 0;
+    }
+
+    &__replies &:first-child {
+        padding-top: 16px;
+    }
+
+    &__replies &:last-child {
+        padding-bottom: 16px;
+    }
+
+    &:first-child {
+        padding-top: 30px;
+    }
+
+    &:last-child {
+        padding-bottom: 30px;
+    }
+
+    &-user {
+        &__avatar {
+            width: 36px;
+            height: 36px;
+            overflow: hidden;
+            border-radius: 50%;
+            border: 1px solid #ede9e9;
+        }
+    }
+
+    &-bottom {
+        display: flex;
+        align-items: center;
+        min-height: 28px;
+        margin-top: 8px;
+    }
+
+    &-react,
+    &-time {
+        color: #999;
+        line-height: 1;
+        font-size: 1.3rem;
+        margin: 0 6px;
+    }
+
+    &-react {
+        color: red;
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+
+    &-options {
+        margin-left: 20px;
+    }
+
+    &-option {
+        width: 22px;
+        height: 22px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: #999;
+
+        &:hover {
+            color: inherit;
+        }
+
+        & svg {
+            width: 18px;
+            height: 18px;
+        }
+    }
+}
+
+.commentCard-content {
+    position: relative;
+    border-radius: 18px;
+    background-color: #f5f5f5;
+    padding: 9px 12px;
+
+    &__username {
+        font-size: 1.5rem;
+        font-weight: 500;
+    }
+
+    &__text {
+        font-size: 1.4rem;
+        line-height: 1.5;
+        margin: 5px 0;
+        padding-top: 4px;
+    }
+
+    &__react-counts {
+        position: absolute;
+        right: 0;
+        bottom: -12px;
+        background-color: #fff;
+        border-radius: 10px;
+        box-shadow: 0 1px 3px 0 #00000033;
+        padding: 2px 6px 2px 2px;
+        display: flex;
+        align-items: center;
+
+        & span {
+            display: block;
+            color: #65676b;
+            font-size: 1.3rem;
+            font-weight: 500;
+            margin-left: 3px;
+            line-height: 1;
+        }
+    }
+}

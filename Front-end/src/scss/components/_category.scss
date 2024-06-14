@@ -1,0 +1,52 @@
+@use '../abstracts';
+
+.category {
+    display: flex;
+    flex-direction: column;
+
+    &-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    &-title {
+        display: flex;
+        margin-bottom: 4px;
+        font-size: 2.6rem;
+
+        & h2 {
+            font-size: inherit;
+            line-height: 1.5;
+            font-weight: normal;
+            text-align: left;
+            color: var(--category-title-color);
+            text-transform: uppercase;
+        }
+
+        @include abstracts.mediaquery(md) {
+            font-size: 1.8rem;
+            margin-bottom: 0;
+        }
+    }
+
+    &-desc {
+        font-size: 1.6rem;
+        line-height: 23px;
+        color: var(--category-desc-color);
+
+        max-width: 670px;
+
+        @include abstracts.mediaquery(md) {
+            display: none;
+        }
+    }
+
+    &-menu {
+        margin-top: 30px;
+
+        @include abstracts.mediaquery(md) {
+            margin-top: 14px;
+        }
+    }
+}

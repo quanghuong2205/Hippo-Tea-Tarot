@@ -1,0 +1,25 @@
+@use '../abstracts';
+
+.logo {
+    display: flex;
+    column-gap: 10px;
+    &__image {
+        width: 60px;
+        height: 60px;
+        object-fit: cover;
+        border-radius: 50%;
+        box-shadow: 0px 0px 7px 4px #fff;
+
+        @include abstracts.mediaquery(md) {
+            width: 52px;
+            height: 52px;
+        }
+    }
+
+    &__slogan {
+        margin-top: auto;
+        margin-bottom: 6px;
+        font-size: 1.7rem;
+        font-weight: 500;
+    }
+}

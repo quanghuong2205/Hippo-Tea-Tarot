@@ -1,0 +1,167 @@
+@use '../abstracts';
+
+.auth {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+
+    min-height: 100vh;
+
+    @supports (-webkit-touch-callout: none) {
+        min-height: -webkit-fill-available;
+    }
+
+    @include abstracts.mediaquery(md) {
+        grid-template-columns: 1fr;
+    }
+
+    &-left {
+        background-color: #f8f8f8;
+
+        padding: 0 30px;
+        text-align: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        &__inner {
+            position: relative;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+
+            width: min(424px, 100%);
+            height: 100%;
+        }
+
+        &__media {
+            width: 90%;
+            margin: 0 auto;
+            border-radius: 10px;
+            overflow: hidden;
+            & img {
+                @include abstracts.fit-frame();
+            }
+        }
+
+        &__desc {
+            text-align: center;
+            font-size: 1.8rem;
+            font-weight: 500;
+            line-height: 144.444%;
+            color: var(--auth-form-left-desc-color);
+
+            margin-top: 50px;
+
+            @include abstracts.mediaquery(md) {
+                font-size: 1.5rem;
+            }
+        }
+
+        &__next-btn {
+            position: absolute;
+            bottom: 50px;
+            left: 50%;
+            translate: -50%;
+        }
+    }
+
+    &-right {
+        @include abstracts.flex($h-center: true);
+        text-align: center;
+
+        background-color: var(--auth-form-right-bg-color);
+
+        &__inner {
+            width: min(460px, 100%);
+            height: 100%;
+
+            padding: 24px 30px;
+
+            @include abstracts.mediaquery(md) {
+                padding: 30px;
+            }
+        }
+
+        &__heading {
+            text-align: center;
+            font-style: normal;
+            font-size: 2.6rem;
+            font-weight: 500;
+            line-height: 146.667%;
+
+            color: var(--auth-form-heading-color);
+
+            margin: 24px 0 10px 0;
+
+            @include abstracts.mediaquery(md) {
+                font-size: 1.8rem;
+            }
+        }
+
+        &__desc {
+            color: #9e9da8;
+            font-weight: 400;
+            line-height: 146.667%;
+            font-size: 1.6rem;
+
+            padding: 0 20px;
+
+            @include abstracts.mediaquery(md) {
+                font-size: 1.3rem;
+            }
+        }
+    }
+
+    &-form {
+        margin-top: 34px;
+
+        display: flex;
+        flex-direction: column;
+
+        @include abstracts.mediaquery(md) {
+            margin-top: 24px;
+        }
+
+        &__group {
+            margin-top: 14px;
+        }
+
+        &__link {
+            font-size: 1.8rem;
+
+            @include abstracts.mediaquery(md) {
+                font-size: 1.3rem;
+            }
+        }
+
+        &__btn-group {
+            display: flex;
+            flex-direction: column;
+            row-gap: 20px;
+
+            margin-top: 30px;
+
+            @include abstracts.mediaquery(md) {
+                margin-top: 20px;
+                row-gap: 20px;
+            }
+        }
+
+        &__footer {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            column-gap: 10px;
+
+            margin-top: 38px;
+
+            @include abstracts.mediaquery(md) {
+                margin-top: 34px;
+                flex-direction: column;
+                row-gap: 10px;
+            }
+        }
+    }
+}

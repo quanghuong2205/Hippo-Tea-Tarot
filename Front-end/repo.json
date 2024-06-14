@@ -1,0 +1,434 @@
+{
+    "auth": [
+        {
+            "id": "H01",
+            "email": "quanghuong@gmail.com",
+            "password": "quanghuong",
+            "avatar": "https://scontent.fhan2-4.fna.fbcdn.net/v/t39.30808-6/428608064_1787296205070042_5514231880064602672_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=5f2048&_nc_eui2=AeGzKX6ueDD_cSDe_7kviujcNBQacbd_q3k0FBpxt3-recY2FIMOpK3TQ5jqnavA4IC-p_hr-IQc72QTKZ_b84VM&_nc_ohc=mLZ2-sMrnNMAX8TM7w9&_nc_ht=scontent.fhan2-4.fna&oh=00_AfCB7GZfOTAdmEKvkTSdlrDhmd6MXPJsQQeohIF558q-6Q&oe=65F8ABE2",
+            "role": "user",
+            "accessToken": "accessTokenxnjhsH01uixlmnUserkimnsx"
+        }
+    ],
+    "key": [
+        {
+            "user_id": "H01",
+            "refreshToken": "refreshTokenxnjhsH01uixlmnUserkimnsx",
+            "accessToken": "accessTokenxnjhsH01uixlmnUserkimnsx",
+            "id": "2c68"
+        }
+    ],
+    "category": [
+        {
+            "category": "drink",
+            "category_description": "qVietnam is the world’s second largest producer of coffee. As a Vietnamese brand, Highlands Coffee hand selects and roasts only",
+            "menu": [
+                {
+                    "_id": "P01",
+                    "name": "Mojito",
+                    "thumbs": [
+                        "https://toplist.vn/images/800px/tra-sua-co-phe-346601.jpg"
+                    ],
+                    "description": "Muddle mint leaves with sugar and lime juiceeee",
+                    "price": 29000,
+                    "is_draft": false,
+                    "is_public": true,
+                    "rating": 5,
+                    "tax": 10,
+                    "attributes": {
+                        "size": ["M", "L", "XL"]
+                    },
+                    "category": "drink",
+                    "category_description": "Vietnam is the world’s second largest producer of coffee. As a Vietnamese brand, Highlands Coffee hand selects and roasts only",
+                    "is_best_sellter": true
+                },
+
+                {
+                    "_id": "P02",
+                    "name": "Mauresque",
+                    "thumbs": [
+                        "https://www.thecocktaildb.com/images/media/drink/duwfa11686236556.jpg"
+                    ],
+                    "description": "Add the ice cubes at the end, otherwise the syrup and pastis do not mix well.",
+                    "price": 39000,
+                    "is_draft": false,
+                    "is_public": true,
+                    "rating": 5,
+                    "tax": 10,
+                    "attributes": {
+                        "size": ["M", "L", "XL"]
+                    },
+                    "category": "drink",
+                    "category_description": "Vietnam is the world’s second largest producer of coffee. As a Vietnamese brand, Highlands Coffee hand selects and roasts only",
+                    "is_best_sellter": true
+                },
+
+                {
+                    "_id": "P03",
+                    "name": "Mango Mojito",
+                    "thumbs": [
+                        "https://www.thecocktaildb.com/images/media/drink/wfqmgm1630406820.jpg"
+                    ],
+                    "description": "Squeeze the juice from 1½ limes and blend with the mango to give a smooth purée",
+                    "price": 49000,
+                    "is_draft": false,
+                    "is_public": true,
+                    "rating": 5,
+                    "tax": 10,
+                    "attributes": {
+                        "size": ["M", "L", "XL"]
+                    },
+                    "category": "drink",
+                    "category_description": "Vietnam is the world’s second largest producer of coffee. As a Vietnamese brand, Highlands Coffee hand selects and roasts only",
+                    "is_best_sellter": false
+                },
+
+                {
+                    "_id": "P04",
+                    "name": "Monkey Wrench",
+                    "thumbs": [
+                        "https://www.thecocktaildb.com/images/media/drink/bw2noj1582473243.jpg"
+                    ],
+                    "description": "Pour all of the ingredients into an old-fashioned glass almost filled with ice cubes.",
+                    "price": 59000,
+                    "is_draft": false,
+                    "is_public": true,
+                    "rating": 5,
+                    "tax": 10,
+                    "attributes": {
+                        "size": ["M", "L", "XL"]
+                    },
+                    "category": "drink",
+                    "category_description": "Vietnam is the world’s second largest producer of coffee. As a Vietnamese brand, Highlands Coffee hand selects and roasts only",
+                    "is_best_sellter": true
+                },
+
+                {
+                    "_id": "P05",
+                    "name": "Mulled Wine",
+                    "thumbs": [
+                        "https://www.thecocktaildb.com/images/media/drink/iuwi6h1504735724.jpg"
+                    ],
+                    "description": "Simmer 3 cups water with, sugar, cloves, cinnamon sticks, and lemon peel in a stainless steel pot for 10 minutes.",
+                    "price": 39000,
+                    "is_draft": false,
+                    "is_public": true,
+                    "rating": 5,
+                    "tax": 10,
+                    "attributes": {
+                        "size": ["M", "L", "XL"]
+                    },
+                    "category": "drink",
+                    "category_description": "Vietnam is the world’s second largest producer of coffee. As a Vietnamese brand, Highlands Coffee hand selects and roasts only",
+                    "is_best_sellter": true
+                }
+            ]
+        },
+
+        {
+            "category": "food",
+            "category_description": "Vietnam is the world’s second largest producer of coffee. As a Vietnamese brand, Highlands Coffee hand selects and roasts only",
+            "menu": [
+                {
+                    "_id": "P06",
+                    "name": "Mojito",
+                    "thumbs": [
+                        "https://www.thecocktaildb.com/drink/178315-Munich-Mule"
+                    ],
+                    "description": "Muddle mint leaves with sugar and lime juice",
+                    "price": 34000,
+                    "is_draft": false,
+                    "is_public": true,
+                    "rating": 5,
+                    "tax": 10,
+                    "attributes": {
+                        "size": ["M", "L", "XL"]
+                    },
+                    "category": "drink",
+                    "category_description": "Vietnam is the world’s second largest producer of coffee. As a Vietnamese brand, Highlands Coffee hand selects and roasts only",
+                    "is_best_sellter": false
+                },
+
+                {
+                    "_id": "P07",
+                    "name": "Mauresque",
+                    "thumbs": [
+                        "https://www.thecocktaildb.com/images/media/drink/squyyq1439907312.jpg"
+                    ],
+                    "description": "Add the ice cubes at the end, otherwise the syrup and pastis do not mix well.",
+                    "price": 12000,
+                    "is_draft": false,
+                    "is_public": true,
+                    "rating": 5,
+                    "tax": 10,
+                    "attributes": {
+                        "size": ["M", "L", "XL"]
+                    },
+                    "category": "drink",
+                    "category_description": "Vietnam is the world’s second largest producer of coffee. As a Vietnamese brand, Highlands Coffee hand selects and roasts only",
+                    "is_best_sellter": true
+                },
+
+                {
+                    "_id": "P08",
+                    "name": "Mango Mojito",
+                    "thumbs": [
+                        "https://www.thecocktaildb.com/images/media/drink/stwiva1619704025.jpg"
+                    ],
+                    "description": "Squeeze the juice from 1½ limes and blend with the mango to give a smooth purée",
+                    "price": 145000,
+                    "is_draft": false,
+                    "is_public": true,
+                    "rating": 5,
+                    "tax": 10,
+                    "attributes": {
+                        "size": ["M", "L", "XL"]
+                    },
+                    "category": "drink",
+                    "category_description": "Vietnam is the world’s second largest producer of coffee. As a Vietnamese brand, Highlands Coffee hand selects and roasts only",
+                    "is_best_sellter": true
+                },
+
+                {
+                    "_id": "P09",
+                    "name": "Monkey Wrench",
+                    "thumbs": [
+                        "https://www.thecocktaildb.com/images/media/drink/vsxxwy1441208133.jpg"
+                    ],
+                    "description": "Pour all of the ingredients into an old-fashioned glass almost filled with ice cubes.",
+                    "price": 23000,
+                    "is_draft": false,
+                    "is_public": true,
+                    "rating": 5,
+                    "tax": 10,
+                    "attributes": {
+                        "size": ["M", "L", "XL"]
+                    },
+                    "category": "drink",
+                    "category_description": "Vietnam is the world’s second largest producer of coffee. As a Vietnamese brand, Highlands Coffee hand selects and roasts only",
+                    "is_best_sellter": false
+                },
+
+                {
+                    "_id": "P10",
+                    "name": "Mulled Wine",
+                    "thumbs": [
+                        "https://www.thecocktaildb.com/images/media/drink/wpspsy1468875747.jpg"
+                    ],
+                    "description": "Simmer 3 cups water with, sugar, cloves, cinnamon sticks, and lemon peel in a stainless steel pot for 10 minutes.",
+                    "price": 56000,
+                    "is_draft": false,
+                    "is_public": true,
+                    "rating": 5,
+                    "tax": 10,
+                    "attributes": {
+                        "size": ["M", "L", "XL"]
+                    },
+                    "category": "drink",
+                    "category_description": "Vietnam is the world’s second largest producer of coffee. As a Vietnamese brand, Highlands Coffee hand selects and roasts only",
+                    "is_best_sellter": true
+                }
+            ]
+        }
+    ],
+
+    "product": [
+        {
+            "id": "P01",
+            "name": "Mojito",
+            "thumbs": [
+                "https://toplist.vn/images/800px/tra-sua-co-phe-346601.jpg"
+            ],
+            "description": "Muddle mint leaves with sugar and lime juiceeee",
+            "price": 29000,
+            "is_draft": false,
+            "is_public": true,
+            "rating": 5,
+            "tax": 10,
+            "attributes": {
+                "size": ["M", "L", "XL"]
+            },
+            "category": "drink",
+            "category_description": "Vietnam is the world’s second largest producer of coffee. As a Vietnamese brand, Highlands Coffee hand selects and roasts only",
+            "is_best_sellter": true
+        },
+
+        {
+            "id": "P02",
+            "name": "Mauresque",
+            "thumbs": [
+                "https://www.thecocktaildb.com/images/media/drink/duwfa11686236556.jpg"
+            ],
+            "description": "Add the ice cubes at the end, otherwise the syrup and pastis do not mix well.",
+            "price": 39000,
+            "is_draft": false,
+            "is_public": true,
+            "rating": 5,
+            "tax": 10,
+            "attributes": {
+                "size": ["M", "L", "XL"]
+            },
+            "category": "drink",
+            "category_description": "Vietnam is the world’s second largest producer of coffee. As a Vietnamese brand, Highlands Coffee hand selects and roasts only",
+            "is_best_sellter": true
+        },
+
+        {
+            "id": "P03",
+            "name": "Mango Mojito",
+            "thumbs": [
+                "https://www.thecocktaildb.com/images/media/drink/wfqmgm1630406820.jpg"
+            ],
+            "description": "Squeeze the juice from 1½ limes and blend with the mango to give a smooth purée",
+            "price": 49000,
+            "is_draft": false,
+            "is_public": true,
+            "rating": 5,
+            "tax": 10,
+            "attributes": {
+                "size": ["M", "L", "XL"]
+            },
+            "category": "drink",
+            "category_description": "Vietnam is the world’s second largest producer of coffee. As a Vietnamese brand, Highlands Coffee hand selects and roasts only",
+            "is_best_sellter": false
+        },
+
+        {
+            "id": "P04",
+            "name": "Monkey Wrench",
+            "thumbs": [
+                "https://www.thecocktaildb.com/images/media/drink/bw2noj1582473243.jpg"
+            ],
+            "description": "Pour all of the ingredients into an old-fashioned glass almost filled with ice cubes.",
+            "price": 59000,
+            "is_draft": false,
+            "is_public": true,
+            "rating": 5,
+            "tax": 10,
+            "attributes": {
+                "size": ["M", "L", "XL"]
+            },
+            "category": "drink",
+            "category_description": "Vietnam is the world’s second largest producer of coffee. As a Vietnamese brand, Highlands Coffee hand selects and roasts only",
+            "is_best_sellter": true
+        },
+
+        {
+            "id": "P05",
+            "name": "Mulled Wine",
+            "thumbs": [
+                "https://www.thecocktaildb.com/images/media/drink/iuwi6h1504735724.jpg"
+            ],
+            "description": "Simmer 3 cups water with, sugar, cloves, cinnamon sticks, and lemon peel in a stainless steel pot for 10 minutes.",
+            "price": 39000,
+            "is_draft": false,
+            "is_public": true,
+            "rating": 5,
+            "tax": 10,
+            "attributes": {
+                "size": ["M", "L", "XL"]
+            },
+            "category": "drink",
+            "category_description": "Vietnam is the world’s second largest producer of coffee. As a Vietnamese brand, Highlands Coffee hand selects and roasts only",
+            "is_best_sellter": true
+        },
+        {
+            "id": "P06",
+            "name": "Mojito",
+            "thumbs": [
+                "https://www.thecocktaildb.com/drink/178315-Munich-Mule"
+            ],
+            "description": "Muddle mint leaves with sugar and lime juice",
+            "price": 34000,
+            "is_draft": false,
+            "is_public": true,
+            "rating": 5,
+            "tax": 10,
+            "attributes": {
+                "size": ["M", "L", "XL"]
+            },
+            "category": "drink",
+            "category_description": "Vietnam is the world’s second largest producer of coffee. As a Vietnamese brand, Highlands Coffee hand selects and roasts only",
+            "is_best_sellter": false
+        },
+
+        {
+            "id": "P07",
+            "name": "Mauresque",
+            "thumbs": [
+                "https://www.thecocktaildb.com/images/media/drink/squyyq1439907312.jpg"
+            ],
+            "description": "Add the ice cubes at the end, otherwise the syrup and pastis do not mix well.",
+            "price": 12000,
+            "is_draft": false,
+            "is_public": true,
+            "rating": 5,
+            "tax": 10,
+            "attributes": {
+                "size": ["M", "L", "XL"]
+            },
+            "category": "drink",
+            "category_description": "Vietnam is the world’s second largest producer of coffee. As a Vietnamese brand, Highlands Coffee hand selects and roasts only",
+            "is_best_sellter": true
+        },
+
+        {
+            "id": "P08",
+            "name": "Mango Mojito",
+            "thumbs": [
+                "https://www.thecocktaildb.com/images/media/drink/stwiva1619704025.jpg"
+            ],
+            "description": "Squeeze the juice from 1½ limes and blend with the mango to give a smooth purée",
+            "price": 145000,
+            "is_draft": false,
+            "is_public": true,
+            "rating": 5,
+            "tax": 10,
+            "attributes": {
+                "size": ["M", "L", "XL"]
+            },
+            "category": "drink",
+            "category_description": "Vietnam is the world’s second largest producer of coffee. As a Vietnamese brand, Highlands Coffee hand selects and roasts only",
+            "is_best_sellter": true
+        },
+
+        {
+            "id": "P09",
+            "name": "Monkey Wrench",
+            "thumbs": [
+                "https://www.thecocktaildb.com/images/media/drink/vsxxwy1441208133.jpg"
+            ],
+            "description": "Pour all of the ingredients into an old-fashioned glass almost filled with ice cubes.",
+            "price": 23000,
+            "is_draft": false,
+            "is_public": true,
+            "rating": 5,
+            "tax": 10,
+            "attributes": {
+                "size": ["M", "L", "XL"]
+            },
+            "category": "drink",
+            "category_description": "Vietnam is the world’s second largest producer of coffee. As a Vietnamese brand, Highlands Coffee hand selects and roasts only",
+            "is_best_sellter": false
+        },
+
+        {
+            "id": "P10",
+            "name": "Mulled Wine",
+            "thumbs": [
+                "https://www.thecocktaildb.com/images/media/drink/wpspsy1468875747.jpg"
+            ],
+            "description": "Simmer 3 cups water with, sugar, cloves, cinnamon sticks, and lemon peel in a stainless steel pot for 10 minutes.",
+            "price": 56000,
+            "is_draft": false,
+            "is_public": true,
+            "rating": 5,
+            "tax": 10,
+            "attributes": {
+                "size": ["M", "L", "XL"]
+            },
+            "category": "drink",
+            "category_description": "Vietnam is the world’s second largest producer of coffee. As a Vietnamese brand, Highlands Coffee hand selects and roasts only",
+            "is_best_sellter": true
+        }
+    ]
+}

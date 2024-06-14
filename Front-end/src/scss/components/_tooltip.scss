@@ -1,0 +1,49 @@
+.tooltip {
+    &-trigger,
+    &-display {
+        width: fit-content;
+        height: fit-content;
+    }
+
+    &-display {
+        user-select: none;
+        pointer-events: none;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        z-index: 10000;
+
+        &.default-style {
+            background-color: var(--white);
+            border-radius: 10px;
+            box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+            display: block;
+            width: fit-content;
+            padding: 8px 24px;
+        }
+    }
+}
+
+@keyframes slideDown {
+    0% {
+        opacity: 0;
+        transform: translateY(-50%);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideUp {
+    0% {
+        opacity: 0;
+        transform: translateY(50%);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

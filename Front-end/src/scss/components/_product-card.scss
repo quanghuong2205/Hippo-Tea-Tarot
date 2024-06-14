@@ -1,0 +1,196 @@
+@use '../abstracts';
+
+.product-card {
+    --gap: 12px;
+
+    position: relative;
+
+    display: flex;
+    flex-direction: column;
+
+    border-radius: 8px;
+
+    height: 100%;
+
+    background-color: var(--product-card-bg-color);
+    box-shadow: var(--product-card-shadow) 0px 0px 4px 0px;
+
+    &__label {
+        --triangle-size: 0.35em;
+
+        position: absolute;
+        display: flex;
+
+        top: 4%;
+        left: calc(-1 * var(--triangle-size));
+        z-index: 1;
+
+        font-size: 1.6rem;
+
+        padding: 0.35em 0.5em;
+        background-color: rgb(242, 82, 32);
+        border-top-right-radius: 0.25em;
+        border-bottom-right-radius: 0.25em;
+
+        @include abstracts.mediaquery(md) {
+            --triangle-size: 0.25em;
+            padding: 0.2em 0.4em;
+        }
+
+        &::before {
+            content: '';
+            display: inline-block;
+            position: absolute;
+            left: 0;
+            bottom: calc(-1 * var(--triangle-size));
+            border-top: var(--triangle-size) solid rgb(242, 82, 32);
+            border-left: var(--triangle-size) solid transparent;
+            filter: brightness(60%);
+        }
+
+        & span {
+            color: #fff;
+            font-size: 0.8em;
+            width: 100%;
+            overflow: hidden;
+            text-overflow: ellipsis;
+
+            @include abstracts.mediaquery(md) {
+                font-size: 0.6em;
+            }
+        }
+    }
+
+    &__media {
+        position: relative;
+
+        height: 0;
+        width: 100%;
+
+        padding-top: 100%;
+
+        background-color: var(--product-card-bg-color);
+    }
+
+    &__image {
+        position: absolute;
+        inset: 0;
+
+        @include abstracts.fit-frame();
+
+        object-fit: cover;
+        border-top-right-radius: 8px;
+        border-top-left-radius: 8px;
+    }
+
+    &__infor {
+        display: flex;
+        flex-direction: column;
+        row-gap: var(--gap);
+
+        flex: 1;
+
+        padding: 14px 18px;
+
+        @include abstracts.mediaquery(md) {
+            padding: 8px;
+        }
+    }
+
+    &__title,
+    &__price,
+    &__score {
+        font-weight: 500;
+        line-height: 150%;
+        font-size: 1.5rem;
+    }
+
+    &__title {
+        &::first-letter {
+            text-transform: uppercase;
+        }
+
+        @include abstracts.mediaquery(md) {
+            font-size: 1.2rem;
+        }
+    }
+
+    &__footer {
+        margin-top: auto;
+    }
+
+    &__rating {
+        display: flex;
+
+        align-items: center;
+        column-gap: 6px;
+        margin-left: auto;
+
+        margin-top: var(--gap);
+
+        & svg {
+            width: 12px;
+            height: 12px;
+            color: var(--primary-color);
+        }
+
+        & .score {
+            margin-left: auto;
+        }
+    }
+
+    &__price {
+        display: flex;
+        line-height: 1;
+
+        &--old,
+        &--new {
+            display: inline-flex;
+            align-items: flex-end;
+        }
+
+        &--old {
+            color: rgba(0, 0, 0, 0.44);
+
+            font-size: 1.4rem;
+
+            margin-left: 4px;
+            position: relative;
+            top: 3px;
+        }
+
+        &--new {
+            font-size: 1.8rem;
+            color: #ee4d2d;
+        }
+
+        &__label {
+            font-size: 1rem;
+            position: relative;
+        }
+
+        @include abstracts.mediaquery(md) {
+            &--old {
+                font-size: 1.1rem;
+            }
+
+            &--new {
+                font-size: 1.4rem;
+            }
+
+            &__label {
+                font-size: 0.8rem;
+            }
+        }
+    }
+
+    &__status {
+        color: rgba(0, 0, 0, 0.65);
+        font-size: 1.4rem;
+        margin-top: var(--gap);
+
+        @include abstracts.mediaquery(md) {
+            font-size: 1.1rem;
+        }
+    }
+}

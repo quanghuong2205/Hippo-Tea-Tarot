@@ -1,0 +1,58 @@
+@use '../abstracts';
+
+.pagination {
+    margin-top: 30px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+
+    @include abstracts.mediaquery(md) {
+        justify-content: space-between;
+    }
+
+    &__back-btn {
+        transform: rotate(180deg);
+    }
+
+    &__back-btn.disable,
+    &__next-btn.disable {
+        opacity: 0.5;
+        pointer-events: none;
+    }
+
+    & button {
+        width: 34px;
+        height: 30px;
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 6px;
+
+        font-size: 1.4rem;
+        font-weight: 500;
+
+        margin: 0 3px;
+
+        transition: 0.3s linear border;
+
+        border: 1px solid transparent;
+
+        &:hover {
+            border: 1px solid #d0d7de;
+        }
+
+        @include abstracts.mediaquery(md) {
+            font-size: 1.2rem;
+        }
+    }
+
+    &__pages button {
+        &.active {
+            background-color: var(--primary-color);
+        }
+
+        & {
+            border-radius: 4px;
+        }
+    }
+}

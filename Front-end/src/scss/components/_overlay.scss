@@ -1,0 +1,15 @@
+@use '../abstracts';
+.overlay {
+    position: fixed;
+    inset: 0;
+
+    visibility: hidden;
+    opacity: 0;
+
+    animation-timing-function: ease-in-out;
+    animation-fill-mode: forwards;
+    animation-name: fadeOut;
+    &.shown {
+        animation-name: fadeIn;
+    }
+}
