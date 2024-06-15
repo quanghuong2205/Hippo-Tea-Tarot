@@ -1,72 +1,58 @@
 import PropTypes from 'prop-types';
-import { useEffect, useRef, useState } from 'react';
+import { useRef } from 'react';
 import { clsx } from 'clsx';
 import { useMemo } from 'react';
 function Display({
     children,
-    triggerCoords,
     position,
     spaces,
-    animation,
+    animationTime,
     hasDefaultStyle,
-    delay,
+    isHiddenWithAnimation,
 }) {
     const ref = useRef(null);
-    const [displayStyles, setDisplayStyles] = useState(null);
 
     /* Set up position of display component */
     const positions = useMemo(() => {
-        if (!triggerCoords || !displayStyles) return {};
         const RStyles = {
             top: 'auto',
             left: 'auto',
             right: 'auto',
             bottom: 'auto',
-        }; //Result Style
+        };
 
-        const DStyles = displayStyles; //Display style
+        const RSpaces = {
+            bottom:
+                spaces?.bottom && spaces.bottom && spaces.bottom !== 0
+                    ? spaces.bottom
+                    : 10,
 
-        const extraSpaces = {
-            left: 0,
-            right: 0,
-            top: 0,
-            bottom: 0,
-            ...spaces,
+            top:
+                spaces?.top && spaces.top && spaces.top !== 0
+                    ? spaces.top
+                    : 10,
+
+            right:
+                spaces?.right && spaces.right && spaces.right !== 0
+                    ? spaces.right
+                    : 10,
+
+            left:
+                spaces?.left && spaces.left && spaces.left !== 0
+                    ? spaces.left
+                    : 10,
         };
 
         switch (position) {
-            case 'left': {
-                RStyles.top = triggerCoords.top + extraSpaces.top;
-                RStyles.left =
-                    triggerCoords.left - DStyles.width - extraSpaces.left;
-                break;
-            }
-
-            case 'right': {
-                RStyles.top = triggerCoords.top + extraSpaces.top;
-                RStyles.left = triggerCoords.right + extraSpaces.right;
-                break;
-            }
-
-            case 'top': {
-                RStyles.top =
-                    triggerCoords.top - DStyles.height - extraSpaces.top;
-                RStyles.left = triggerCoords.left + extraSpaces.left;
-                break;
-            }
-
-            case 'bottom': {
-                RStyles.top = triggerCoords.bottom + extraSpaces.bottom;
-                RStyles.left = triggerCoords.left + extraSpaces.left;
-                break;
-            }
-
             case 'bottom-right': {
-                RStyles.top = triggerCoords.bottom + extraSpaces.bottom;
-                RStyles.left =
-                    triggerCoords.right -
-                    DStyles.width -
-                    extraSpaces.right;
+                RStyles.top = `calc(100% + ${RSpaces.bottom}px`;
+                RStyles.right = `calc(0px + ${RSpaces.right}px)`;
+                break;
+            }
+
+            case 'bottom-left': {
+                RStyles.top = `calc(100% + ${RSpaces.bottom}px)`;
+                RStyles.left = `calc(0px + ${RSpaces.left}px)`;
                 break;
             }
 
@@ -76,38 +62,18 @@ function Display({
         }
 
         return RStyles;
-    }, [triggerCoords, position, spaces, displayStyles]);
-
-    const animationStyles = useMemo(() => {
-        if (!animation) return {};
-
-        const styles = {
-            animationDuration: `300ms`,
-            animationTimingFunction: 'ease-in-out',
-            animationName: animation,
-        };
-
-        return styles;
-    }, [animation]);
-
-    useEffect(() => {
-        const styles = getComputedStyle(ref.current);
-        setDisplayStyles({
-            width: parseFloat(styles.width),
-            height: parseFloat(styles.height),
-        });
-    }, []);
+    }, [position, spaces]);
 
     return (
         <div
             className={clsx({
                 'tooltip-display': true,
                 'default-style': hasDefaultStyle,
+                hidden: isHiddenWithAnimation,
             })}
             style={{
                 ...positions,
-                ...animationStyles,
-                animationName: 'slideUp',
+                animationDuration: `${animationTime}ms`,
             }}
             ref={ref}>
             {children}
@@ -118,11 +84,11 @@ function Display({
 Display.propTypes = {
     children: PropTypes.element,
     position: PropTypes.string,
-    triggerCoords: PropTypes.object,
     spaces: PropTypes.object,
-    animation: PropTypes.string,
+    animationTime: PropTypes.number,
     hasDefaultStyle: PropTypes.bool,
     delay: PropTypes.number,
+    isHiddenWithAnimation: PropTypes.bool,
 };
 
 export default Display;

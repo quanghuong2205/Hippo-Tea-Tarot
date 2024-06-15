@@ -10,4 +10,26 @@ const getCoords = ({ node }) => {
     };
 };
 
-export { getCoords };
+const getParentNode = ({
+    parentClassName,
+    parentId,
+    node = document.querySelector(),
+}) => {
+    let parentNode = node.parentElement;
+    if (!parentNode) return undefined;
+
+    while (parentNode) {
+        parentNode = parentNode.parentElement;
+        if (!parentNode) return undefined;
+        if (
+            parentNode.classList.contains(parentClassName) ||
+            parentNode.id === parentId
+        ) {
+            return parentNode;
+        }
+    }
+
+    return undefined;
+};
+
+export { getCoords, getParentNode };

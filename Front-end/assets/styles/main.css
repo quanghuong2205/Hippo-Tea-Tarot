@@ -71,7 +71,7 @@
     display: none !important;
   }
 }
-@keyframes tippy {
+@keyframes tippy_fadeIn {
   0% {
     opacity: 0;
     transform: translateY(-8px);
@@ -79,6 +79,16 @@
   100% {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+@keyframes tippy_fadeOut {
+  0% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-8px);
   }
 }
 @keyframes fadeIn {
@@ -3382,25 +3392,27 @@ back .slideshow + .slideshow {
   line-height: 1;
 }
 
-.tooltip-trigger, .tooltip-display {
-  width: fit-content;
-  height: fit-content;
+.tooltip {
+  position: relative;
 }
 .tooltip-display {
+  position: absolute;
   user-select: none;
   pointer-events: none;
-  position: fixed;
-  bottom: 0;
-  left: 0;
   z-index: 10000;
+  animation-name: tippy_fadeIn;
+  animation-timing-function: ease-in-out;
+  animation-fill-mode: forwards;
 }
 .tooltip-display.default-style {
   background-color: var(--white);
   border-radius: 10px;
   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
   display: block;
-  width: fit-content;
   padding: 8px 24px;
+}
+.tooltip-display.hidden {
+  animation-name: tippy_fadeOut;
 }
 
 @keyframes slideDown {

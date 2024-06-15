@@ -1,23 +1,29 @@
 import PropTypes from 'prop-types';
 import images from '../../images';
 import clsx from 'clsx';
+import { useEffect, useRef, useState } from 'react';
 
 function Image({ src, alt, className, options = {} }) {
-    const roundStyle = {
-        borderRadius: '50%',
-    };
+    const [url, setUrl] = useState(src);
+    const ref = useRef(null);
+
+    useEffect(() => {
+        /* Fail to load image */
+        ref.current.onerror = () => {
+            setUrl(images.placeholder);
+        };
+    }, []);
 
     return (
         <img
-            src={src ? src : images.placeholder}
+            src={url}
+            ref={ref}
             alt={alt || 'No alt'}
             className={clsx({
                 [className]: true,
                 fit: options?.fit,
+                round: options.round,
             })}
-            style={{
-                ...(options?.round ? roundStyle : {}),
-            }}
         />
     );
 }

@@ -1,25 +1,26 @@
 .tooltip {
-    &-trigger,
-    &-display {
-        width: fit-content;
-        height: fit-content;
-    }
+    position: relative;
 
     &-display {
+        position: absolute;
         user-select: none;
         pointer-events: none;
-        position: fixed;
-        bottom: 0;
-        left: 0;
         z-index: 10000;
+
+        animation-name: tippy_fadeIn;
+        animation-timing-function: ease-in-out;
+        animation-fill-mode: forwards;
 
         &.default-style {
             background-color: var(--white);
             border-radius: 10px;
             box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
             display: block;
-            width: fit-content;
             padding: 8px 24px;
+        }
+
+        &.hidden {
+            animation-name: tippy_fadeOut;
         }
     }
 }

@@ -1,53 +1,35 @@
 import PropTypes from 'prop-types';
-import { useEffect, useRef } from 'react';
-import { getCoords } from '../../../../utils/dom.utils';
-function Trigger({
+import { memo } from 'react';
+const Trigger = memo(function Trigger({
     children,
-    setCoords,
-    clickOnShown,
+    clickOnShow,
     isShownDisplay,
     handleShowDisplay,
     handleHiddenDisplay,
 }) {
-    const ref = useRef(null);
-
-    /**
-     * Caculate the coords of trigger
-     * Re-calculate whenever Display is Shown
-     *  to shown display based on the newest coords
-     *  of the trigger
-     */
-    useEffect(() => {
-        const node = ref.current;
-        setCoords({
-            coords: getCoords({ node }),
-        });
-    }, [isShownDisplay, setCoords]);
-
     return (
         <div
             onClick={
-                clickOnShown
+                clickOnShow
                     ? isShownDisplay
                         ? handleHiddenDisplay
                         : handleShowDisplay
                     : null
             }
-            onMouseEnter={!clickOnShown ? handleShowDisplay : null}
-            onMouseLeave={!clickOnShown ? handleHiddenDisplay : null}
-            className='tooltip-trigger'
-            ref={ref}>
+            onMouseEnter={!clickOnShow ? handleShowDisplay : null}
+            onMouseLeave={!clickOnShow ? handleHiddenDisplay : null}
+            className='tooltip-trigger'>
             {children}
         </div>
     );
-}
+});
 
 Trigger.propTypes = {
     children: PropTypes.element,
     setCoords: PropTypes.func,
     handleShowDisplay: PropTypes.func,
     handleHiddenDisplay: PropTypes.func,
-    clickOnShown: PropTypes.bool,
+    clickOnShow: PropTypes.bool,
     isShownDisplay: PropTypes.bool,
 };
 

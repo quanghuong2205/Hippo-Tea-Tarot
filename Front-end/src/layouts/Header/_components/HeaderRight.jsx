@@ -4,7 +4,7 @@ import config from '../../../../configs';
 import UserMenu from './UserMenu';
 import LoginButton from './LoginButton';
 import Navigate from './Navigate';
-import Dropdown from '../../../components/common/DropDown';
+import Tooltip from '../../../components/common/Tooltip';
 
 function HeaderRight() {
     const user = useSelector((state) => state.auth.user);
@@ -13,8 +13,15 @@ function HeaderRight() {
             <Navigate />
             {user ? (
                 <div className='header-avatar'>
-                    <Dropdown
-                        Trigger={() => (
+                    <Tooltip
+                        clickOnShown
+                        hasDefaultStyle
+                        position='bottom-right'
+                        clickOnShow
+                        spaces={{
+                            right: null,
+                        }}
+                        TriggerComponent={() => (
                             <Image
                                 options={{
                                     fit: true,
@@ -23,7 +30,7 @@ function HeaderRight() {
                                 src={`${config.SERVER_URL}/${user.avatar}`}
                             />
                         )}
-                        Content={() => <UserMenu />}
+                        DisplayComponent={() => <UserMenu />}
                     />
                 </div>
             ) : (

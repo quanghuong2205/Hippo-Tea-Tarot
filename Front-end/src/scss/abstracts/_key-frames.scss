@@ -1,4 +1,4 @@
-@keyframes tippy {
+@keyframes tippy_fadeIn {
     0% {
         opacity: 0;
         transform: translateY(-8px);
@@ -6,6 +6,17 @@
     100% {
         opacity: 1;
         transform: translateY(0);
+    }
+}
+
+@keyframes tippy_fadeOut {
+    0% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(-8px);
     }
 }
 
