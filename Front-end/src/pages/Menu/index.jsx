@@ -5,9 +5,9 @@ import { useEffect, useRef } from 'react';
 import Category from '../../components/molecules/Category';
 import { CiFilter } from 'react-icons/ci';
 import Pagination from '../../components/molecules/Pagination';
-import { dispatchEvent } from '../../utils';
+import { createRandomArray, dispatchEvent } from '../../utils';
 import EVENTS from '../../constants/event.constant';
-import { PANEL_TITLES } from '../../constants/panel.constant';
+import { MODAL_TITLES } from '../../constants/modal.constant';
 import { useLocation } from 'react-router-dom';
 
 function Menu() {
@@ -45,42 +45,69 @@ function Menu() {
     return (
         <div className='menu page'>
             <div className='container'>
-                {PPIsFetching && <Loading loadingText='Đang tải...' />}
+                {PPIsFetching && (
+                    <Category
+                        title={'COFFEE'}
+                        description={null}
+                        products={createRandomArray({ size: 8 })}
+                        productNumPerLine={5}
+                        isSkeleton
+                        HeaderRight={() => (
+                            <button
+                                className='pri-btn'
+                                style={{
+                                    height: 38,
+                                    fontWeight: 400,
+                                }}
+                                onClick={() => {
+                                    dispatchEvent({
+                                        eventName: EVENTS.OPEN_MODAL,
+                                        payload: {
+                                            title: MODAL_TITLES.FILTER_MODAL,
+                                        },
+                                    });
+                                }}>
+                                <CiFilter />
+                                Filter
+                            </button>
+                        )}
+                    />
+                )}
                 {!PPIsFetching && PPIsSuccess && PPData && (
-                    <>
-                        <Category
-                            title={'COFFEE'}
-                            description={null}
-                            products={PPData.products}
-                            productNumPerLine={5}
-                            HeaderRight={() => (
-                                <button
-                                    className='pri-btn'
-                                    style={{
-                                        height: 38,
-                                        fontWeight: 400,
-                                    }}
-                                    onClick={() => {
-                                        dispatchEvent({
-                                            eventName: EVENTS.OPEN_PANEL,
-                                            payload: {
-                                                title: PANEL_TITLES.FILTER_PANEL,
-                                            },
-                                        });
-                                    }}>
-                                    <CiFilter />
-                                    Filter
-                                </button>
-                            )}
-                        />
-                        <Pagination
-                            totalPages={parseInt(PPData.totalPages)}
-                            currentPage={parseInt(PPData.currentPage)}
-                            prevPage={parseInt(PPData.prevPage)}
-                            nextPage={parseInt(PPData.nextPage)}
-                            setPage={setPage}
-                        />
-                    </>
+                    <Category
+                        title={'COFFEE'}
+                        description={null}
+                        products={PPData.products}
+                        productNumPerLine={5}
+                        HeaderRight={() => (
+                            <button
+                                className='pri-btn'
+                                style={{
+                                    height: 38,
+                                    fontWeight: 400,
+                                }}
+                                onClick={() => {
+                                    dispatchEvent({
+                                        eventName: EVENTS.OPEN_MODAL,
+                                        payload: {
+                                            title: MODAL_TITLES.FILTER_MODAL,
+                                        },
+                                    });
+                                }}>
+                                <CiFilter />
+                                Filter
+                            </button>
+                        )}
+                    />
+                )}
+                {!PPIsFetching && PPIsSuccess && PPData && (
+                    <Pagination
+                        totalPages={parseInt(PPData.totalPages)}
+                        currentPage={parseInt(PPData.currentPage)}
+                        prevPage={parseInt(PPData.prevPage)}
+                        nextPage={parseInt(PPData.nextPage)}
+                        setPage={setPage}
+                    />
                 )}
             </div>
         </div>

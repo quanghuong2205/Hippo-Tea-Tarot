@@ -1,0 +1,38 @@
+div[class^='skeleton-'] {
+}
+
+.skeleton {
+    animation: skeleton-loading 1s linear infinite alternate;
+    border-radius: 8px;
+
+    &-text {
+        height: 14px;
+        width: max(100%, 60px);
+        flex: 1;
+
+        animation: skeleton-loading 1s linear infinite alternate;
+        border-radius: 8px;
+    }
+
+    &-round {
+        border-radius: 50% !important;
+        overflow: hidden;
+        flex-shrink: 0;
+
+        animation: skeleton-loading 1s linear infinite alternate;
+        border-radius: 8px;
+    }
+
+    &-flex {
+        display: flex;
+
+        & .w-70 {
+            width: 70% !important;
+            max-width: 70% !important;
+            flex-basis: 70% !important;
+        }
+    }
+}
+
+.feed-card-skeleton {
+}

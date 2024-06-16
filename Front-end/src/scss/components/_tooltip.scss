@@ -3,8 +3,6 @@
 
     &-display {
         position: absolute;
-        user-select: none;
-        pointer-events: none;
         z-index: 10000;
 
         animation-name: tippy_fadeIn;

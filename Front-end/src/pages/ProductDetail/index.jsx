@@ -2,7 +2,6 @@ import { useParams } from 'react-router-dom';
 import OtherProducts from './OtherProducts';
 import MainProduct from './MainProduct';
 import ProductFeedbacks from './ProductFeedback';
-import Popup from '../../components/common/Popup';
 
 function ProductDetail() {
     /* Get the infor of the product by params */

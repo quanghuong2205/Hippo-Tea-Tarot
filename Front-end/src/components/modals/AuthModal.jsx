@@ -1,14 +1,10 @@
 import PropTypes from 'prop-types';
 import Image from '../../components/atoms/Image';
 import images from '../../images';
-import Popup from '../../components/common/Popup';
 
-function AuthPopup({ signUpInfor, handleCloseSideEffects }) {
+function AuthModal({ data }) {
     return (
-        <Popup
-            hasCloseBtn
-            closeOnOverlay
-            handleCloseSideEffects={handleCloseSideEffects}>
+        <>
             <div className='auth-popup'>
                 <div className='auth-popup__photo'>
                     <Image
@@ -19,7 +15,7 @@ function AuthPopup({ signUpInfor, handleCloseSideEffects }) {
                     />
                 </div>
                 <div className='auth-popup__text'>
-                    <h1>Chào mừng {signUpInfor.name} đến với SHOP</h1>
+                    <h1>Chào mừng {data.user.name} đến với SHOP</h1>
                     <p>
                         Chào mừng bạn đến với SHOP - nơi kết hợp giữa hương
                         vị thơm ngon của trà sữa kem và sự thú vị của dịch
@@ -34,13 +30,12 @@ function AuthPopup({ signUpInfor, handleCloseSideEffects }) {
                     </p>
                 </div>
             </div>
-        </Popup>
+        </>
     );
 }
 
-AuthPopup.propTypes = {
-    signUpInfor: PropTypes.object,
-    handleCloseSideEffects: PropTypes.func,
+AuthModal.propTypes = {
+    data: PropTypes.object,
 };
 
-export default AuthPopup;
+export default AuthModal;

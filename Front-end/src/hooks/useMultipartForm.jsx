@@ -102,7 +102,6 @@ function useMultipartForm({ FORM_FILEDS, initalFormValues = {} }) {
     const removeFile =
         ({ url, file, type }) =>
         () => {
-            console.log(url, file, type);
             if (type === 'file_object') {
                 setForm((prev) => {
                     const fileArrayAfterRemoving = prev[
@@ -117,21 +116,17 @@ function useMultipartForm({ FORM_FILEDS, initalFormValues = {} }) {
             }
 
             if (type === 'file_url') {
-                console.log(url);
                 setForm((prev) => {
                     const fileArrayAfterRemoving = prev[
                         FORM_FILEDS.FILE_URLS.name
                     ].filter((u) => u !== url);
 
-                    console.log(fileArrayAfterRemoving);
                     return {
                         ...prev,
                         [FORM_FILEDS.FILE_URLS.name]:
                             fileArrayAfterRemoving,
                     };
                 });
-
-                console.log('hreeee');
             }
         };
 

@@ -6,6 +6,8 @@ import EVENTS from '../../../constants/event.constant';
 import Overlay from '../../../components/common/Overlay';
 import Loading from '../../../components/common/Loading';
 import { useEffect, useState } from 'react';
+import { dispatchEvent } from '../../../utils';
+import { MODAL_TITLES } from '../../../constants/modal.constant';
 
 function SignUp({ fields, setErrorText, switchAuthMode, handleValidate }) {
     const [longLoadingTime, setLongLoadingTime] = useState(false);
@@ -42,17 +44,6 @@ function SignUp({ fields, setErrorText, switchAuthMode, handleValidate }) {
         }
     };
 
-    if (error) {
-        setErrorText(
-            error?.status == 409
-                ? 'Người dùng đã tồn tại'
-                : 'Đã xảy ra lỗi bên server'
-        );
-
-        /* Reset mutate state */
-        reset();
-    }
-
     useEffect(() => {
         if (isSuccess) {
             /* Hidden error */
@@ -61,20 +52,30 @@ function SignUp({ fields, setErrorText, switchAuthMode, handleValidate }) {
             /* Hidden long loading text */
             setLongLoadingTime(false);
 
-            /* Dispatch success event */
-            document.dispatchEvent(
-                new CustomEvent(EVENTS.SIGN_UP_SUCCESS, {
-                    detail: {
-                        user: data.user,
-                    },
-                })
-            );
+            dispatchEvent({
+                eventName: EVENTS.OPEN_MODAL,
+                payload: {
+                    title: MODAL_TITLES.AUTH_INFOR_MODAL,
+                    data: data?.user,
+                },
+            });
 
             /* Redirect to sign in */
             switchAuthMode(AUTH_MODES.SIGN_IN)();
         }
+
+        if (error) {
+            setErrorText(
+                error?.status == 409
+                    ? 'Người dùng đã tồn tại'
+                    : 'Đã xảy ra lỗi bên server'
+            );
+
+            /* Reset mutate state */
+            reset();
+        }
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [isSuccess]);
+    }, [isSuccess, error]);
 
     return (
         <>

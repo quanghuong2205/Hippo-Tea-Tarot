@@ -92,9 +92,10 @@
             display: block;
             color: var(--user-menu-text-color);
 
+            cursor: pointer;
+
             &:hover {
                 color: inherit;
-                cursor: pointer;
             }
         }
     }

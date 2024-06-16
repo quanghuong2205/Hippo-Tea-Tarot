@@ -12,7 +12,7 @@ function NavItem({ item, onClick }) {
                     onClick={() => {
                         /* Close the navbar when navigate to link */
                         dispatchEvent({
-                            eventName: EVENTS.HIDDEN_PANEL,
+                            eventName: EVENTS.HIDDEN_MODAL,
                         });
                     }}>
                     <>

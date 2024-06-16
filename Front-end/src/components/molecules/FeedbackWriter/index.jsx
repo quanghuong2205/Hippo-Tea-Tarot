@@ -2,22 +2,21 @@ import PropTypes from 'prop-types';
 import CreateFeedback from './_components/CreateFeedback';
 import UpdateFeedback from './_components/UpdateFeedback';
 import 'react-toastify/dist/ReactToastify.css';
-function FeedbackWriter({ userFeedback, productID }) {
-    if (userFeedback) {
+function FeedbackWriter({ data }) {
+    if (data.feedback) {
         return (
             <UpdateFeedback
-                feedbackObject={userFeedback}
-                productID={productID}
+                feedbackObject={data.feedback}
+                productID={data.productID}
             />
         );
     }
 
-    return <CreateFeedback productID={productID} />;
+    return <CreateFeedback productID={data.productID} />;
 }
 
 FeedbackWriter.propTypes = {
-    userFeedback: PropTypes.object,
-    productID: PropTypes.string,
+    data: PropTypes.object,
 };
 
 export default FeedbackWriter;

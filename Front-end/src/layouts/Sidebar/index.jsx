@@ -12,7 +12,7 @@ function SideBar() {
                         className='sidebar-item'
                         onClick={() => {
                             dispatchEvent({
-                                eventName: EVENTS.OPEN_PANEL,
+                                eventName: EVENTS.OPEN_MODAL,
                                 payload: {
                                     title: item.panelTitle,
                                 },

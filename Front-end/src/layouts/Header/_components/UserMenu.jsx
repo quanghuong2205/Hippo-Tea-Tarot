@@ -4,7 +4,6 @@ import { USER_MENU } from '../../../constants/header.const';
 import { useDispatch } from 'react-redux';
 import authActions from '../../../redux/actions/action.auth';
 import { useNavigate } from 'react-router-dom';
-import { LuLogOut } from 'react-icons/lu';
 import clsx from 'clsx';
 
 function UserMenu() {
@@ -18,30 +17,31 @@ function UserMenu() {
                         hasBorder: menuIndex !== USER_MENU.length - 1,
                     })}
                     key={`sub-menu/${menuIndex}`}>
-                    {subMenu.map((item, itemIndex) => (
+                    {subMenu.map((item, i) => (
                         <>
-                            <MenuItem
-                                key={`sub-menu/${item.id}`}
-                                uniqueKey={`sub-menu/${item.id}`}
-                                item={item}
-                            />
+                            <li key={`sub-menu/${i}`}>
+                                {item.isLink ? (
+                                    <Button linkTo={item.path}>
+                                        <>{item.label}</>
+                                    </Button>
+                                ) : (
+                                    <span onClick={null}>
+                                        {item.label}
+                                    </span>
+                                )}
+                            </li>
 
                             {/* Sign out button */}
                             {menuIndex == USER_MENU.length - 1 &&
-                                itemIndex == subMenu.length - 1 && (
-                                    <MenuItem
-                                        onClick={
-                                            dispatcher.signOutDispatcher
-                                        }
-                                        key={`sub-menu/LO`}
-                                        uniqueKey={`sub-menu/${item.id}`}
-                                        item={{
-                                            id: 'LO',
-                                            icon: LuLogOut,
-                                            isLink: false,
-                                            label: 'Sign out',
-                                        }}
-                                    />
+                                i == subMenu.length - 1 && (
+                                    <li key={`sub-menu/LO`}>
+                                        <span
+                                            onClick={
+                                                dispatcher.signOutDispatcher
+                                            }>
+                                            {'Sign out'}
+                                        </span>
+                                    </li>
                                 )}
                         </>
                     ))}

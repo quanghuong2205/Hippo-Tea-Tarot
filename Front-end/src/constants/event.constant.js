@@ -4,9 +4,9 @@ const EVENTS = {
     SIGN_UP_SUCCESS: 'sign-up-success',
 
     /* Panels */
-    OPEN_PANEL: 'open-panel',
-    HIDDEN_PANEL: 'hidden-panel',
-    SHOW_INVISIBLE_PANEL: 'show-invisible-panel',
+    OPEN_MODAL: 'open-modal',
+    HIDDEN_MODAL: 'hidden-modal',
+    SHOW_INVISIBLE_MODAL: 'show-invisible-modal',
 
     /* Filter */
     SET_SEARCH_PARAM_FOR_MULTI_FIELD: 'search-params-for-multi-field',

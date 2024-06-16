@@ -1,52 +1,31 @@
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
-import Auth from './pages/Auth';
-import publicRoutes from './routes/public.route';
-import { useSelector } from 'react-redux';
-import AppPanels from './AppPanels';
+import { Suspense } from 'react';
+import AppRouter from './AppRouter';
 import useAppEvents from './hooks/useAppEvents';
+import { Helmet } from 'react-helmet';
+import { useLocation } from 'react-router-dom';
+import getHtmlTitle from './routes/title.route';
+import AppModals from './AppModals';
+import Loading from './components/common/Loading';
 
 function App() {
-    /* Auth */
-    const accessToken = useSelector((state) => state.auth.accessToken);
+    /* Routes */
+    const location = useLocation();
 
     /* Events */
     useAppEvents();
 
     return (
-        <BrowserRouter>
-            <Routes>
-                {/* Public route */}
-                <Route>
-                    {publicRoutes.map((publicRoute, index) => (
-                        <Route
-                            element={
-                                publicRoute.layout ? (
-                                    <publicRoute.layout>
-                                        <publicRoute.element />
-                                    </publicRoute.layout>
-                                ) : (
-                                    <publicRoute.element />
-                                )
-                            }
-                            path={publicRoute.path}
-                            key={`${index}-${publicRoute.path}`}
-                        />
-                    ))}
-                </Route>
-
-                {/* Private route */}
-
-                {/* Specific route */}
-                <Route
-                    path='/auth'
-                    element={
-                        !accessToken ? <Auth /> : <Navigate to={'/'} />
-                    }
-                />
-            </Routes>
-
-            <AppPanels />
-        </BrowserRouter>
+        <>
+            <Helmet
+                defaultTitle='TeaShop'
+                titleTemplate='TeaShop - %s'>
+                <title>{getHtmlTitle({ path: location.pathname })}</title>
+            </Helmet>
+            <Suspense fallback={<Loading />}>
+                <AppRouter />
+                <AppModals />
+            </Suspense>
+        </>
     );
 }
 

@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import images from '../../../images';
 import Image from '../../atoms/Image';
+// import LogoSkeleton from './LogoSkeleton';
 
 function Logo({ slogan }) {
     return (
@@ -18,6 +19,7 @@ function Logo({ slogan }) {
 
             {slogan && <p className='logo__slogan'>{slogan}</p>}
         </div>
+        // <LogoSkeleton slogan={slogan} />
     );
 }
 

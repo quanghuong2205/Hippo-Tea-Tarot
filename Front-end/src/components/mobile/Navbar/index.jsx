@@ -73,7 +73,7 @@ function MobileNavBar() {
                         onClick={() => {
                             navigate('/auth');
                             dispatchEvent({
-                                eventName: EVENTS.HIDDEN_PANEL,
+                                eventName: EVENTS.HIDDEN_MODAL,
                             });
                         }}
                     />
@@ -101,7 +101,7 @@ function MobileNavBar() {
                             onClick={() => {
                                 dispatcher.signOutDispatcher();
                                 dispatchEvent({
-                                    eventName: EVENTS.HIDDEN_PANEL,
+                                    eventName: EVENTS.HIDDEN_MODAL,
                                 });
                             }}
                         />

@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import Product from '../Product';
+import ProductSkeleton from '../Product/ProductSkeleton';
 
 function Category({
     title,
@@ -7,6 +8,7 @@ function Category({
     products,
     productNumPerLine,
     HeaderRight,
+    isSkeleton,
 }) {
     const numPerline = {
         1: 'col-12',
@@ -41,11 +43,19 @@ function Category({
 
             <div className='category-menu row g-3'>
                 {products.map((product) => (
-                    <Product
-                        key={product._id}
-                        product={product}
-                        className={numPerline[productNumPerLine]}
-                    />
+                    <>
+                        {isSkeleton ? (
+                            <ProductSkeleton
+                                className={numPerline[productNumPerLine]}
+                            />
+                        ) : (
+                            <Product
+                                key={product._id}
+                                product={product}
+                                className={numPerline[productNumPerLine]}
+                            />
+                        )}
+                    </>
                 ))}
             </div>
         </div>
@@ -58,6 +68,7 @@ Category.propTypes = {
     products: PropTypes.array,
     productNumPerLine: PropTypes.number,
     HeaderRight: PropTypes.func,
+    isSkeleton: PropTypes.bool,
 };
 
 export default Category;

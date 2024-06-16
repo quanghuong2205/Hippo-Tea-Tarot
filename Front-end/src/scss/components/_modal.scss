@@ -1,0 +1,86 @@
+@use '../abstracts';
+
+.modal {
+    position: fixed;
+
+    inset: 5%;
+    z-index: 999;
+
+    & .inner {
+        width: 100%;
+        height: 100%;
+
+        display: flex;
+        justify-content: center;
+
+        background-color: #fff;
+        box-shadow: 4px 0 24px rgba(0, 0, 0, 0.15);
+
+        animation: ease-in-out forwards;
+
+        animation-name: fadeIn;
+    }
+
+    &.hidden .inner {
+        animation-name: fadeOut;
+    }
+
+    &__close {
+        position: absolute;
+        top: 3px;
+        right: 3px;
+        z-index: 4;
+
+        display: flex;
+
+        font-size: 2.2rem;
+        color: #000;
+        padding: 6px;
+        border-radius: 50%;
+
+        @include abstracts.mediaquery(md) {
+            font-size: 1.8rem;
+        }
+
+        &:hover {
+            cursor: pointer;
+            opacity: 0.8;
+        }
+    }
+}
+
+.modal-vertical {
+    &--leftEdge {
+        inset: 0 auto auto 0;
+    }
+
+    &--rightEdge {
+        inset: 0 0 auto auto;
+    }
+
+    & .inner {
+        height: 100vh;
+    }
+
+    &--leftEdge .inner {
+        animation-name: slideFromLeft;
+
+        border-top-right-radius: 16px;
+        border-bottom-right-radius: 16px;
+    }
+
+    &--leftEdge.hidden .inner {
+        animation-name: slideOutToLeft;
+    }
+
+    &--rightEdge .inner {
+        animation-name: slideFromRight;
+
+        border-top-left-radius: 16px;
+        border-bottom-left-radius: 16px;
+    }
+
+    &--rightEdge.hidden .inner {
+        animation-name: slideOutToRight;
+    }
+}

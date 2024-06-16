@@ -1,5 +1,5 @@
 'use strict';
 
-const publicRoutes = [];
+const privateRoutes = [];
 
-export default publicRoutes;
+export default privateRoutes;
