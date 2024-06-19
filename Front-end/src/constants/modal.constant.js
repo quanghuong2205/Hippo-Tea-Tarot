@@ -2,65 +2,63 @@
 import { lazy } from 'react';
 
 const Filter = lazy(() => import('../components/molecules/Filter'));
-// const MobileNavBar = lazy(() => import('../components/mobile/Navbar'));
+const MobileNavBar = lazy(() => import('../components/mobile/Navbar'));
 const Notify = lazy(() => import('../components/molecules/Notify'));
 const Search = lazy(() => import('../components/molecules/Search'));
 const FeedbackWriter = lazy(() =>
     import('../components/molecules/FeedbackWriter')
 );
-// const AuthModal = lazy(() => import('../components/modals/AuthModal'));
 
-import MobileNavBar from '../components/mobile/Navbar';
 import AuthModal from '../components/modals/AuthModal';
 
-const MODAL_TITLES = {
-    SEARCH_MODAL: 'search-modal',
-    NOTIFY_MODAL: 'notify-modal',
-    HEADER_MOBILE_MODAL: 'header-mobile-modal',
-    FILTER_MODAL: 'filter-modal',
-    AUTH_INFOR_MODAL: 'auth-infor-modal',
-    FEEDBACK_WRITER_MODAL: 'feedback-writer-modal',
+const MODAL_IDS = {
+    SEARCH_MODAL: '495b6262-18a8-433f-af65-af4a43e2dfc1',
+    NOTIFY_MODAL: '58c2bf1d-719d-4b68-8adc-dc34be96a52d',
+    HEADER_MOBILE_MODAL: 'd44d886a-e9c0-4a76-a958-c0d9c3e8626b',
+    FILTER_MODAL: '756aaa7d-b37f-4905-9040-09d329806030',
+    AUTH_INFOR_MODAL: 'af7a133a-350f-49c1-b158-db6076bd8e3d',
+    FEEDBACK_WRITER_MODAL: 'e4e449fe-a6a1-4d64-b35d-96943caa3e6b',
 };
 
 const MODALS = {
-    [MODAL_TITLES.SEARCH_MODAL]: {
+    [MODAL_IDS.SEARCH_MODAL]: {
         component: Search,
         position: 'leftEdge',
         isVertical: true,
-        outOfDOM: true,
+        layer: 1,
     },
-    [MODAL_TITLES.NOTIFY_MODAL]: {
+    [MODAL_IDS.NOTIFY_MODAL]: {
         component: Notify,
         position: 'leftEdge',
         isVertical: true,
-        outOfDOM: true,
+        layer: 1,
     },
-    [MODAL_TITLES.HEADER_MOBILE_MODAL]: {
+    [MODAL_IDS.HEADER_MOBILE_MODAL]: {
         component: MobileNavBar,
         position: 'leftEdge',
         isVertical: true,
-        outOfDOM: true,
+        hasOverlay: true,
+        layer: 1,
     },
-    [MODAL_TITLES.FILTER_MODAL]: {
+    [MODAL_IDS.FILTER_MODAL]: {
         component: Filter,
         position: 'rightEdge',
-        isVertical: true,
-        outOfDOM: false,
+        hasOverlay: true,
+        layer: 1,
     },
 
-    [MODAL_TITLES.AUTH_INFOR_MODAL]: {
+    [MODAL_IDS.AUTH_INFOR_MODAL]: {
         component: AuthModal,
-        position: '',
         isVertical: false,
-        outOfDOM: true,
+        hasCloseButton: true,
+        hasOverlay: true,
+        layer: 1,
     },
 
-    [MODAL_TITLES.FEEDBACK_WRITER_MODAL]: {
+    [MODAL_IDS.FEEDBACK_WRITER_MODAL]: {
         component: FeedbackWriter,
-        position: '',
-        isVertical: false,
-        outOfDOM: true,
+        layer: 1,
     },
 };
 
-export { MODAL_TITLES, MODALS };
+export { MODAL_IDS, MODALS };

@@ -5,7 +5,7 @@ import FeedbackCard from '../../components/molecules/FeedbackCard';
 import { useSelector } from 'react-redux';
 import { createRandomArray, dispatchEvent } from '../../utils';
 import EVENTS from '../../constants/event.constant';
-import { MODAL_TITLES } from '../../constants/modal.constant';
+import { MODAL_IDS } from '../../constants/modal.constant';
 import FeedbackCardSkeleton from '../../components/molecules/FeedbackCard/FeedbackCardSkeleton';
 import useRequireAuth from '../../hooks/useRequireAuth';
 
@@ -43,7 +43,7 @@ function ProductFeedbacks({ productID }) {
         dispatchEvent({
             eventName: EVENTS.OPEN_MODAL,
             payload: {
-                title: MODAL_TITLES.FEEDBACK_WRITER_MODAL,
+                title: MODAL_IDS.FEEDBACK_WRITER_MODAL,
                 data: {
                     feedback: getFeedback(),
                     productID,

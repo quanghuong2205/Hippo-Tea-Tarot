@@ -1,7 +1,7 @@
 import { CiMenuFries } from 'react-icons/ci';
 import { dispatchEvent } from '../../../utils';
 import EVENTS from '../../../constants/event.constant';
-import { MODAL_TITLES } from '../../../constants/modal.constant';
+import { MODAL_IDS } from '../../../constants/modal.constant';
 import SearchIcon from '../../../components/icons/SearchIcon';
 import HeartIcon from '../../../components/icons/HeartIcon';
 import Button from '../../../components/atoms/Button';
@@ -17,7 +17,7 @@ function HeaderOnMobile() {
                             dispatchEvent({
                                 eventName: EVENTS.OPEN_MODAL,
                                 payload: {
-                                    title: MODAL_TITLES.HEADER_MOBILE_MODAL,
+                                    id: MODAL_IDS.HEADER_MOBILE_MODAL,
                                 },
                             });
                         }

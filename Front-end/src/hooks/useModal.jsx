@@ -1,5 +1,7 @@
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import EVENTS from '../constants/event.constant';
+import { MODALS } from '../constants/modal.constant';
+const MODAL_IDS = Object.keys(MODALS);
 
 /**
  * modalItems: {
@@ -7,45 +9,33 @@ import EVENTS from '../constants/event.constant';
  * }
  */
 
-function useModal({ modalItems }) {
+function useModal() {
     const bodyNode = useRef(document.querySelector('body'));
-    const [modals, setModals] = useState(() => {
-        const modalKeys = Object.keys(modalItems);
-
-        /* Initial panels with open state (false) */
-        modalKeys.forEach((modalKey) => {
-            modalItems[modalKey] = {
-                ...modalItems[modalKey],
-                isOpen: false,
-                data: null,
-            };
-        });
-
-        return modalItems;
-    });
-    const [isVisible, setIsVisisble] = useState(true);
+    const [openedModals, setOpenedModals] = useState([
+        // {
+        //     ...MODALS['af7a133a-350f-49c1-b158-db6076bd8e3d'],
+        //     id: 'af7a133a-350f-49c1-b158-db6076bd8e3d',
+        //     data: {
+        //         user: { name: 'huong' },
+        //     },
+        // },
+    ]);
 
     /**
      * @desc Open the targeted panel
      */
-    const openModal = ({ modalTitle, modalData }) => {
-        const isOpen = modals[modalTitle].isOpen;
+    const handleOpenModal = ({ modalID, modalData }) => {
+        setOpenedModals((prev) => {
+            if (prev.find((m) => m.id === modalID)) return [...prev];
 
-        /* The current panel is not removed out of DOM
-            it is just invisible
-        */
-        if (!isOpen) {
-            setModals((prev) => {
-                prev[modalTitle] = {
-                    ...prev[modalTitle],
-                    isOpen: true,
-                    data: modalData,
-                };
-                return { ...prev };
+            prev.push({
+                ...MODALS[modalID],
+                id: modalID,
+                data: modalData,
             });
-        }
 
-        setIsVisisble(true);
+            return [...prev];
+        });
 
         bodyNode.current.classList.add('hidden-scrollbar');
     };
@@ -53,33 +43,29 @@ function useModal({ modalItems }) {
     /**
      * @desc Hidden Open the panel
      */
-    const hiddenModal = () => {
-        setModals((prev) => {
-            const modalKeys = Object.keys(prev);
+    const handleHiddenModal = ({ modalID }) => {
+        return () => {
+            console.log(modalID);
+            setOpenedModals((prev) => {
+                prev = prev.filter((m) => m.id !== modalID);
+                return [...prev];
+            });
 
-            /* Hidden current opened panel */
-            modalKeys.forEach((key) => (prev[key].isOpen = false));
-
-            return { ...prev };
-        });
-
-        bodyNode.current.classList.remove('hidden-scrollbar');
+            bodyNode.current.classList.remove('hidden-scrollbar');
+        };
     };
-
-    const openedModal = useMemo(() => {
-        const modalKeys = Object.keys(modals);
-        const openedModalKey = modalKeys.find((key) => modals[key].isOpen);
-
-        return openedModalKey ? modals[openedModalKey] : undefined;
-    }, [modals]);
 
     useEffect(() => {
         const openModalHandler = (e) => {
-            const title = e.detail?.title;
-            if (!title) return;
+            const id = e.detail?.id;
+            if (!id) return;
 
-            openModal({
-                modalTitle: title,
+            if (!MODAL_IDS.includes(id)) {
+                throw new Error(`Modal ID:: ${id} is not valid`);
+            }
+
+            handleOpenModal({
+                modalID: id,
                 modalData: e.detail?.data,
             });
         };
@@ -96,13 +82,8 @@ function useModal({ modalItems }) {
     }, []);
 
     return {
-        hiddenModal,
-        openedModal,
-        isVisible,
-        setIsVisisble: (bool) => {
-            bodyNode.current.classList.toggle('hidden-scrollbar');
-            setIsVisisble(bool);
-        },
+        handleHiddenModal,
+        openedModals,
     };
 }
 

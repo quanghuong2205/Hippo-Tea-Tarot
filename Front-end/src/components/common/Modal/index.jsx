@@ -1,25 +1,34 @@
 import PropTypes from 'prop-types';
 import { clsx } from 'clsx';
 import Overlay from '../Overlay';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import EVENTS from '../../../constants/event.constant';
 import Button from '../../atoms/Button';
 import { IoMdClose } from 'react-icons/io';
 
 function Modal({
     children,
-    hiddenModal,
-    position = '',
-    outOfDom,
+    handleHiddenModal,
+    position,
     isVertical,
-    animationTime = 500,
-    isVisible,
-    setIsVisisble,
     hasCloseBtn,
+    hasOverlay,
+    id,
+    layer,
 }) {
+    const animationTime = 500;
+
+    const [animatedBeforeHidden, setAnimatedBeforeHidden] =
+        useState(false);
+
     const hiddenModalHandler = () => {
-        setIsVisisble(false);
-        setTimeout(() => (outOfDom ? hiddenModal() : null), animationTime);
+        setAnimatedBeforeHidden(true);
+
+        setTimeout(() => {
+            handleHiddenModal({
+                modalID: id,
+            })();
+        }, animationTime);
     };
 
     useEffect(() => {
@@ -42,10 +51,10 @@ function Modal({
                     'modal-vertical': isVertical,
                     'modal-vertical--leftEdge': position === 'leftEdge',
                     'modal-vertical--rightEdge': position === 'rightEdge',
-                    hidden: !isVisible,
+                    hidden: animatedBeforeHidden,
                 })}
                 style={{
-                    pointerEvents: isVisible ? 'auto' : 'none',
+                    zIndex: 999 + layer + 1,
                 }}>
                 <div
                     className='inner'
@@ -57,19 +66,21 @@ function Modal({
                     {hasCloseBtn && (
                         <Button
                             className={'modal__close'}
-                            onClick={hiddenModal}>
+                            onClick={hiddenModalHandler}>
                             <IoMdClose />
                         </Button>
                     )}
                 </div>
             </div>
 
-            <Overlay
-                onClick={hiddenModalHandler}
-                isShown={isVisible}
-                animationTime={animationTime}
-                zIndex={998}
-            />
+            {hasOverlay && (
+                <Overlay
+                    onClick={hiddenModalHandler}
+                    animationTime={animationTime}
+                    zIndex={999 + layer}
+                    isShown={!animatedBeforeHidden}
+                />
+            )}
         </>
     );
 }
@@ -77,13 +88,12 @@ function Modal({
 Modal.propTypes = {
     children: PropTypes.element,
     position: PropTypes.string,
-    hiddenModal: PropTypes.func,
-    animationTime: PropTypes.number,
-    outOfDom: PropTypes.bool,
-    isVisible: PropTypes.bool,
-    setIsVisisble: PropTypes.func,
+    id: PropTypes.string,
+    handleHiddenModal: PropTypes.func,
     hasCloseBtn: PropTypes.bool,
     isVertical: PropTypes.bool,
+    hasOverlay: PropTypes.bool,
+    layer: PropTypes.number,
 };
 
 export default Modal;

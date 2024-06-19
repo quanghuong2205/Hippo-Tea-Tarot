@@ -1,30 +1,27 @@
-import { MODALS } from './constants/modal.constant';
 import Modal from './components/common/Modal';
 import useModal from './hooks/useModal';
 
 function AppModals() {
     /* Panel */
-    const { hiddenModal, openedModal, isVisible, setIsVisisble } =
-        useModal({
-            modalItems: MODALS,
-        });
+    const { handleHiddenModal, openedModals } = useModal();
 
-    return (
-        <>
-            {openedModal?.isOpen && (
-                <Modal
-                    hiddenModal={hiddenModal}
-                    position={openedModal.position}
-                    outOfDom={openedModal.outOfDOM}
-                    isVertical={openedModal.isVertical}
-                    animationTime={400}
-                    isVisible={isVisible}
-                    setIsVisisble={setIsVisisble}>
-                    <openedModal.component data={openedModal?.data} />
-                </Modal>
-            )}
-        </>
-    );
+    if (openedModals.length === 0) return <></>;
+
+    if (openedModals.length === 1) {
+        const openedModal = openedModals[0];
+        return (
+            <Modal
+                handleHiddenModal={handleHiddenModal}
+                position={openedModal.position}
+                isVertical={openedModal.isVertical}
+                hasCloseBtn={openedModal?.hasCloseButton}
+                id={openedModal.id}
+                layer={openedModal.layer}
+                hasOverlay={openedModal.hasOverlay}>
+                <openedModal.component data={openedModal?.data} />
+            </Modal>
+        );
+    }
 }
 
 export default AppModals;

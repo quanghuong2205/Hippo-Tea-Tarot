@@ -84,3 +84,69 @@
         animation-name: slideOutToRight;
     }
 }
+
+.auth-modal {
+    display: flex;
+    align-items: center;
+
+    border-radius: 8px;
+    background-color: #fff;
+
+    @include abstracts.mediaquery(md) {
+        flex-direction: column;
+    }
+
+    &__photo {
+        display: flex;
+        justify-content: flex-end;
+        align-items: flex-end;
+        flex-basis: 60%;
+        height: 100%;
+
+        @include abstracts.mediaquery(md) {
+            flex-basis: auto;
+            height: 40%;
+        }
+    }
+    &__text {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        flex-basis: 40%;
+        height: 100%;
+        overflow: auto;
+
+        padding: 44px;
+
+        h1 {
+            font-size: 2.1rem;
+            line-height: 1.6;
+            font-weight: 600;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            color: #0a0a0a;
+        }
+        p {
+            font-size: 1.6rem;
+            color: #686868;
+            line-height: 1.8;
+        }
+
+        @include abstracts.mediaquery(md) {
+            flex-basis: auto;
+
+            flex: 1;
+
+            padding: 30px;
+            justify-content: flex-start;
+
+            & h1 {
+                font-size: 1.8rem;
+            }
+
+            & p {
+                font-size: 1.4rem;
+            }
+        }
+    }
+}

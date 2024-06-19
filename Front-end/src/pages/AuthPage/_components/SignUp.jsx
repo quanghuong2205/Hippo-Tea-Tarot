@@ -5,7 +5,7 @@ import { AUTH_MODES } from '../../../constants/auth.constant';
 import EVENTS from '../../../constants/event.constant';
 import { useEffect, useState } from 'react';
 import { dispatchEvent } from '../../../utils';
-import { MODAL_TITLES } from '../../../constants/modal.constant';
+import { MODAL_IDS } from '../../../constants/modal.constant';
 import MediaLoading from '../../../components/loaders/MediaLoading';
 
 function SignUp({ fields, setErrorText, switchAuthMode, handleValidate }) {
@@ -51,16 +51,16 @@ function SignUp({ fields, setErrorText, switchAuthMode, handleValidate }) {
             /* Hidden long loading text */
             setLongLoadingTime(false);
 
+            /* Redirect to sign in */
+            switchAuthMode(AUTH_MODES.SIGN_IN)();
+
             dispatchEvent({
                 eventName: EVENTS.OPEN_MODAL,
                 payload: {
-                    title: MODAL_TITLES.AUTH_INFOR_MODAL,
+                    id: MODAL_IDS.AUTH_INFOR_MODAL,
                     data: data?.user,
                 },
             });
-
-            /* Redirect to sign in */
-            switchAuthMode(AUTH_MODES.SIGN_IN)();
         }
 
         if (error) {

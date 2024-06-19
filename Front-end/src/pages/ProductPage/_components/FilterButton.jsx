@@ -1,6 +1,6 @@
 import { CiFilter } from 'react-icons/ci';
 import EVENTS from '../../../constants/event.constant';
-import { MODAL_TITLES } from '../../../constants/modal.constant';
+import { MODAL_IDS } from '../../../constants/modal.constant';
 import { dispatchEvent } from '../../../utils';
 
 function FilterButton() {
@@ -15,7 +15,7 @@ function FilterButton() {
                 dispatchEvent({
                     eventName: EVENTS.OPEN_MODAL,
                     payload: {
-                        title: MODAL_TITLES.FILTER_MODAL,
+                        id: MODAL_IDS.FILTER_MODAL,
                     },
                 });
             }}>

@@ -5,8 +5,8 @@ import images from '../../../assets/img';
 function AuthModal({ data }) {
     return (
         <>
-            <div className='auth-popup'>
-                <div className='auth-popup__photo'>
+            <div className='auth-modal'>
+                <div className='auth-modal__photo'>
                     <Image
                         src={images.avatar}
                         options={{
@@ -14,7 +14,7 @@ function AuthModal({ data }) {
                         }}
                     />
                 </div>
-                <div className='auth-popup__text'>
+                <div className='auth-modal__text'>
                     <h1>Chào mừng {data.user.name} đến với SHOP</h1>
                     <p>
                         Chào mừng bạn đến với SHOP - nơi kết hợp giữa hương

@@ -3453,6 +3453,67 @@ back .slideshow + .slideshow {
   animation-name: slideOutToRight;
 }
 
+.auth-modal {
+  display: flex;
+  align-items: center;
+  border-radius: 8px;
+  background-color: #fff;
+}
+@media (max-width: 767.98px) {
+  .auth-modal {
+    flex-direction: column;
+  }
+}
+.auth-modal__photo {
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+  flex-basis: 60%;
+  height: 100%;
+}
+@media (max-width: 767.98px) {
+  .auth-modal__photo {
+    flex-basis: auto;
+    height: 40%;
+  }
+}
+.auth-modal__text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex-basis: 40%;
+  height: 100%;
+  overflow: auto;
+  padding: 44px;
+}
+.auth-modal__text h1 {
+  font-size: 2.1rem;
+  line-height: 1.6;
+  font-weight: 600;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+  color: #0a0a0a;
+}
+.auth-modal__text p {
+  font-size: 1.6rem;
+  color: #686868;
+  line-height: 1.8;
+}
+@media (max-width: 767.98px) {
+  .auth-modal__text {
+    flex-basis: auto;
+    flex: 1;
+    padding: 30px;
+    justify-content: flex-start;
+  }
+  .auth-modal__text h1 {
+    font-size: 1.8rem;
+  }
+  .auth-modal__text p {
+    font-size: 1.4rem;
+  }
+}
+
 .skeleton {
   animation: skeleton-loading 1s linear infinite alternate;
   border-radius: 8px;
