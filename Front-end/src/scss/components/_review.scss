@@ -92,12 +92,11 @@
 }
 
 .review-writer {
+    position: relative;
     display: flex;
     flex-direction: column;
 
-    background-color: #fff;
     padding: 20px;
-    border-radius: 12px;
 
     width: 100%;
     overflow-x: hidden;
@@ -468,7 +467,6 @@
             &__content {
                 font-size: 1.3rem;
             }
-
             &__title {
                 margin-top: 4px;
             }
@@ -498,17 +496,6 @@
             resize: none;
         }
 
-        &__options {
-            display: flex;
-            justify-content: flex-end;
-            column-gap: 16px;
-            margin-top: 10px;
-
-            @include abstracts.mediaquery(md) {
-                margin-top: 4px;
-            }
-        }
-
         &__act-btn {
             height: 36px;
             width: 100px;
@@ -528,28 +515,13 @@
     }
 
     &__like,
-    &__option {
+    &__options button {
         display: flex;
         padding: 6px;
 
         & svg {
             width: 18px;
             height: 18px;
-        }
-    }
-
-    &__like {
-        font-size: 1.3rem;
-        display: flex;
-        align-items: center;
-        column-gap: 4px;
-
-        & span {
-            font-weight: 500;
-        }
-
-        &.liked svg {
-            color: red;
         }
 
         @include abstracts.mediaquery(md) {
@@ -560,5 +532,28 @@
 
             font-size: 1.1rem;
         }
+    }
+
+    &__like {
+        font-size: 1.3rem;
+        display: flex;
+        align-items: center;
+        column-gap: 4px;
+
+        height: 30px;
+        min-width: 40px;
+
+        & span {
+            font-weight: 500;
+        }
+
+        &.liked svg {
+            color: red;
+        }
+    }
+
+    &__option {
+        font-size: 1.3rem;
+        padding: 0;
     }
 }

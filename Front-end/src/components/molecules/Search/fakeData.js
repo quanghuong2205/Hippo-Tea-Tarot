@@ -1,5 +1,5 @@
 'use strict';
-import images from '../../../images';
+import images from '../../../../assets/img';
 const fakeResults = {
     products: [
         {

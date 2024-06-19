@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import images from '../../images';
+import images from '../../../assets/img';
 import clsx from 'clsx';
 import { useEffect, useRef, useState } from 'react';
 

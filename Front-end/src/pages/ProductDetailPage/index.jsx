@@ -3,7 +3,7 @@ import OtherProducts from './OtherProducts';
 import MainProduct from './MainProduct';
 import ProductFeedbacks from './ProductFeedback';
 
-function ProductDetail() {
+function ProductDetailPage() {
     /* Get the infor of the product by params */
     const params = useParams();
     const productID = params.id;
@@ -13,12 +13,12 @@ function ProductDetail() {
         <div className='page product-detail'>
             <div className='container'>
                 <div className='product-detail__inner'>
-                    {/* <MainProduct productID={productID} />
+                    <MainProduct productID={productID} />
 
                     <OtherProducts
                         productCat={productCat}
                         productID={productID}
-                    /> */}
+                    />
 
                     <ProductFeedbacks productID={productID} />
                 </div>
@@ -27,4 +27,4 @@ function ProductDetail() {
     );
 }
 
-export default ProductDetail;
+export default ProductDetailPage;

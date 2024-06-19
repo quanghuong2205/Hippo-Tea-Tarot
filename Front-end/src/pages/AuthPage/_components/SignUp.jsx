@@ -3,11 +3,10 @@ import Button from '../../../components/atoms/Button';
 import { useSignUp } from '../../../queries/useAuth';
 import { AUTH_MODES } from '../../../constants/auth.constant';
 import EVENTS from '../../../constants/event.constant';
-import Overlay from '../../../components/common/Overlay';
-import Loading from '../../../components/common/Loading';
 import { useEffect, useState } from 'react';
 import { dispatchEvent } from '../../../utils';
 import { MODAL_TITLES } from '../../../constants/modal.constant';
+import MediaLoading from '../../../components/loaders/MediaLoading';
 
 function SignUp({ fields, setErrorText, switchAuthMode, handleValidate }) {
     const [longLoadingTime, setLongLoadingTime] = useState(false);
@@ -80,19 +79,12 @@ function SignUp({ fields, setErrorText, switchAuthMode, handleValidate }) {
     return (
         <>
             {isLoading && (
-                <>
-                    <Overlay colorBG={'rgba(255, 255, 255, 1)'} />
-                    <div className='form-loading'>
-                        <Loading />
-                        {longLoadingTime && (
-                            <span className='form-loading__text'>
-                                Server đang đang xử lý yêu cầu đăng kí của
-                                bạn. Vui lòng kiên nhẫn đợi trong giây
-                                lát...
-                            </span>
-                        )}
-                    </div>
-                </>
+                <MediaLoading
+                    descText={
+                        'Server đang đang xử lý yêu cầu đăng kí của bạn. Vui lòng kiên nhẫn đợi trong giây lát...'
+                    }
+                    isShownDescText={longLoadingTime}
+                />
             )}
             <div className='auth-form__btn-group'>
                 <Button

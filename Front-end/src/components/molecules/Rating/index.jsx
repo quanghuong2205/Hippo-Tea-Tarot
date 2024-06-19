@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { roundNumber } from '../../../utils';
+import { createRandomArray, roundNumber } from '../../../utils';
 import { FaStar, FaStarHalfAlt, FaRegStar } from 'react-icons/fa';
 
 function Rating({ rating, className, isShownScore = true }) {
@@ -25,16 +25,16 @@ function Rating({ rating, className, isShownScore = true }) {
             : 5 - roundedRating;
     return (
         <div className={className}>
-            {Array(Math.floor(roundedRating))
-                .fill(1)
-                .map((_, i) => (
-                    <FaStar key={`solid/${i}`} />
-                ))}
+            {createRandomArray({ size: Math.floor(roundedRating) }).map(
+                (id) => (
+                    <FaStar key={id} />
+                )
+            )}
             {hasHalfOfOne && <FaStarHalfAlt />}
             {emptyStar &&
-                Array(emptyStar)
-                    .fill(1)
-                    .map((_, i) => <FaRegStar key={`empty/${i}`} />)}
+                createRandomArray({ size: emptyStar }).map((id) => (
+                    <FaRegStar key={id} />
+                ))}
 
             {isShownScore && (
                 <span className='score'>

@@ -10,6 +10,29 @@ const getCoords = ({ node }) => {
     };
 };
 
+const matchAttributes = ({
+    node = document.querySelector(),
+    attributes = [],
+}) => {
+    if (attributes.length === 0) {
+        return false;
+    }
+
+    for (let i = 0; i < attributes.length; i++) {
+        const { name, value } = attributes[i];
+        if (
+            !node.getAttribute(name) ||
+            node.getAttribute(name).toString() !== value.toString()
+        ) {
+            return false;
+        }
+
+        continue;
+    }
+
+    return true;
+};
+
 const getParentNode = ({
     parentClassName,
     parentId,
@@ -32,4 +55,4 @@ const getParentNode = ({
     return undefined;
 };
 
-export { getCoords, getParentNode };
+export { getCoords, getParentNode, matchAttributes };

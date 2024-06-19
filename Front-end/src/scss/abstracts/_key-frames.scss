@@ -134,3 +134,35 @@
         background-color: hsl(200, 20%, 95%);
     }
 }
+
+@keyframes loading-circle {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes blur-text {
+    0% {
+        transform: scale(1.2);
+    }
+    100% {
+        transform: scale(0.6);
+    }
+}
+@keyframes shakeRotate {
+    0% {
+        transform: rotate(0deg);
+    }
+    30% {
+        transform: rotate(30deg);
+    }
+    60% {
+        transform: rotate(-30deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}

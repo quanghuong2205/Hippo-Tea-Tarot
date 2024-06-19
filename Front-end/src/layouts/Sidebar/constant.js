@@ -7,13 +7,13 @@ const SIDEBAR_ITEMS = [
     {
         icon: SearchIcon,
         title: 'Tìm kiếm',
-        panelTitle: MODAL_TITLES.SEARCH_MODAL,
+        modelTitle: MODAL_TITLES.SEARCH_MODAL,
     },
 
     {
         icon: HeartIcon,
         title: 'Thông báo',
-        panelTitle: MODAL_TITLES.NOTIFY_MODAL,
+        modelTitle: MODAL_TITLES.NOTIFY_MODAL,
     },
 ];
 

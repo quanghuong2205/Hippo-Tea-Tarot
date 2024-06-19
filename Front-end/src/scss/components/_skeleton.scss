@@ -1,12 +1,23 @@
-div[class^='skeleton-'] {
-}
-
 .skeleton {
     animation: skeleton-loading 1s linear infinite alternate;
     border-radius: 8px;
+    border: none !important;
+
+    &-heading {
+        height: 36px;
+
+        width: max(100%, 60px);
+        flex: 1;
+
+        animation: skeleton-loading 1s linear infinite alternate;
+        border-radius: 8px;
+    }
 
     &-text {
         height: 14px;
+
+        display: inline-block;
+
         width: max(100%, 60px);
         flex: 1;
 
@@ -23,6 +34,10 @@ div[class^='skeleton-'] {
         border-radius: 8px;
     }
 
+    &-fit-width {
+        width: 100%;
+    }
+
     &-flex {
         display: flex;
 
@@ -32,7 +47,4 @@ div[class^='skeleton-'] {
             flex-basis: 70% !important;
         }
     }
-}
-
-.feed-card-skeleton {
 }

@@ -48,10 +48,8 @@
     &__content .row {
         padding: 10px 0;
 
-        @include abstracts.mediaquery(md) {
-            flex-wrap: nowrap;
-            overflow-y: hidden;
-            overflow-x: auto;
-        }
+        flex-wrap: nowrap;
+        overflow-y: hidden;
+        overflow-x: auto;
     }
 }

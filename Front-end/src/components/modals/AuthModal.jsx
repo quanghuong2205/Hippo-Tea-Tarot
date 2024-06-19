@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import Image from '../../components/atoms/Image';
-import images from '../../images';
+import images from '../../../assets/img';
 
 function AuthModal({ data }) {
     return (

@@ -5,6 +5,8 @@ import { REVIEW_FORM_FOR_CREATION } from '../../../../constants/form.constant';
 import { convertObjectToFormData } from '../../../../utils/index';
 import { useCreateFeedback } from '../../../../queries/useFeedback';
 import useMultipartForm from '../../../../hooks/useMultipartForm';
+import MediaLoading from '../../../loaders/MediaLoading';
+import { useEffect } from 'react';
 
 function CreateFeedback({ productID }) {
     const { setFormField, form, setRating, previewImages, removeFile } =
@@ -17,11 +19,10 @@ function CreateFeedback({ productID }) {
      */
     const {
         mutate: CFMutate,
-        isSuccess: CFIsSuccess,
         reset: CFReset,
         error: CFError,
-        isError,
-        isLoading,
+        isLoading: CFIsLoading,
+        isFinished: CFIsFinished,
     } = useCreateFeedback();
 
     const handleSubmitForm = () => {
@@ -37,19 +38,27 @@ function CreateFeedback({ productID }) {
         });
     };
 
-    if (isLoading) {
-        return <div>Is loading</div>;
-    }
+    useEffect(() => {
+        if (CFIsFinished) {
+            return;
+        }
 
-    if (CFIsSuccess) {
-        console.log('success');
-    }
-    if (isError) {
-        console.log(CFError);
-    }
+        if (CFError) {
+            CFReset();
+            return;
+        }
+    }, [CFIsFinished, CFError, CFReset]);
 
     return (
         <div className='review-writer'>
+            {CFIsLoading && (
+                <MediaLoading
+                    loadingText='Sending...'
+                    styles={{
+                        bgColor: 'rgba(255, 255, 255, .6)',
+                    }}
+                />
+            )}
             <ReviewQuality
                 choosenRating={form[REVIEW_FORM_FOR_CREATION.RATING.name]}
                 setChoosenRating={setRating}

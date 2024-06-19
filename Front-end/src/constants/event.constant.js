@@ -14,7 +14,6 @@ const EVENTS = {
     RESET_SEARCH_PARAMS: 'reset-search-params',
 
     /* Tooltip */
-    TOOLTIP_HIDDEN: 'tooltip-hidden',
 };
 
 export default EVENTS;

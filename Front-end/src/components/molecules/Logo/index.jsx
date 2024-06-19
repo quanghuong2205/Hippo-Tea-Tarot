@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import images from '../../../images';
+import images from '../../../../assets/img';
 import Image from '../../atoms/Image';
 // import LogoSkeleton from './LogoSkeleton';
 

@@ -1,6 +1,6 @@
 import ScrollList from '../../components/common/ScrollList';
 import FeedCard from '../../components/molecules/FeedCard';
-function Home() {
+function HomePage() {
     return (
         <div className='home page'>
             <div className='container'>
@@ -54,4 +54,4 @@ function Home() {
     );
 }
 
-export default Home;
+export default HomePage;

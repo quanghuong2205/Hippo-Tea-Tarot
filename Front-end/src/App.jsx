@@ -5,7 +5,7 @@ import { Helmet } from 'react-helmet';
 import { useLocation } from 'react-router-dom';
 import getHtmlTitle from './routes/title.route';
 import AppModals from './AppModals';
-import Loading from './components/common/Loading';
+import MediaLoading from './components/loaders/MediaLoading';
 
 function App() {
     /* Routes */
@@ -21,7 +21,8 @@ function App() {
                 titleTemplate='TeaShop - %s'>
                 <title>{getHtmlTitle({ path: location.pathname })}</title>
             </Helmet>
-            <Suspense fallback={<Loading />}>
+
+            <Suspense fallback={<MediaLoading />}>
                 <AppRouter />
                 <AppModals />
             </Suspense>

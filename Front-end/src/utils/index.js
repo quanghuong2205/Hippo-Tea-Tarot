@@ -1,5 +1,6 @@
 'use strict';
 import { jwtDecode } from 'jwt-decode';
+import { v4 } from 'uuid';
 
 const appendPrefix = ({ prefix, object = {} }) => {
     let keys = Object.keys(object);
@@ -50,9 +51,14 @@ const convertMapToObject = (map) => {
 };
 
 const createRandomArray = ({ size }) => {
-    return Array.from({ length: size }, () =>
-        Math.floor(Math.random() * (size * 10))
-    );
+    if (!size) return [];
+
+    const result = [];
+    for (let i = 1; i <= size; i++) {
+        result.push(v4());
+    }
+
+    return result;
 };
 
 const roundNumber = ({ num }) => {

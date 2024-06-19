@@ -2,10 +2,6 @@
 import apiBase from './base.api';
 
 const signInApi = async ({ email, password }) => {
-    await new Promise((resolve) => {
-        setTimeout(() => resolve(true), 4000);
-    });
-
     return await apiBase.post(
         '/auth/signin',
         {
@@ -21,10 +17,6 @@ const signInApi = async ({ email, password }) => {
 };
 
 const signUpApi = async ({ email, password, name }) => {
-    await new Promise((resolve) => {
-        setTimeout(() => resolve(true), 10000);
-    });
-
     return await apiBase.post(
         '/auth/signup',
         {

@@ -2,13 +2,14 @@ import PropTypes from 'prop-types';
 import Product from '../Product';
 import ProductSkeleton from '../Product/ProductSkeleton';
 
-function Category({
+function ProductCategory({
     title,
     description,
     products,
+    randomArray = [],
     productNumPerLine,
+    isReady,
     HeaderRight,
-    isSkeleton,
 }) {
     const numPerline = {
         1: 'col-12',
@@ -42,33 +43,34 @@ function Category({
             </div>
 
             <div className='category-menu row g-3'>
-                {products.map((product) => (
-                    <>
-                        {isSkeleton ? (
-                            <ProductSkeleton
-                                className={numPerline[productNumPerLine]}
-                            />
-                        ) : (
-                            <Product
-                                key={product._id}
-                                product={product}
-                                className={numPerline[productNumPerLine]}
-                            />
-                        )}
-                    </>
-                ))}
+                {isReady &&
+                    products.map((p) => (
+                        <Product
+                            key={p._id}
+                            product={p}
+                            className={numPerline[productNumPerLine]}
+                        />
+                    ))}
+                {!isReady &&
+                    randomArray.map((id) => (
+                        <ProductSkeleton
+                            key={id}
+                            className={numPerline[productNumPerLine]}
+                        />
+                    ))}
             </div>
         </div>
     );
 }
 
-Category.propTypes = {
+ProductCategory.propTypes = {
     title: PropTypes.string,
     description: PropTypes.string,
     products: PropTypes.array,
+    randomArray: PropTypes.array,
     productNumPerLine: PropTypes.number,
     HeaderRight: PropTypes.func,
-    isSkeleton: PropTypes.bool,
+    isReady: PropTypes.bool,
 };
 
-export default Category;
+export default ProductCategory;

@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import { formatMoney, getPricePlusTax } from '../../../utils';
 import { FaMinus, FaPlus } from 'react-icons/fa6';
+
 function ProductInfor({ product }) {
     const attrGroups = product?.attributes;
     const attrGroupKeys = attrGroups ? Object.keys(attrGroups) : null;

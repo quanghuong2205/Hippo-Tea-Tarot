@@ -1,7 +1,6 @@
 @use '../abstracts';
 .product-detail {
     background-color: #f5f5f5;
-    height: 100vh;
     &__inner {
         display: flex;
         flex-direction: column;
@@ -52,6 +51,7 @@
     column-gap: 26px;
 
     &__image-slides {
+        position: relative;
         padding: 4px;
         flex: 1;
         box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
@@ -272,6 +272,7 @@
 .product-attr {
     display: flex;
     align-items: center;
+    height: 30px;
 
     &__name {
         font-size: 1.6rem;
@@ -279,6 +280,7 @@
         margin-right: 12px;
         color: gray;
         min-width: 120px;
+        height: 100%;
 
         &::first-letter {
             text-transform: uppercase;
@@ -294,13 +296,14 @@
         display: flex;
         flex-wrap: wrap;
         gap: 10px;
+        height: 100%;
     }
 
     &__value {
         background-color: var(--product-infor-size-bg-color);
         color: var(--product-infor-size-color);
         padding: 6px 12px;
-        height: 30px;
+        height: 100%;
         font-weight: 500;
         font-size: 1.4rem;
         border-radius: 6px;

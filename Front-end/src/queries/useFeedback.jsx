@@ -10,14 +10,25 @@ import {
     likeFeedbackApi,
     unLikeFeedbackApi,
 } from '../apis/feedback.api';
+import { isFinishedMutate, isReady } from '.';
 // import { useQueryClient } from 'react-query';
 
 function useFeedbacks({ searchParamObjects, productID }) {
-    return useQuery({
+    const props = useQuery({
         queryKey: `${QUERY_KEYS.FEEDBACK_ALL_KEY}/${productID}`,
         queryFn: async () =>
             await getFeedbacksApi({ searchParamObjects, productID }),
     });
+
+    return {
+        ...props,
+        isReady: isReady({
+            isFetching: props.isFetching,
+            isLoading: props.isLoading,
+            data: props.data,
+            isSuccess: props.isSuccess,
+        }),
+    };
 }
 
 function useFeedback({ productID }) {
@@ -28,38 +39,88 @@ function useFeedback({ productID }) {
 }
 
 function useCreateFeedback() {
-    return useMutation({
+    const props = useMutation({
         mutationKey: MUTATE_KEYS.FEEDBACK_CREATE,
         mutationFn: createFeedbackApi,
     });
+
+    return {
+        ...props,
+        isFinished: isFinishedMutate({
+            isError: props.isError,
+            error: props.error,
+            isSuccess: props.isSuccess,
+            isLoading: props.isLoading,
+        }),
+    };
 }
 
 function useUpdateFeedback() {
-    return useMutation({
+    const props = useMutation({
         mutationKey: MUTATE_KEYS.FEEDBACK_UPDATE,
         mutationFn: updateFeedbackApi,
     });
+
+    return {
+        ...props,
+        isFinished: isFinishedMutate({
+            isError: props.isError,
+            error: props.error,
+            isSuccess: props.isSuccess,
+            isLoading: props.isLoading,
+        }),
+    };
 }
 
 function useDeleteFeedback() {
-    return useMutation({
+    const props = useMutation({
         mutationKey: MUTATE_KEYS.FEEDBACK_DELETE,
         mutationFn: deleteFeedbackApi,
     });
+
+    return {
+        ...props,
+        isFinished: isFinishedMutate({
+            isError: props.isError,
+            error: props.error,
+            isSuccess: props.isSuccess,
+            isLoading: props.isLoading,
+        }),
+    };
 }
 
 function useLikeFeedback() {
-    return useMutation({
+    const props = useMutation({
         mutationKey: MUTATE_KEYS.FEEDBACK_LIKE,
         mutationFn: likeFeedbackApi,
     });
+
+    return {
+        ...props,
+        isFinished: isFinishedMutate({
+            isError: props.isError,
+            error: props.error,
+            isSuccess: props.isSuccess,
+            isLoading: props.isLoading,
+        }),
+    };
 }
 
 function useUnlikeFeedback() {
-    return useMutation({
+    const props = useMutation({
         mutationKey: MUTATE_KEYS.FEEDBACK_UNLIKE,
         mutationFn: unLikeFeedbackApi,
     });
+
+    return {
+        ...props,
+        isFinished: isFinishedMutate({
+            isError: props.isError,
+            error: props.error,
+            isSuccess: props.isSuccess,
+            isLoading: props.isLoading,
+        }),
+    };
 }
 
 function useUpdateReply() {

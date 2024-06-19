@@ -44,9 +44,10 @@ function useModal({ modalItems }) {
                 return { ...prev };
             });
         }
+
         setIsVisisble(true);
 
-        bodyNode.current.classList.add('scroll');
+        bodyNode.current.classList.add('hidden-scrollbar');
     };
 
     /**
@@ -62,9 +63,7 @@ function useModal({ modalItems }) {
             return { ...prev };
         });
 
-        // bodyNode.current.style.setProperty('padding-left', '0px');
-        // bodyNode.current.style.setProperty('padding-right', '0px');
-        bodyNode.current.classList.remove('scroll');
+        bodyNode.current.classList.remove('hidden-scrollbar');
     };
 
     const openedModal = useMemo(() => {
@@ -101,7 +100,7 @@ function useModal({ modalItems }) {
         openedModal,
         isVisible,
         setIsVisisble: (bool) => {
-            bodyNode.current.classList.toggle('scroll');
+            bodyNode.current.classList.toggle('hidden-scrollbar');
             setIsVisisble(bool);
         },
     };

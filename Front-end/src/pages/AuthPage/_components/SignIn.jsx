@@ -6,10 +6,9 @@ import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import authActions from '../../../redux/actions/action.auth';
 import { AUTH_FIELDS } from '../../../constants/auth.constant';
-import Overlay from '../../../components/common/Overlay';
-import Loading from '../../../components/common/Loading';
 import { FaGoogle } from 'react-icons/fa';
 import { FaFacebookF } from 'react-icons/fa';
+import MediaLoading from '../../../components/loaders/MediaLoading';
 
 function SignIn({ fields, setErrorText, handleValidate }) {
     const [longLoadingTime, setLongLoadingTime] = useState(false);
@@ -74,19 +73,12 @@ function SignIn({ fields, setErrorText, handleValidate }) {
     return (
         <>
             {isLoading && (
-                <>
-                    <Overlay colorBG={'rgba(255, 255, 255, 1)'} />
-                    <div className='form-loading'>
-                        <Loading />
-                        {longLoadingTime && (
-                            <span className='form-loading__text'>
-                                Server đang đang xử lý yêu cầu đăng nhập
-                                của bạn. Vui lòng kiên nhẫn đợi trong giây
-                                lát...
-                            </span>
-                        )}
-                    </div>
-                </>
+                <MediaLoading
+                    descText={
+                        'Server đang đang xử lý yêu cầu đăng nhập của bạn. Vui lòng kiên nhẫn đợi trong giây lát...'
+                    }
+                    isShownDescText={longLoadingTime}
+                />
             )}
 
             <div className='auth-form__btn-group'>

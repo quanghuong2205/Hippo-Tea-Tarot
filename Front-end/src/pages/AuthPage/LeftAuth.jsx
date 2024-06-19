@@ -1,5 +1,5 @@
 import Image from '../../components/atoms/Image';
-import images from '../../images';
+import images from '../../../assets/img';
 
 function LeftAuth() {
     return (
@@ -13,8 +13,8 @@ function LeftAuth() {
                 </div>
 
                 <h2 className='auth-left__desc'>
-                    HIPPO - Nơi lắng nghe, đồng
-                    hành và an toàn nhất của bạn
+                    HIPPO - Nơi lắng nghe, đồng hành và an toàn nhất của
+                    bạn
                 </h2>
             </div>
         </div>

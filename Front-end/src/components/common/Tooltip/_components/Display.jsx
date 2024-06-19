@@ -8,7 +8,7 @@ function Display({
     spaces,
     animationTime,
     hasDefaultStyle,
-    isHiddenWithAnimation,
+    isAnimatedBeforeHidden,
 }) {
     const ref = useRef(null);
 
@@ -69,7 +69,7 @@ function Display({
             className={clsx({
                 'tooltip-display': true,
                 'default-style': hasDefaultStyle,
-                hidden: isHiddenWithAnimation,
+                hidden: isAnimatedBeforeHidden,
             })}
             style={{
                 ...positions,
@@ -88,7 +88,7 @@ Display.propTypes = {
     animationTime: PropTypes.number,
     hasDefaultStyle: PropTypes.bool,
     delay: PropTypes.number,
-    isHiddenWithAnimation: PropTypes.bool,
+    isAnimatedBeforeHidden: PropTypes.bool,
 };
 
 export default Display;

@@ -2,22 +2,18 @@ import PropTypes from 'prop-types';
 import AdminResponse from './_components/AdminResponse';
 import config from '../../../../configs';
 import Rating from '../Rating';
-import ThreeDotsIcon from '../../icons/ThreeDotsIcon';
 import LikeButton from './_components/LikeButton';
+import FeedbackOptions from './_components/FeedbackOptions';
 
-function FeedbackCard({ feedback, userID }) {
+function FeedbackCard({ feedback }) {
     return (
         <div className='review-card'>
             <div className='review-card__top'>
                 <div className='review-card__user'>
-                    <div
-                        className='review-card__avatar'
-                        style={{
-                            background: 'red',
-                        }}>
+                    <div className='review-card__avatar'>
                         <img
                             src={`${config.SERVER_URL}/${feedback.user.avatar}`}
-                            alt=''
+                            alt='avatar'
                         />
                     </div>
                 </div>
@@ -56,10 +52,10 @@ function FeedbackCard({ feedback, userID }) {
                             {feedback.thumbs.map((thumbUrl) => (
                                 <div
                                     className='review-card__image'
-                                    key={`${thumbUrl}`}>
+                                    key={thumbUrl}>
                                     <img
                                         src={`${config.SERVER_URL}/${thumbUrl}`}
-                                        alt=''
+                                        alt='thumb'
                                     />
                                 </div>
                             ))}
@@ -78,16 +74,12 @@ function FeedbackCard({ feedback, userID }) {
 
             <div className='review-card__bottom'>
                 <LikeButton
-                    hasLike={feedback.likes.includes(userID)}
+                    likes={feedback?.likes}
                     feedbackID={feedback?._id}
                     totalLikes={feedback.likes.length}
                 />
 
-                <div className='review-card__options'>
-                    <button className='review-card__option'>
-                        <ThreeDotsIcon />
-                    </button>
-                </div>
+                <FeedbackOptions />
             </div>
         </div>
     );
@@ -95,7 +87,6 @@ function FeedbackCard({ feedback, userID }) {
 
 FeedbackCard.propTypes = {
     feedback: PropTypes.object,
-    userID: PropTypes.string,
 };
 
 export default FeedbackCard;

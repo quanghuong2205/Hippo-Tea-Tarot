@@ -1,5 +1,5 @@
 import { Routes, Route, Navigate } from 'react-router-dom';
-import Auth from './pages/Auth';
+import AuthPage from './pages/AuthPage';
 import publicRoutes from './routes/public.route';
 import { useSelector } from 'react-redux';
 
@@ -33,7 +33,9 @@ function AppRouter() {
             {/* Specific route */}
             <Route
                 path='/auth'
-                element={!accessToken ? <Auth /> : <Navigate to={'/'} />}
+                element={
+                    !accessToken ? <AuthPage /> : <Navigate to={'/'} />
+                }
             />
         </Routes>
     );

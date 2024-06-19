@@ -4,7 +4,7 @@ import RightAuth from './RightAuth';
 import { AUTH_MODES } from '../../constants/auth.constant';
 import useAuthField from '../../hooks/useAuthField';
 
-function Auth() {
+function AuthPage() {
     const [authMode, setAuthMode] = useState(AUTH_MODES.SIGN_IN);
     const [errorText, setErrorText] = useState(null);
     const {
@@ -54,4 +54,4 @@ function Auth() {
     );
 }
 
-export default Auth;
+export default AuthPage;

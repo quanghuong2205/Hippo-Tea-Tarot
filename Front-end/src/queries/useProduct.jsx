@@ -6,19 +6,31 @@ import {
     getPublishedProductByCatApi,
 } from '../apis/product.api';
 import { useQueryClient } from 'react-query';
+import { isReady } from '.';
 
 function usePublishProducts({ searchParamObjects }) {
     const queryKey = `${QUERY_KEYS.PRODUCTS_PUBLISH_KEY}/${searchParamObjects['page']}`;
-    return useQuery({
+
+    const props = useQuery({
         queryKey,
         queryFn: async () =>
             await getPublishedProductsApi({ searchParamObjects }),
     });
+
+    return {
+        ...props,
+        isReady: isReady({
+            isFetching: props.isFetching,
+            isLoading: props.isLoading,
+            data: props.data,
+            isSuccess: props.isSuccess,
+        }),
+    };
 }
 
 function usePublishProductByCat({ category, id, searchParamObjects }) {
     const queryKey = `${QUERY_KEYS.PRODUCT_PUBLISH_BY_CAT_KEY}/${category}}`;
-    return useQuery({
+    const props = useQuery({
         queryKey,
         queryFn: async () =>
             await getPublishedProductByCatApi({
@@ -34,12 +46,22 @@ function usePublishProductByCat({ category, id, searchParamObjects }) {
             };
         },
     });
+
+    return {
+        ...props,
+        isReady: isReady({
+            isFetching: props.isFetching,
+            isLoading: props.isLoading,
+            data: props.data,
+            isSuccess: props.isSuccess,
+        }),
+    };
 }
 
 function usePublishProduct({ id }) {
     const queryClient = useQueryClient();
 
-    return useQuery({
+    const props = useQuery({
         queryKey: `${QUERY_KEYS.PRODUCT_PUBLISH_KEY}/${id}`,
         queryFn: async () => await getPublishedProductApi({ id }),
         placeholderData: () => {
@@ -50,6 +72,16 @@ function usePublishProduct({ id }) {
             return !product ? undefined : product;
         },
     });
+
+    return {
+        ...props,
+        isReady: isReady({
+            isFetching: props.isFetching,
+            isLoading: props.isLoading,
+            data: props.data,
+            isSuccess: props.isSuccess,
+        }),
+    };
 }
 
 export { usePublishProducts, usePublishProduct, usePublishProductByCat };

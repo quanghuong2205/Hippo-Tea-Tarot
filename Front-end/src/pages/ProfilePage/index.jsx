@@ -1,7 +1,7 @@
 import { useRef } from 'react';
 import Tooltip from '../../components/common/Tooltip';
 
-function Profile() {
+function ProfilePage() {
     const ref = useRef(null);
 
     return (
@@ -57,4 +57,4 @@ function Profile() {
     );
 }
 
-export default Profile;
+export default ProfilePage;

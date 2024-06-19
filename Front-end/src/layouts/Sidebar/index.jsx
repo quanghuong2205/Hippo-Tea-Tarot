@@ -14,7 +14,7 @@ function SideBar() {
                             dispatchEvent({
                                 eventName: EVENTS.OPEN_MODAL,
                                 payload: {
-                                    title: item.panelTitle,
+                                    title: item.modelTitle,
                                 },
                             });
                         }}>

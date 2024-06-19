@@ -4,7 +4,6 @@ import clsx from 'clsx';
 
 function InputBox({
     type = 'text',
-    labelTitle,
     value,
     placeholder,
     onChange,
@@ -18,6 +17,7 @@ function InputBox({
         label: '',
     },
     hasLabel,
+    labelTitle,
     LabelIcon,
     inputProps = {
         hidden: false,

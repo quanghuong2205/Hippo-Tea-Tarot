@@ -5,31 +5,42 @@ import {
     useUnlikeFeedback,
 } from '../../../../queries/useFeedback';
 import { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 import clsx from 'clsx';
+import useRequireAuth from '../../../../hooks/useRequireAuth';
+import CircleLoading from '../../../loaders/CircleLoading';
 
-function LikeButton({ hasLike, feedbackID, totalLikes }) {
-    const [isLike, setIsLike] = useState(hasLike);
-    const [likeNums, setLikeNums] = useState(totalLikes);
+function LikeButton({ likes = [], feedbackID }) {
+    const { requireSignIn } = useRequireAuth();
+    /* Auth state */
+    const auth = useSelector((state) => state.auth);
+    const userID = auth.user?._id;
+
+    const [isLike, setIsLike] = useState(likes.includes(userID));
+    const [likeNums, setLikeNums] = useState(likes.length);
 
     /* Mutate query */
     const {
         mutate: LFMutate,
-        isSuccess: LFIsSuccess,
+        isFinished: LFIsFinished,
+        isLoading: LFIsLoading,
         reset: LFReset,
     } = useLikeFeedback();
     const {
         mutate: ULFMutate,
-        isSuccess: ULFIsSuccess,
+        isFinished: ULFIsFinished,
+        isLoading: ULFIsLoading,
         reset: ULFReset,
     } = useUnlikeFeedback();
 
     /* Like and Unlike handler */
     const handleReaction = () => {
+        if (!requireSignIn()) return;
+
         if (isLike) {
             ULFMutate({
                 id: feedbackID,
             });
-
             return;
         }
 
@@ -39,39 +50,44 @@ function LikeButton({ hasLike, feedbackID, totalLikes }) {
     };
 
     useEffect(() => {
-        if (LFIsSuccess) {
+        if (LFIsFinished) {
             setIsLike(true);
             setLikeNums((prev) => prev + 1);
             LFReset();
             return;
         }
 
-        if (ULFIsSuccess) {
+        if (ULFIsFinished) {
             setIsLike(false);
             setLikeNums((prev) => prev - 1);
             ULFReset();
             return;
         }
-    }, [LFIsSuccess, ULFIsSuccess, LFReset, ULFReset]);
+    }, [LFIsFinished, ULFIsFinished, LFReset, ULFReset]);
 
-    console.log(totalLikes);
     return (
         <button
             className={clsx({
                 'review-card__like': true,
                 liked: isLike,
+                loading: LFIsLoading || ULFIsLoading,
             })}
             onClick={handleReaction}>
-            <HeartIcon isBold={isLike} />
-            <span>{likeNums}</span>
+            {LFIsLoading || ULFIsLoading ? (
+                <CircleLoading />
+            ) : (
+                <>
+                    <HeartIcon isBold={isLike} />
+                    <span>{likeNums}</span>
+                </>
+            )}
         </button>
     );
 }
 
 LikeButton.propTypes = {
-    hasLike: PropTypes.bool,
+    likes: PropTypes.array,
     feedbackID: PropTypes.string,
-    totalLikes: PropTypes.number,
 };
 
 export default LikeButton;

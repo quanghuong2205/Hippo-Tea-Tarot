@@ -1,11 +1,11 @@
 'use strict';
 import { lazy } from 'react';
 
-import Home from '../pages/Home';
+import HomePage from '../pages/HomePage';
 
-const ProductDetail = lazy(() => import('../pages/ProductDetail'));
-const Profile = lazy(() => import('../pages/Profile'));
-const Menu = lazy(() => import('../pages/Menu'));
+const ProductDetailPage = lazy(() => import('../pages/ProductDetailPage'));
+const ProfilePage = lazy(() => import('../pages/ProfilePage'));
+const ProductPage = lazy(() => import('../pages/ProductPage'));
 
 import MainLayout from '../layouts/MainLayout';
 import SidebarLayout from '../layouts/SidebarLayout';
@@ -14,28 +14,28 @@ const publicRoutes = [
     {
         path: '/',
         layout: SidebarLayout,
-        element: Home,
+        element: HomePage,
         title: 'Home',
     },
 
     {
         path: '/menu',
         layout: MainLayout,
-        element: Menu,
+        element: ProductPage,
         title: 'Menu',
     },
 
     {
         path: '/product-detail/:cat/:id',
         layout: MainLayout,
-        element: ProductDetail,
+        element: ProductDetailPage,
         title: 'Product Detail',
     },
 
     {
-        path: '/profile/:id',
-        element: Profile,
-        title: 'Profile',
+        path: '/profilePage/:id',
+        element: ProfilePage,
+        title: 'ProfilePage',
     },
 ];
 

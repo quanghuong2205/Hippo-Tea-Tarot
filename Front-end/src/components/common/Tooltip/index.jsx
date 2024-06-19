@@ -2,7 +2,6 @@ import PropTypes from 'prop-types';
 import Trigger from './_components/Trigger';
 import Display from './_components/Display';
 import { useEffect, useRef, useState } from 'react';
-import EVENTS from '../../../constants/event.constant';
 
 function Tooltip({
     TriggerComponent,
@@ -12,17 +11,17 @@ function Tooltip({
     animation,
     hasDefaultStyle,
     spaces,
-    animationTime = 400,
     clickOnShow,
+    animationTime = 400,
 }) {
     const [isShownDisplay, setIsShownDisplay] = useState(false);
-    const [isHiddenWithAnimation, setIsHiddenWithAnimation] =
+    const [isAnimatedBeforeHidden, setIsAnimatedBeforeHidden] =
         useState(false);
     const timeID = useRef(null);
     const ref = useRef(null);
 
     const handleShowDisplay = () => {
-        setIsHiddenWithAnimation(false);
+        setIsAnimatedBeforeHidden(false);
 
         if (!delay) {
             return setIsShownDisplay(true);
@@ -42,7 +41,7 @@ function Tooltip({
             return;
         }
 
-        setIsHiddenWithAnimation(true);
+        setIsAnimatedBeforeHidden(true);
 
         if (!delay) {
             return setTimeout(() => {
@@ -56,21 +55,25 @@ function Tooltip({
     };
 
     useEffect(() => {
-        window.addEventListener(
-            EVENTS.TOOLTIP_HIDDEN,
-            handleHiddenDisplay
-        );
+        if (!clickOnShow) return;
+
+        const clickEventHandler = (e) => {
+            if (!isShownDisplay) return;
+            if (!ref.current.contains(e.target)) {
+                handleHiddenDisplay();
+            }
+        };
+
+        window.addEventListener('click', clickEventHandler);
 
         return () => {
-            window.removeEventListener(
-                EVENTS.TOOLTIP_HIDDEN,
-                handleHiddenDisplay
-            );
+            if (!clickOnShow) return;
+
+            window.removeEventListener('click', clickEventHandler);
         };
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+    }, [isShownDisplay]);
 
-    /* Shown display by clicking or hovering over the trigger */
     return (
         <div
             className='tooltip'
@@ -88,7 +91,7 @@ function Tooltip({
                 <Display
                     position={position}
                     animationTime={animationTime}
-                    isHiddenWithAnimation={isHiddenWithAnimation}
+                    isAnimatedBeforeHidden={isAnimatedBeforeHidden}
                     spaces={spaces}
                     animation={animation}
                     hasDefaultStyle={hasDefaultStyle}>
