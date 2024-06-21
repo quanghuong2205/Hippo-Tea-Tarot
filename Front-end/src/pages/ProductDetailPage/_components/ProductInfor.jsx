@@ -102,7 +102,7 @@ function ProductInfor({ product }) {
 
                     <div className='product-infor__row'>
                         <button className='pri-btn product-infor__order-btn'>
-                            Order now
+                            Add to cart
                         </button>
                     </div>
                 </div>

@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import { MdKeyboardDoubleArrowRight } from 'react-icons/md';
-import { createArrayBasedOnLength } from '../../../utils';
+import { createRandomArray } from '../../../utils';
 import clsx from 'clsx';
 
 function Pagination({
@@ -28,16 +28,20 @@ function Pagination({
             </button>
 
             <div className='pagination__pages'>
-                {createArrayBasedOnLength({ length: totalPages }).map(
-                    (page, index) =>
-                        index < maxVisibleButtons && (
+                {createRandomArray({ size: totalPages }).map(
+                    (id, index) =>
+                        index + 1 < maxVisibleButtons && (
                             <button
-                                onClick={() => setPage({ page })}
+                                onClick={() =>
+                                    setPage({ page: index + 1 })
+                                }
                                 className={clsx({
-                                    active: page === parseInt(currentPage),
+                                    active:
+                                        index + 1 ===
+                                        parseInt(currentPage),
                                 })}
-                                key={page}>
-                                {page}
+                                key={id}>
+                                {index + 1}
                             </button>
                         )
                 )}

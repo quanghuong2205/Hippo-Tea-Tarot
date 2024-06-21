@@ -73,14 +73,15 @@ function Modal({
                 </div>
             </div>
 
-            {hasOverlay && (
-                <Overlay
-                    onClick={hiddenModalHandler}
-                    animationTime={animationTime}
-                    zIndex={999 + layer}
-                    isShown={!animatedBeforeHidden}
-                />
-            )}
+            <Overlay
+                onClick={hiddenModalHandler}
+                animationTime={animationTime}
+                zIndex={999 + layer}
+                isShown={!animatedBeforeHidden}
+                colorBG={
+                    hasOverlay ? 'var(--overlay-bg-color)' : 'transparent'
+                }
+            />
         </>
     );
 }

@@ -1,16 +1,7 @@
+import CheckBoxInput from '../../../components/atoms/CheckboxInput';
+
 function RemembeMe() {
-    return (
-        <div className='form__checkbox-input'>
-            <label>
-                <input
-                    type='checkbox'
-                    hidden
-                />
-                <span className='form__checkbox-input__custom'></span>
-                <span>Remember me</span>
-            </label>
-        </div>
-    );
+    return <CheckBoxInput labelTitle={'Remember me'} />;
 }
 
 export default RemembeMe;

@@ -14,7 +14,7 @@ function ProductPage() {
     const location = useLocation();
     const category = new URLSearchParams(location.search).get('category');
 
-    /* Filter */
+    /* Filter Params */
     const isFilter = useRef(false);
     const { searchParamObjects, setPage } = useSearchParams({
         filters: category ? { category: [category] } : {},

@@ -4,6 +4,7 @@
     box-shadow: rgba(50, 50, 93, 0.15) 0px 2px 5px -1px,
         rgba(0, 0, 0, 0.15) 0px 1px 3px -1px;
     width: 100%;
+    background-color: var(--feedcard-bg-color);
 
     &__media {
         height: 0;
@@ -32,7 +33,7 @@
     }
 
     &__time {
-        color: #888888;
+        color: var(--feedcard-time-color);
         margin: 12px 0;
         display: flex;
         column-gap: 12px;

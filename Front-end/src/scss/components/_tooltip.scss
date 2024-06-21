@@ -10,9 +10,9 @@
         animation-fill-mode: forwards;
 
         &.default-style {
-            background-color: var(--white);
+            background-color: var(--tooltip-bg-color);
             border-radius: 8px;
-            box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+            box-shadow: var(--tooltip-shadow) 0px 2px 8px 0px;
             display: block;
             padding: 6px 12px;
         }

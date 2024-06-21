@@ -1,14 +1,84 @@
-@use './basic';
+@use './common';
 
 html.dark {
-    /*BODY*/
+    /* BODY */
     --text-color: var(--white);
     --body-bg-color: var(--dark-2);
+    --scrollbar-thumb-bg-color: rgba(255, 255, 255, 0.06);
+    --overlay-bg-color: rgba(255, 255, 255, 0.1);
+
+    /* STAR */
+    --star-color: yellow;
+
+    /* HEADER */
+    --header-bg-color: var(--dark-1);
+    --mobile-nav-text-color: var(--white);
+    --mobile-nav-icon-color: var(--white);
+    --mobile-nav-border-color: rgba(255, 255, 255, 0.079);
+    --mobile-subnav-bg-color: var(--dark-1);
+    --skeleton-from-bg-color: hsl(200, 20%, 15%);
+    --skeleton-to-bg-color: hsl(200, 20%, 25%);
+
+    /* FOOTER */
+    --footer-text-color: var(--white);
+
+    /* TOOLTIP */
+    --tooltip-bg-color: var(--dark-2);
+    --tooltip-shadow: rgba(23, 28, 40, 0.4);
+
+    /* FEED CARD */
+    --feedcard-bg-color: var(--dark-1);
+    --feedcard-time-color: #888888;
+
+    /* SCROLL LIST */
+    --scrollist-title-color: var(--white);
+    --scrollist-link-color: var(--white);
+
+    /* MODAL */
+    --modal-bg-color: var(--dark-1);
+    --modal-shadow-color: rgba(255, 255, 255, 0.05);
 
     /*ICON*/
-    --icon-color: brightness(0) saturate(100%) invert(100%)
-        sepia(0%) saturate(0%) hue-rotate(342deg)
-        brightness(102%) contrast(102%);
+    --icon-color: brightness(0) saturate(100%) invert(100%) sepia(0%)
+        saturate(0%) hue-rotate(342deg) brightness(102%) contrast(102%);
+
+    /*PRODUCT-CARD*/
+    --product-card-bg-color: var(--dark-1);
+    --product-card-shadow: transparent;
+    --product-card-old-price-color: var(--white);
+    --product-card-status-color: var(--white);
+
+    /*PRODUCT DETAIL*/
+    --product-detail-page-bg-color: var(--dark-2);
+    --product-detail-bg-color: var(--dark-2);
+    --product-section-bg-color: var(--dark-1);
+
+    --product-media-shadow: rgba(255, 255, 255, 0.05);
+    --product-preview-image-shadow: rgba(255, 255, 255, 0.05);
+    --product-preview-bg-color: var(--dark-1)
+    --product-preview-image-bg-color: var(--white);
+
+    --product-infor-bg-color: var(--dark-1);
+    --product-infor-desc-color: #f5f5f5;
+    --product-infor-size-bg-color: #ededf6;
+    --product-infor-size-color: #9e9da8;
+    --product-infor-old-price-color: rgba(255, 255, 255, .5);
+
+    --product-attr-name-color: var(--light-primary-color);
+    --product-attr-value-bg-color: var(--dark-2);
+    --product-attr-value-color: #9e9da8;
+
+    /* REVIEW */
+    --review-card-bg-color: var(--dark-2);
+    --review-card-border-color: rgba(255, 255, 255, 0.09);
+    --review-time-color: rgba(255, 255, 255, 0.6);
+    --review-form-bg-color: var(--dark-2);
+    --review-form-input-bg-color: var(--dark-1);
+    --review-form-input-placeholder-color: rgba(255, 255, 255, 0.6);
+
+     /* CATEGORY */
+    --category-title-color: var(--white);
+    --category-desc-color: rgba(255, 255, 255, 0.6);
 
     /*BUTTONS*/
     --filter-btn-bg-color: var(--dark-2);

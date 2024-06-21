@@ -98,10 +98,6 @@ const convertObjectToFormData = ({ obj = {} }) => {
     return formData;
 };
 
-const createArrayBasedOnLength = ({ length }) => {
-    return Array.from({ length }, (_, index) => index + 1);
-};
-
 const dispatchEvent = ({ eventName, payload }) => {
     const customEvent = new CustomEvent(eventName, {
         detail: payload,
@@ -114,6 +110,14 @@ const formatMoney = ({ money }) => {
     return money.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
 };
 
+const saveToLocalstorage = ({ key, data }) => {
+    localStorage.setItem(key, JSON.stringify(data));
+};
+
+const extractFromLocalstorage = ({ key }) => {
+    return JSON.parse(localStorage.getItem(key));
+};
+
 export {
     appendPrefix,
     decodeToken,
@@ -123,8 +127,9 @@ export {
     roundNumber,
     getPricePlusTax,
     formQueryString,
-    createArrayBasedOnLength,
     convertObjectToFormData,
     dispatchEvent,
     formatMoney,
+    saveToLocalstorage,
+    extractFromLocalstorage,
 };

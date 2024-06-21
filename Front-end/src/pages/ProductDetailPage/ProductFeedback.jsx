@@ -38,18 +38,20 @@ function ProductFeedbacks({ productID }) {
 
     /* Show feedback popup if user has been signed in */
     const showFeedbackPopup = () => {
-        requireSignIn();
+        const isSignedIn = requireSignIn();
 
-        dispatchEvent({
-            eventName: EVENTS.OPEN_MODAL,
-            payload: {
-                title: MODAL_IDS.FEEDBACK_WRITER_MODAL,
-                data: {
-                    feedback: getFeedback(),
-                    productID,
+        if (isSignedIn) {
+            dispatchEvent({
+                eventName: EVENTS.OPEN_MODAL,
+                payload: {
+                    id: MODAL_IDS.FEEDBACK_WRITER_MODAL,
+                    data: {
+                        feedback: getFeedback(),
+                        productID,
+                    },
                 },
-            },
-        });
+            });
+        }
     };
 
     return (

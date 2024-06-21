@@ -18,7 +18,9 @@ function Overlay({
             })}
             style={{
                 position: isFixed ? 'fixed' : 'absolute',
-                backgroundColor: colorBG ? colorBG : 'rgba(0, 0, 0, 0.15)',
+                backgroundColor: colorBG
+                    ? colorBG
+                    : 'var(--overlay-bg-color)',
                 animationDuration: `${animationTime}ms`,
                 transitionDuration: `${animationTime}ms`,
                 zIndex,

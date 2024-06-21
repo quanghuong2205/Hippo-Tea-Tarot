@@ -52,14 +52,14 @@
         color: #f5f5f5;
 
         &.active {
-            color: var(--primary-color);
+            color: var(--star-color);
             animation: zoom 0.3s ease-in-out;
         }
     }
 
     &__level {
         font-size: 1.6rem;
-        color: var(--primary-color);
+        color: var(--star-color);
     }
 
     @include abstracts.mediaquery(md) {
@@ -98,9 +98,15 @@
 
     padding: 20px;
 
-    width: 100%;
+    width: 80vw;
+    height: 80vh;
+
     overflow-x: hidden;
     overflow-y: auto;
+
+    @include abstracts.mediaquery(md) {
+        width: 90vw;
+    }
 }
 
 .review-form {
@@ -123,7 +129,7 @@
         flex-direction: column;
 
         padding: 20px;
-        background-color: #f5f5f5;
+        background-color: var(--review-form-bg-color);
         border-radius: 6px;
         margin-top: 20px;
 
@@ -207,13 +213,17 @@
     & input,
     & textarea {
         border: 1px solid #dbdde4;
-        background-color: #fff;
+        background-color: var(--review-form-input-bg-color);
         border-radius: 4px;
         box-sizing: border-box;
         height: 56px;
         padding: 14px;
 
         flex: 1;
+
+        &::placeholder {
+            color: var(--review-form-input-placeholder-color);
+        }
 
         @include abstracts.mediaquery(md) {
             font-size: 1.4rem;
@@ -239,6 +249,12 @@
         border-radius: 4px;
 
         background-color: var(--primary-color);
+        color: var(--dark-1);
+
+        &:hover {
+            opacity: 0.8;
+            cursor: pointer;
+        }
 
         & sgv {
             font-size: 24px;
@@ -246,12 +262,6 @@
 
         & span {
             font-size: 1.5rem;
-        }
-
-        &:hover {
-            background-color: #1473e6;
-            color: #fff;
-            cursor: pointer;
         }
 
         @include abstracts.mediaquery(md) {
@@ -288,10 +298,15 @@
 
 .review-card {
     padding: 20px 24px;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.09);
+    background-color: var(--review-card-bg-color);
+    border-radius: 12px;
 
     @include abstracts.mediaquery(md) {
         padding: 16px 0px;
+    }
+
+    & + & {
+        margin-top: 12px;
     }
 
     &:last-child {
@@ -333,7 +348,7 @@
     }
 
     &__stars {
-        color: var(--primary-color);
+        color: var(--star-color);
         display: flex;
         column-gap: 4px;
         margin: 8px 0;
@@ -341,7 +356,7 @@
 
     &__time {
         margin-bottom: 12px;
-        color: rgba(0, 0, 0, 0.54);
+        color: var(--review-time-color);
         font-size: 1.4rem;
         font-weight: 400;
 

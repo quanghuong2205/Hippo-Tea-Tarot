@@ -130,7 +130,7 @@
     &__list {
         padding: 8px 0;
         margin-bottom: 12px;
-        border-bottom: 1px solid rgba(0, 0, 0, 0.079);
+        border-bottom: 1px solid var(--mobile-nav-border-color);
     }
 
     &__item div,
@@ -152,11 +152,11 @@
 
         & svg {
             font-size: 1.6rem;
-            color: #757575;
+            color: var(--mobile-nav-icon-color);
         }
 
         & span {
-            color: #333;
+            color: var(--mobile-nav-text-color);
             font-size: 1.3rem;
             font-weight: 500;
         }
@@ -170,7 +170,7 @@
     width: 100%;
     height: 100%;
 
-    background-color: #fff;
+    background-color: var(--mobile-subnav-bg-color);
     animation: slideFromLeft 400ms ease-in-out forwards;
 
     &.hidden {
@@ -183,7 +183,7 @@
         justify-content: space-between;
         padding: 16px;
 
-        border-bottom: 1px solid rgba(0, 0, 0, 0.079);
+        border-bottom: 1px solid var(--mobile-nav-border-color);
     }
 
     &__title {

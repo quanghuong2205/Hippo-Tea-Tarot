@@ -1,5 +1,5 @@
 @use '../abstracts';
-@use './basic';
+@use './common';
 
 html {
     /* PRIMARY */
@@ -7,18 +7,83 @@ html {
     --light-primary-color: #ffd362;
     --lighter-primary-color: rgb(255, 183, 0, .6);
 
+    /* STAR */
+    --star-color: var(--primary-color);
+
     /* BODY */
     --text-color: var(--dark-3);
     --body-bg-color: var(--white);
+    --scrollbar-thumb-bg-color: rgba(22, 24, 35, 0.06);
+    --skeleton-from-bg-color: hsl(200, 20%, 80%);
+    --skeleton-to-bg-color:  hsl(200, 20%, 95%);
+    --overlay-bg-color: rgba(0, 0, 0, 0.15);
 
     /* HEADER */
-    --header-icon-color: var(--dark-3);
-    --user-menu-hr-color: rgba(0, 0, 0, 0.05);
-    --user-menu-text-color: #666;
     --header-bg-color: rgba(255, 255, 255, 0.8);
+    --mobile-nav-text-color: #333;
+    --mobile-nav-icon-color: #757575;
+    --mobile-nav-border-color: rgba(0, 0, 0, 0.079);
+    --mobile-subnav-bg-color: var(--white);
+
+    /* FOOTER */
+    --footer-text-color: #bbbbbb;
+
+    /* TOOLTIP */
+    --tooltip-bg-color: var(--white);
+    --tooltip-shadow: rgba(99, 99, 99, 0.2);
+
+    /* FEED CARD */
+    --feedcard-bg-color: var(--white);
+    --feedcard-time-color: #888888;
+
+    /* SCROLL LIST */
+    --scrollist-title-color: #242424;
+    --scrollist-link-color: #f05123;
+
+    /* MODAL */
+    --modal-bg-color: var(--white);
+    --modal-shadow-color: rgba(0, 0, 0, 0.15);
+
+    /* ICON */
+    --icon-color: brightness(0) saturate(100%) invert(8%)
+        sepia(7%) saturate(6038%) hue-rotate(213deg)
+        brightness(99%) contrast(95%);
 
     /* LOGO */
     --logo-border-color: var(--white);
+
+    /*PRODUCT CARD*/
+    --product-card-bg-color: var(--white);
+    --product-card-shadow: rgba(99, 99, 99, 0.2);
+    --product-card-old-price-color: rgba(0, 0, 0, 0.44);
+    --product-card-status-color: rgba(0, 0, 0, 0.65);
+
+    /*PRODUCT DETAIL*/
+    --product-detail-page-bg-color: #f5f5f5;
+    --product-detail-bg-color: var(--white);
+    --product-section-bg-color: var(--white);
+
+    --product-media-shadow: rgba(99, 99, 99, 0.2);
+    --product-preview-image-shadow: rgba(0, 0, 0, 0.15);
+    --product-preview-bg-color: var(--white);
+    --product-preview-image-bg-color: var(--white);
+
+    --product-infor-bg-color: var(--white);
+    --product-infor-desc-color: #53382c;
+    --product-infor-old-price-color: rgba(0, 0, 0, 0.44);
+
+    --product-attr-name-color: gray;
+    --product-attr-value-bg-color: #ededf6;
+    --product-attr-value-color: #9e9da8;
+
+
+     /* REVIEW */
+    --review-card-bg-color: #f3f3f36b;
+    --review-card-border-color: rgba(0, 0, 0, 0.09);
+    --review-time-color: rgba(0, 0, 0, 0.54);
+    --review-form-bg-color: #f5f5f5;
+    --review-form-input-bg-color: var(--white);
+
 
     /* SEARCH */
     --search-label-color: #3c4b66;
@@ -41,17 +106,6 @@ html {
     --popup-overlay-color: rgba(0, 0, 0, 0.5);
     --popup-close-bg-color: #0a0a0a;
 
-     /* FOOTER */
-    --footer-bg-color: #24262b;
-    --footer-title-color: var(--white);
-    --footer-title-underline-color: #e91e63;
-    --footer-text-color: #bbbbbb;
-    --footer-text-hover-color: var(--white);
-    --footer-social-link-bg-color: rgba(255, 255, 255, 0.2);
-    --footer-social-link-icon-color: var(--white);
-    --footer-social-link-icon-hover-color: #24262b;
-    --footer-social-link-hover-bg-color: var(--white);
-
     /* LANGUAGE */
     --language-bg-color: #f5f5f5;
     --language-active-bg-color: var(--white);
@@ -64,10 +118,7 @@ html {
     --sidebar-panel-bg-color: var(--white);
     --sidebar-panel-shadow: rgba(0, 0, 0, 0.15);
 
-    /* ICON */
-    --icon-color: brightness(0) saturate(100%) invert(8%)
-        sepia(7%) saturate(6038%) hue-rotate(213deg)
-        brightness(99%) contrast(95%);
+
 
     /* BUTTONS */
     --filter-btn-bg-color: var(--white);
@@ -81,21 +132,11 @@ html {
     --auth-form-left-desc-color: var(--text-color);
     --form-text-input-error-color: var(--error-color)
 
-    /* CHECKBOX */
-    --checkbox-border-color: #1a162e;
 
     /* CATEGORY */
     --category-title-color: #53382c;
     --category-desc-color: #53382c;
 
-    /*PRODUCT-CARD*/
-    --product-card-bg-color: #fff;
-    --product-card-shadow: rgba(99, 99, 99, 0.2);
-    --product-card-love-bg-color: #fff;
-
     /*PRODUCT-DETAIL*/
-    --product-infor-bg-color: #f8f8f8;
-    --product-infor-desc-color: #53382c;
-    --product-infor-size-bg-color: #ededf6;
-    --product-infor-size-color: #9e9da8;
+
 }

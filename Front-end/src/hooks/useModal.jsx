@@ -13,10 +13,13 @@ function useModal() {
     const bodyNode = useRef(document.querySelector('body'));
     const [openedModals, setOpenedModals] = useState([
         // {
-        //     ...MODALS['af7a133a-350f-49c1-b158-db6076bd8e3d'],
-        //     id: 'af7a133a-350f-49c1-b158-db6076bd8e3d',
+        //     ...MODALS['e4e449fa-a6a1-4d63-b39d-96b43caa3e6c'],
+        //     id: 'e4e449fa-a6a1-4d63-b39d-96b43caa3e6c',
         //     data: {
-        //         user: { name: 'huong' },
+        //         title: 'Sign in first',
+        //         desc: 'You must be sign in first. Try the link below',
+        //         link: '/home',
+        //         linkTitle: 'Go to sign in',
         //     },
         // },
     ]);
@@ -45,7 +48,6 @@ function useModal() {
      */
     const handleHiddenModal = ({ modalID }) => {
         return () => {
-            console.log(modalID);
             setOpenedModals((prev) => {
                 prev = prev.filter((m) => m.id !== modalID);
                 return [...prev];
@@ -58,6 +60,7 @@ function useModal() {
     useEffect(() => {
         const openModalHandler = (e) => {
             const id = e.detail?.id;
+            console.log(id);
             if (!id) return;
 
             if (!MODAL_IDS.includes(id)) {

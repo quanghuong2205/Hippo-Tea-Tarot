@@ -75,8 +75,6 @@ function useSearchParams({ filters = {} }) {
                 });
             }
 
-            console.log(prev);
-
             return {
                 ...prev,
             };
