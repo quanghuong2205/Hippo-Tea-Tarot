@@ -1,20 +1,21 @@
 'use strict';
 import Image from '../../atoms/Image';
-import { MOBILE_MENU } from '../../../constants/header.const';
+import { ITEM_IDS, MOBILE_MENU } from '../../../constants/header.const';
 import SubNav from './SubNav';
 import { useState } from 'react';
 import NavList from './_components/NavList';
 import { LuLogOut, LuLogIn } from 'react-icons/lu';
-import { useNavigate } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-import authActions from '../../../redux/actions/action.auth';
+import { useSelector } from 'react-redux';
 import NavItem from './_components/NavItem';
 import { dispatchEvent } from '../../../utils';
+import useUserMenu from '../../../hooks/useUserMenu';
 import EVENTS from '../../../constants/event.constant';
 
 function MobileNavBar() {
     const user = useSelector((state) => state.auth.user);
-    const navigate = useNavigate();
+
+    /* User hanlder */
+    const { getHandler } = useUserMenu();
 
     /* Sub nav controller */
     const [sub, setSub] = useState([]);
@@ -38,18 +39,13 @@ function MobileNavBar() {
         });
     };
 
-    /* Dispatcher */
-    const dispatcher = useDispatcher();
-
     return (
         <div className='mobile-navbar'>
             {user ? (
                 <div className='user'>
                     <div className='user-avatar'>
                         <Image
-                            src={
-                                'https://th.bing.com/th/id/OIP.6gJD-jUf5ApBDegR5sIleQHaNL?w=186&h=331&c=7&r=0&o=5&dpr=1.3&pid=1.7'
-                            }
+                            src={'hello'}
                             options={{
                                 fit: true,
                                 round: true,
@@ -65,13 +61,13 @@ function MobileNavBar() {
                 <ul className='mobile-navbar__list'>
                     <NavItem
                         item={{
-                            id: 'LI',
+                            id: ITEM_IDS.SIGN_IN,
                             icon: LuLogIn,
                             isLink: false,
                             label: 'Sign in',
                         }}
                         onClick={() => {
-                            navigate('/auth');
+                            getHandler({ id: ITEM_IDS.SIGN_IN })();
                             dispatchEvent({
                                 eventName: EVENTS.HIDDEN_MODAL,
                             });
@@ -93,13 +89,13 @@ function MobileNavBar() {
                     <ul className='mobile-navbar__list'>
                         <NavItem
                             item={{
-                                id: 'LO',
+                                id: ITEM_IDS.SIGN_OUT,
                                 icon: LuLogOut,
                                 isLink: false,
                                 label: 'Sign out',
                             }}
                             onClick={() => {
-                                dispatcher.signOutDispatcher();
+                                getHandler({ id: ITEM_IDS.SIGN_OUT })();
                                 dispatchEvent({
                                     eventName: EVENTS.HIDDEN_MODAL,
                                 });
@@ -119,20 +115,6 @@ function MobileNavBar() {
             )}
         </div>
     );
-}
-
-/**
- * Dispatcher
- */
-function useDispatcher() {
-    const navigate = useNavigate();
-    /* Dispatcher */
-    const dispatch = useDispatch();
-
-    return {
-        signOutDispatcher: () =>
-            dispatch(authActions.signOutAction({ navigate })),
-    };
 }
 
 export default MobileNavBar;

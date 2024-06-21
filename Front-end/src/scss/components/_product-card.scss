@@ -15,8 +15,6 @@
     background-color: var(--product-card-bg-color);
     box-shadow: var(--product-card-shadow) 0px 0px 4px 0px;
 
-    overflow: hidden;
-
     &__label {
         --triangle-size: 0.35em;
 
@@ -69,8 +67,6 @@
         width: 100%;
 
         padding-top: 100%;
-
-        background-color: var(--product-card-bg-color);
     }
 
     &__image {
@@ -99,8 +95,7 @@
     }
 
     &__title,
-    &__price,
-    &__score {
+    &__price {
         font-weight: 500;
         line-height: 150%;
         font-size: 1.5rem;
@@ -137,6 +132,9 @@
 
         & .score {
             margin-left: auto;
+            @include abstracts.mediaquery(md) {
+                font-size: 1.2rem;
+            }
         }
     }
 

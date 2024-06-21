@@ -144,6 +144,7 @@
     &__item {
         border-top-left-radius: 6px;
         border-bottom-left-radius: 6px;
+        cursor: pointer;
 
         &.active {
             background-color: #f0f0f0;

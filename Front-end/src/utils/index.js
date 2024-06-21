@@ -118,6 +118,10 @@ const extractFromLocalstorage = ({ key }) => {
     return JSON.parse(localStorage.getItem(key));
 };
 
+const clearFromLocalstorage = ({ key }) => {
+    localStorage.removeItem(key);
+};
+
 export {
     appendPrefix,
     decodeToken,
@@ -132,4 +136,5 @@ export {
     formatMoney,
     saveToLocalstorage,
     extractFromLocalstorage,
+    clearFromLocalstorage,
 };

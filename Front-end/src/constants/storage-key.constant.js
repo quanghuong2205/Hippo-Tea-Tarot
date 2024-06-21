@@ -7,6 +7,8 @@ const STORAGE_KEYS = {
 
     /* FILTER */
     PRODUCT_FILTER_STATE: 'product-filter-state',
+
+    THEME: 'theme',
 };
 
 export default STORAGE_KEYS;

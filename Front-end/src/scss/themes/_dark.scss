@@ -1,10 +1,12 @@
 @use './common';
 
-html.dark {
+html[data-theme = "dark"] {
     /* BODY */
     --text-color: var(--white);
     --body-bg-color: var(--dark-2);
     --scrollbar-thumb-bg-color: rgba(255, 255, 255, 0.06);
+    --skeleton-from-bg-color: hsl(200, 20%, 15%);
+    --skeleton-to-bg-color: hsl(200, 20%, 25%);
     --overlay-bg-color: rgba(255, 255, 255, 0.1);
 
     /* STAR */
@@ -16,8 +18,6 @@ html.dark {
     --mobile-nav-icon-color: var(--white);
     --mobile-nav-border-color: rgba(255, 255, 255, 0.079);
     --mobile-subnav-bg-color: var(--dark-1);
-    --skeleton-from-bg-color: hsl(200, 20%, 15%);
-    --skeleton-to-bg-color: hsl(200, 20%, 25%);
 
     /* FOOTER */
     --footer-text-color: var(--white);
@@ -52,8 +52,9 @@ html.dark {
     --product-detail-page-bg-color: var(--dark-2);
     --product-detail-bg-color: var(--dark-2);
     --product-section-bg-color: var(--dark-1);
+    --product-card-bg-color-in-product-detail-page: var(--dark-2);
 
-    --product-media-shadow: rgba(255, 255, 255, 0.05);
+    --product-media-shadow: transparent;
     --product-preview-image-shadow: rgba(255, 255, 255, 0.05);
     --product-preview-bg-color: var(--dark-1)
     --product-preview-image-bg-color: var(--white);

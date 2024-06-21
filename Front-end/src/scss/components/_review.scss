@@ -302,7 +302,7 @@
     border-radius: 12px;
 
     @include abstracts.mediaquery(md) {
-        padding: 16px 0px;
+        padding: 12px 8px;
     }
 
     & + & {

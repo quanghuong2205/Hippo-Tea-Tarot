@@ -3,7 +3,7 @@ import Button from '../../../atoms/Button';
 import { dispatchEvent } from '../../../../utils';
 import EVENTS from '../../../../constants/event.constant';
 
-function NavItem({ item, onClick }) {
+function NavItem({ item, handleOnClick }) {
     return (
         <li className='mobile-navbar__item'>
             {item.isLink ? (
@@ -21,7 +21,7 @@ function NavItem({ item, onClick }) {
                     </>
                 </Button>
             ) : (
-                <div onClick={onClick}>
+                <div onClick={handleOnClick}>
                     {item?.icon && <item.icon />}
                     <span>{item.label}</span>
                 </div>
@@ -32,7 +32,7 @@ function NavItem({ item, onClick }) {
 
 NavItem.propTypes = {
     item: PropTypes.object,
-    onClick: PropTypes.func,
+    handleOnClick: PropTypes.func,
 };
 
 export default NavItem;

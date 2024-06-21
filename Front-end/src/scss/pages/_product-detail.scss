@@ -27,6 +27,12 @@
         }
     }
 
+    & .product-card {
+        background-color: var(
+            --product-card-bg-color-in-product-detail-page
+        );
+    }
+
     &__feedbacks {
         background-color: var(--product-section-bg-color);
         padding: 20px;
