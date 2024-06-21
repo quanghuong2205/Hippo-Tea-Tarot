@@ -49,6 +49,8 @@
     &__pages button {
         &.active {
             background-color: var(--primary-color);
+            border-color: transparent;
+            color: var(--dark-1);
         }
 
         & {

@@ -28,18 +28,46 @@
     &__text-input {
         display: flex;
         flex-direction: column;
+        position: relative;
+
+        --input-height: 48px;
+        --input-padding: 12px;
+        --input-padding-right: 12px;
+        --icon-height: 18px;
+        --icon-width: 18px;
+
+        &.has-label-icon {
+            --input-padding-right: calc(24px + var(--icon-width));
+        }
+
+        & .label-icon {
+            --height: 18px;
+
+            display: flex;
+            align-items: center;
+
+            position: absolute;
+            right: var(--input-padding);
+            top: calc(var(--input-height) / 2);
+
+            width: var(--icon-width);
+            height: var(--icon-height);
+
+            transform: translateY(calc(var(--icon-height) * -1 / 2));
+        }
 
         & input {
             flex: 1;
 
-            font-size: 1.8rem;
+            font-size: 1.6rem;
             font-weight: 500;
             line-height: 144.444%;
 
-            height: 48px;
+            height: var(--input-height);
             border: 1px solid #d2d1d6;
 
-            padding: 12px;
+            padding: var(--input-padding);
+            padding-right: var(--input-padding-right);
 
             border-radius: 10px;
 
@@ -55,9 +83,9 @@
         & .error {
             text-align: left;
             color: var(--error-color);
-            font-size: 1.6rem;
+            font-size: 1.4rem;
             font-weight: 500;
-            padding: 10px 0 14px 0;
+            padding: 12px 0 16px 0;
             margin-left: 6px;
             line-height: 1.3;
 
@@ -88,7 +116,7 @@
         }
 
         @include abstracts.mediaquery(md) {
-            font-size: 1.3rem;
+            font-size: 1.4rem;
         }
     }
 
@@ -102,8 +130,8 @@
             font-size: 1.8rem;
             position: absolute;
             left: 20px;
-            top: 0;
-            transform: translateY(50%);
+            top: 50%;
+            transform: translateY(-50%);
         }
 
         @include abstracts.mediaquery(md) {
@@ -119,7 +147,7 @@
         line-height: 144.444%;
 
         @include abstracts.mediaquery(md) {
-            font-size: 1.4rem;
+            font-size: 1.5rem;
         }
     }
 }

@@ -1,4 +1,8 @@
 html {
+    /* PRIMARY */
+    --light-primary-color: #ffd362;
+    --lighter-primary-color: rgb(255, 183, 0, 0.8);
+
     /* LIGHT */
     --white: #fff;
     --light-1: #d2d1d6;
@@ -14,7 +18,7 @@ html {
     --dark-blue: #0556a3;
 
     /* OTHERS */
-    --error-color: red;
+    --error-color: #ff5757;
 
     /* FOOTER */
     --footer-bg-color: var(--dark-1);

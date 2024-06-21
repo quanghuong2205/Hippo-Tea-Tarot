@@ -14,6 +14,7 @@ const SIDEBAR_ITEMS = [
         icon: HeartIcon,
         title: 'Thông báo',
         modelID: MODAL_IDS.NOTIFY_MODAL,
+        iconColor: 'red',
     },
 ];
 

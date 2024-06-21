@@ -15,13 +15,14 @@
     }
 
     &-left {
-        background-color: #f8f8f8;
-
         padding: 0 30px;
         text-align: center;
         display: flex;
         justify-content: center;
         align-items: center;
+
+        background-color: var(--auth-page-left-bg-color);
+        border-right: 1px solid var(--auth-page-left-border-color);
 
         &__inner {
             position: relative;
@@ -131,7 +132,7 @@
             font-size: 1.8rem;
 
             @include abstracts.mediaquery(md) {
-                font-size: 1.3rem;
+                font-size: 1.5rem;
             }
         }
 

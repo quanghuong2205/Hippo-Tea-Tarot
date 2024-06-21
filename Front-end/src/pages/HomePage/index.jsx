@@ -4,7 +4,7 @@ function HomePage() {
     return (
         <div className='home page'>
             <div className='container'>
-                <div className='home-slideshow slideshow'>
+                {/* <div className='home-slideshow slideshow'>
                     <div className='slideshow-left'>
                         <h3 className='slideshow__title'>
                             Sữa chua nếp nha đam
@@ -23,33 +23,33 @@ function HomePage() {
                     <div className='slideshow-right'>
                         <div className='slideshow__image'></div>
                     </div>
-                </div>
+                </div> */}
 
-                <div className='home-content'>
-                    <ScrollList
-                        title={'Tin mới'}
-                        RenderComponent={() => (
-                            <>
-                                <div className='col col-3 col-md-10'>
-                                    <FeedCard />
-                                </div>
+                {/* <div className='home-content'> */}
+                <ScrollList
+                    title={'Tin mới'}
+                    RenderComponent={() => (
+                        <>
+                            <div className='col col-3 col-md-10'>
+                                <FeedCard />
+                            </div>
 
-                                <div className='col col-3 col-md-10'>
-                                    <FeedCard />
-                                </div>
+                            <div className='col col-3 col-md-10'>
+                                <FeedCard />
+                            </div>
 
-                                <div className='col col-3 col-md-10'>
-                                    <FeedCard />
-                                </div>
+                            <div className='col col-3 col-md-10'>
+                                <FeedCard />
+                            </div>
 
-                                <div className='col col-3 col-md-10'>
-                                    <FeedCard />
-                                </div>
-                            </>
-                        )}
-                    />
-                </div>
+                            <div className='col col-3 col-md-10'>
+                                <FeedCard />
+                            </div>
+                        </>
+                    )}
+                />
             </div>
+            {/* </div> */}
         </div>
     );
 }

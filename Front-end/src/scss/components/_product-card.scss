@@ -32,6 +32,8 @@
         border-top-right-radius: 0.25em;
         border-bottom-right-radius: 0.25em;
 
+        color: #fff;
+
         @include abstracts.mediaquery(md) {
             --triangle-size: 0.25em;
             padding: 0.2em 0.4em;

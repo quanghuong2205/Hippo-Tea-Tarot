@@ -52,7 +52,7 @@ function ProductPage() {
                     isReady={PPIsReady}
                     HeaderRight={() => <FilterButton />}
                 />
-                {PPIsReady && (
+                {PPIsReady && PPData.products.length !== 0 && (
                     <Pagination
                         totalPages={parseInt(PPData.totalPages)}
                         currentPage={parseInt(PPData.currentPage)}

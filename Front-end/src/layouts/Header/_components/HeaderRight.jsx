@@ -2,9 +2,9 @@ import { useSelector } from 'react-redux';
 import Image from '../../../components/atoms/Image';
 import config from '../../../../configs';
 import UserMenu from './UserMenu';
-import LoginButton from './LoginButton';
 import Navigate from './Navigate';
 import Tooltip from '../../../components/common/Tooltip';
+import Button from '../../../components/atoms/Button';
 
 function HeaderRight() {
     const user = useSelector((state) => state.auth.user);
@@ -34,7 +34,11 @@ function HeaderRight() {
                     />
                 </div>
             ) : (
-                <LoginButton />
+                <Button
+                    className={'header__login-btn pri-btn'}
+                    linkTo={'/auth'}>
+                    <span>Đăng nhập</span>
+                </Button>
             )}
         </div>
     );

@@ -13,8 +13,9 @@ function InputBox({
     isTextArea = false,
     classNames = {
         wrap: 'form__text-input',
-        input: 'form__input',
+        input: '',
         label: '',
+        labelIcon: 'label-icon',
     },
     hasLabel,
     labelTitle,
@@ -26,12 +27,18 @@ function InputBox({
     const randomID = useId();
 
     return (
-        <div className={classNames.wrap}>
+        <div
+            className={clsx({
+                [classNames.wrap]: true,
+                'has-label-icon': LabelIcon,
+            })}>
             {hasLabel && (
                 <label
-                    className={classNames.label}
+                    className={
+                        LabelIcon ? classNames.labelIcon : classNames.label
+                    }
                     htmlFor={randomID}>
-                    {LabelIcon && <LabelIcon />}
+                    {LabelIcon && LabelIcon()}
                     <span>{labelTitle}</span>
                 </label>
             )}

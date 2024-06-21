@@ -44,6 +44,7 @@ function ProductCategory({
 
             <div className='category-menu row g-3'>
                 {isReady &&
+                    products.length !== 0 &&
                     products.map((p) => (
                         <Product
                             key={p._id}
@@ -51,6 +52,7 @@ function ProductCategory({
                             className={numPerline[productNumPerLine]}
                         />
                     ))}
+
                 {!isReady &&
                     randomArray.map((id) => (
                         <ProductSkeleton
@@ -58,6 +60,12 @@ function ProductCategory({
                             className={numPerline[productNumPerLine]}
                         />
                     ))}
+
+                {isReady && products.length === 0 && (
+                    <p className='category-menu__empty'>
+                        Không tìm thấy sản phẩm
+                    </p>
+                )}
             </div>
         </div>
     );

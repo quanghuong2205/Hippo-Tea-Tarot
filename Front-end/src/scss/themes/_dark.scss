@@ -1,6 +1,8 @@
 @use './common';
 
 html[data-theme = "dark"] {
+    --primary-color: yellow;
+
     /* BODY */
     --text-color: var(--white);
     --body-bg-color: var(--dark-2);
@@ -18,9 +20,19 @@ html[data-theme = "dark"] {
     --mobile-nav-icon-color: var(--white);
     --mobile-nav-border-color: rgba(255, 255, 255, 0.079);
     --mobile-subnav-bg-color: var(--dark-1);
+    --navigate-item-decor-color: var(--primary-color);
+
+    /* SIDEBAR */
+    --sidebar-item-bg-color: var(--primary-color);
+    --sidebar-item-hover-bg-color: yellow;
+    --sidebar-item-text-color: var(--dark-1);
 
     /* FOOTER */
     --footer-text-color: var(--white);
+
+    /* AUTH */
+    --auth-page-left-bg-color: var(--dark-2);
+    --auth-page-left-border-color: #444;
 
     /* TOOLTIP */
     --tooltip-bg-color: var(--dark-2);
@@ -29,6 +41,9 @@ html[data-theme = "dark"] {
     /* FEED CARD */
     --feedcard-bg-color: var(--dark-1);
     --feedcard-time-color: #888888;
+
+    /* FILTER */
+    --filter-product-bg-color: var(--dark-2);
 
     /* SCROLL LIST */
     --scrollist-title-color: var(--white);
@@ -82,9 +97,8 @@ html[data-theme = "dark"] {
     --category-desc-color: rgba(255, 255, 255, 0.6);
 
     /*BUTTONS*/
-    --filter-btn-bg-color: var(--dark-2);
-    --filter-btn-text-color: var(--white);
-    --normal-btn-bg-color: var(--dark-2);
+    --primary-button-bg-color: var(--primary-color);
+    --primary-button-hover-bg-color: yellow;
 
     /*FORM*/
     --form-link-hover: var(--white);

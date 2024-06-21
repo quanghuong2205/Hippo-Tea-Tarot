@@ -8,6 +8,8 @@ import RecoveryPass from './_components/RecoveryPass';
 import { IoIosWarning } from 'react-icons/io';
 
 import { AUTH_MODES, AUTH_FIELDS } from '../../constants/auth.constant';
+import MailIcon from '../../components/icons/MailIcon';
+import LockIcon from '../../components/icons/LockIcon';
 
 function RightAuth({
     authMode,
@@ -60,6 +62,8 @@ function RightAuth({
                             }
                             value={authFields[AUTH_FIELDS.NAME].value}
                             hasErrorTag
+                            LabelIcon={() => null}
+                            hasLabel
                         />
                     )}
 
@@ -72,6 +76,8 @@ function RightAuth({
                         }
                         value={authFields[AUTH_FIELDS.EMAIL].value}
                         hasErrorTag
+                        LabelIcon={() => <MailIcon />}
+                        hasLabel
                     />
 
                     <InputBox
@@ -84,6 +90,8 @@ function RightAuth({
                         }
                         value={authFields[AUTH_FIELDS.PASSWORD].value}
                         hasErrorTag
+                        LabelIcon={() => <LockIcon />}
+                        hasLabel
                     />
 
                     {/* More fields for sign up */}
@@ -107,6 +115,8 @@ function RightAuth({
                                     .value
                             }
                             hasErrorTag
+                            LabelIcon={() => <LockIcon />}
+                            hasLabel
                         />
                     )}
 

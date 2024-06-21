@@ -52,8 +52,13 @@
 /*Primary*/
 .pri-btn {
     @extend %common;
-    background-color: var(--primary-color);
+    background-color: var(--primary-button-bg-color);
     color: #1a162e;
+
+    &:hover {
+        opacity: 1;
+        background-color: var(--primary-button-hover-bg-color);
+    }
 }
 
 /*Secondary*/

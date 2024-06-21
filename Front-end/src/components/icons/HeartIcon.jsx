@@ -1,8 +1,9 @@
 import PropTypes from 'prop-types';
-function HeartIcon({ className, isBold, width, height }) {
+function HeartIcon({ className, isBold, styles }) {
     if (isBold) {
         return (
             <svg
+                style={styles}
                 aria-label='Notifications'
                 className={className}
                 fill='currentColor'
@@ -35,6 +36,7 @@ HeartIcon.propTypes = {
     height: PropTypes.number,
     isBold: PropTypes.bool,
     width: PropTypes.number,
+    styles: PropTypes.object,
 };
 
 export default HeartIcon;

@@ -18,10 +18,7 @@ function SideBar() {
                                 },
                             });
                         }}>
-                        <item.icon
-                            className='sidebar-icon'
-                            isBold
-                        />
+                        <item.icon className='sidebar-icon' />
                         <span className='sidebar-text'>{item.title}</span>
                     </div>
                 ))}
