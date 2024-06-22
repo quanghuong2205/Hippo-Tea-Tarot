@@ -19,6 +19,6 @@ const multerInstance = multer({
 });
 
 module.exports = {
-    parseMultipartForm: (req, res, next) =>
+    multipartFormParserMiddleware: (req, res, next) =>
         multerInstance.any()(req, res, next),
 };

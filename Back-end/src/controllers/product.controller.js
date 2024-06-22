@@ -103,7 +103,7 @@ class ProductController {
      * @route [POST] /product
      */
     static async createProduct(req, res, next) {
-        if (!req.query?.cat) {
+        if (!req.body?.category) {
             throw new BadRequestError({
                 message: 'Not provide the category of the product',
                 code: CODES.PRODUCT_CREATION_MISS_CATEGORY,
@@ -113,8 +113,8 @@ class ProductController {
         return new CREATED({
             message: 'Created the product successfully',
             body: await ProductServices.createProduct({
-                request: req,
-                response: res,
+                productProps: req.body,
+                fileObjects: req.files,
             }),
         }).sendResponse(res);
     }
@@ -134,9 +134,8 @@ class ProductController {
             message: 'Updated the product successfully',
             body: await ProductServices.updateProduct({
                 productID: req.query.pid,
-                category: req.query.cat,
-                request: req,
-                response: res,
+                productProps: req.body,
+                fileObjects: req.files,
             }),
             code: CODES.OK,
         }).sendResponse(res);

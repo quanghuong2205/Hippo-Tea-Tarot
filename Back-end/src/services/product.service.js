@@ -205,11 +205,11 @@ class ProductServices {
      * @param {string} category product's category
      * @param {object} productProps properties of the product
      */
-    static async createProduct({ request, response }) {
+    static async createProduct({ productProps, fileObjects }) {
         /* Check category */
         const categoryObject = await CommonRepo.findOne({
             filter: {
-                category,
+                category: productProps.category,
             },
             model: 'category',
         });
@@ -221,14 +221,10 @@ class ProductServices {
             });
         }
 
-        const newThumbPaths = await MulterServices.uploadMany({
-            req: request,
-            res: response,
-            context: 'product',
+        const newThumbPaths = await FileServices.writeMultiFiles({
+            fileObjects: fileObjects,
+            type: 'product',
         });
-
-        /* Get product props */
-        const productProps = request.body;
 
         /* Create product */
         return await ProductRepo.createProduct({
@@ -242,12 +238,7 @@ class ProductServices {
     /**
      * @desc Delete a product based on the product id
      */
-    static async updateProduct({
-        productID,
-        request,
-        response,
-        category,
-    }) {
+    static async updateProduct({ productID, productProps, fileObjects }) {
         checkMongoID({
             id: productID,
             message: 'Invalid productID',
@@ -266,7 +257,7 @@ class ProductServices {
             });
         }
 
-        /* Check category field */
+        /* Check category type */
         if (productProps?.category) {
             const categoryObject = await CommonRepo.findOne({
                 filter: {
@@ -283,38 +274,40 @@ class ProductServices {
             }
         }
 
-        /* Parse multipart form and upload new files */
-        const newProductThumbPaths = await MulterServices.uploadMany({
-            req: request,
-            res: response,
-            context: 'product',
+        /* Store new files */
+        const newThumbPaths = await FileServices.writeMultiFiles({
+            fileObjects: fileObjects,
+            type: 'product',
         });
 
-        /* Unlink stale products's thumbs */
-        const productThumbs = productObject?.thumbs;
-        if (productThumbs) {
-            await FileServices.removeMultiFiles({
-                relativePaths: productThumbs,
-            });
-        }
+        /* Unlink stale products's files */
+        const productFilePaths = productObject.thumbs;
+        const remainedFilePaths =
+            typeof productProps.remain_thumbs === 'string' &&
+            productProps.remain_thumbs === ''
+                ? []
+                : productProps.remain_thumbs;
+
+        const removedFilePaths =
+            remainedFilePaths.length === 0
+                ? productFilePaths
+                : productFilePaths.filter(
+                      (t) => !remainedFilePaths.includes(t)
+                  );
+
+        await FileServices.removeMultiFiles({
+            relativePaths: removedFilePaths,
+        });
 
         /* Remove undefined props and flatten the updated object */
         removeNullOrUndefinedProps({ productProps });
         productProps = flattenObject({ prefix: null, obj: productProps });
 
-        /* Update the products */
-        if (!productThumbPaths) {
-            return await ProductRepo.updateProduct({
-                productID,
-                updatedProps: productProps,
-            });
-        }
-
         return await ProductRepo.updateProduct({
             productID,
             updatedProps: {
                 ...productProps,
-                thumbs: newProductThumbPaths ? newProductThumbPaths : [],
+                thumbs: [...newThumbPaths, ...remainedFilePaths],
             },
             unselectedProps: ['__v'],
         });
@@ -353,7 +346,7 @@ class ProductServices {
         /* Delete the products */
         return await ProductRepo.deleteProduct({
             productID,
-            unselectedProps: ['__v', 'thumbs'],
+            unselectedProps: ['__v'],
         });
     }
 }

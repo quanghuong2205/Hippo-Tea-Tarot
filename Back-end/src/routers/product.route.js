@@ -16,6 +16,7 @@ rbac.setGrants({ permissionType: 'product' });
 const ErrorHandler = require('../utils/error.hanlder');
 const { verifyClientID } = require('../middlewares/auth');
 const { verifyGrant } = require('../middlewares/access-controll');
+const { multipartFormParserMiddleware } = require('../middlewares/multer');
 const grantVerifier = verifyGrant({ rbac });
 
 /**
@@ -63,7 +64,16 @@ ProductRouter.get(
 ProductRouter.post(
     '/',
     grantVerifier({ resource: 'products', action: 'createAny' }),
+    multipartFormParserMiddleware,
     ErrorHandler(ProductController.createProduct)
+);
+
+/* [PATCH] [/product?pid=] */
+ProductRouter.patch(
+    '/',
+    grantVerifier({ resource: 'products', action: 'updateAny' }),
+    multipartFormParserMiddleware,
+    ErrorHandler(ProductController.updateProduct)
 );
 
 /* [DELETE] [/product?pid=] */
@@ -71,13 +81,6 @@ ProductRouter.delete(
     '/',
     grantVerifier({ resource: 'products', action: 'deleteAny' }),
     ErrorHandler(ProductController.deleteProduct)
-);
-
-/* [PATCH] [/product?pid=] */
-ProductRouter.patch(
-    '/',
-    grantVerifier({ resource: 'products', action: 'updateAny' }),
-    ErrorHandler(ProductController.updateProduct)
 );
 
 /* Export the router */
