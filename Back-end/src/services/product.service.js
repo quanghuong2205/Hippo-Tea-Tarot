@@ -282,10 +282,17 @@ class ProductServices {
 
         /* Unlink stale products's files */
         const productFilePaths = productObject.thumbs;
+
+        /* Remain file field in multipart form could be
+            string, empty string, or array of string
+        */
         const remainedFilePaths =
-            typeof productProps.remain_thumbs === 'string' &&
-            productProps.remain_thumbs === ''
-                ? []
+            typeof productProps.remain_thumbs === 'string'
+                ? [
+                      ...(productProps.remain_thumbs !== ''
+                          ? [productProps.remain_thumbs]
+                          : []),
+                  ]
                 : productProps.remain_thumbs;
 
         const removedFilePaths =

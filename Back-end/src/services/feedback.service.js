@@ -53,7 +53,12 @@ class FeedbackServices {
     /**
      * @desc Create a new feedback
      */
-    static async createFeedback({ userID, request, response, productID }) {
+    static async createFeedback({
+        userID,
+        productID,
+        fileObjects,
+        feedbackProps,
+    }) {
         checkMongoID({
             id: productID,
             message: 'Invalid feedbackID',
@@ -73,22 +78,103 @@ class FeedbackServices {
         }
 
         /* Upload files */
-        const newThumbPaths = await MulterServices.uploadMany({
-            req: request,
-            res: response,
-            context: 'feedback',
+        const newThumbPaths = await FileServices.writeMultiFiles({
+            fileObjects,
+            type: 'feedback',
         });
-
-        /* Get feedback props  */
-        const feedbackProps = request.body;
 
         return await FeedbackRepo.createFeedback({
             props: {
                 ...feedbackProps,
                 product: productID,
-                thumbs: newThumbPaths ? newThumbPaths : [],
+                thumbs: newThumbPaths,
             },
             userID,
+        });
+    }
+
+    /**
+     * @desc Update a product based on the feedback id
+     */
+    static async updateFeedback({
+        feedbackID,
+        fileObjects,
+        feedbackProps,
+        userID,
+    }) {
+        checkMongoID({
+            id: feedbackID,
+            message: 'Invalid feedbackID',
+        });
+
+        /* Check if the feedback existed */
+        const feedbackObject = await FeedbackRepo.getFeedbackByID({
+            feedbackID,
+        });
+
+        if (!feedbackObject) {
+            throw new BadRequestError({
+                message: 'Feedback not exist',
+                code: CODES.FEEDBACK_NOT_EXIST,
+            });
+        }
+
+        /* The feedback must belong to user */
+        if (feedbackObject.user.toString() !== userID) {
+            throw new BadRequestError({
+                message: 'Can not delete feedback of another one',
+                code: CODES.FEEDBACK_CAN_NOT_DELETE_OF_ANOTHERONE,
+            });
+        }
+
+        /* Store new feedback's files */
+        const newThumbPaths = await FileServices.writeMultiFiles({
+            fileObjects,
+            type: 'feedback',
+        });
+
+        /* Unlink stale feedback's files */
+        const feedbackFilePaths = feedbackObject.thumbs;
+        /* Remain file field in multipart form could be
+            string, empty string, or array of string
+        */
+        const remainedFilePaths =
+            typeof feedbackProps?.remain_thumbs === 'string'
+                ? [
+                      ...(feedbackProps.remain_thumbs !== ''
+                          ? [feedbackProps.remain_thumbs]
+                          : []),
+                  ]
+                : feedbackProps?.remain_thumbs;
+
+        console.log('remained files::', remainedFilePaths);
+        const removedFilePaths =
+            remainedFilePaths.length === 0
+                ? feedbackFilePaths
+                : feedbackFilePaths.filter(
+                      (t) => !remainedFilePaths.includes(t)
+                  );
+        console.log('removed files::', removedFilePaths);
+
+        if (removedFilePaths.length !== 0) {
+            await FileServices.removeMultiFiles({
+                relativePaths: removedFilePaths,
+            });
+        }
+
+        /* Remove undefined props and flatten the updated object */
+        removeNullOrUndefinedProps({ feedbackProps });
+
+        /* Update the products */
+        return await FeedbackRepo.updateFeedback({
+            feedbackID,
+            productID: feedbackObject.product,
+            ratingScoreBeforeUpdate: feedbackObject.rating_star,
+            updatedProps: {
+                ...feedbackProps,
+                thumbs: [...newThumbPaths, ...remainedFilePaths],
+            },
+            unselectedProps: ['__v'],
         });
     }
 
@@ -135,88 +221,6 @@ class FeedbackServices {
             productID: feedbackObject.product,
             feedbackRatingScore: feedbackObject.rating_star,
             unselectedProps: ['__v', 'thumbs'],
-        });
-    }
-
-    /**
-     * @desc Update a product based on the feedback id
-     */
-    static async updateFeedback({
-        feedbackID,
-        request,
-        response,
-        userID,
-    }) {
-        checkMongoID({
-            id: feedbackID,
-            message: 'Invalid feedbackID',
-        });
-
-        /* Check if the feedback existed */
-        const feedbackObject = await FeedbackRepo.getFeedbackByID({
-            feedbackID,
-        });
-
-        if (!feedbackObject) {
-            throw new BadRequestError({
-                message: 'Feedback not exist',
-                code: CODES.FEEDBACK_NOT_EXIST,
-            });
-        }
-
-        /* The feedback must belong to user */
-        if (feedbackObject.user.toString() !== userID) {
-            throw new BadRequestError({
-                message: 'Can not delete feedback of another one',
-                code: CODES.FEEDBACK_CAN_NOT_DELETE_OF_ANOTHERONE,
-            });
-        }
-
-        /* Upload new feedback's thumbs */
-        const newThumbPaths =
-            (await MulterServices.uploadMany({
-                req: request,
-                res: response,
-                context: 'feedback',
-            })) || [];
-
-        /* Get feedbackProps */
-        const feedbackProps = request.body;
-
-        /* Unlink stale feedback's thumbs */
-        const feedbackThumbs = feedbackObject.thumbs;
-        const remainingThumbs =
-            (typeof feedbackProps?.remain_thumbs === 'string') &
-            (feedbackProps?.remain_thumbs !== '')
-                ? [feedbackProps?.remain_thumbs]
-                : [];
-
-        const finalPaths =
-            remainingThumbs.length === 0
-                ? feedbackThumbs
-                : feedbackThumbs.filter(
-                      (t) => !remainingThumbs.includes(t)
-                  );
-
-        if (finalPaths.length !== 0) {
-            await FileServices.removeMultiFiles({
-                relativePaths: finalPaths,
-            });
-        }
-
-        /* Remove undefined props and flatten the updated object */
-        removeNullOrUndefinedProps({ feedbackProps });
-
-        /* Update the products */
-        return await FeedbackRepo.updateFeedback({
-            feedbackID,
-            productID: feedbackObject.product,
-            ratingScoreBeforeUpdate: feedbackObject.rating_star,
-            updatedProps: {
-                ...feedbackProps,
-                thumbs: [...newThumbPaths, ...remainingThumbs],
-            },
-            unselectedProps: ['__v'],
         });
     }
 

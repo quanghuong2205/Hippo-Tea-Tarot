@@ -53,13 +53,13 @@ const productSchema = new Schema(
 
         is_draft: {
             type: Boolean,
-            default: false,
+            default: true,
             select: false,
         },
 
         is_public: {
             type: Boolean,
-            default: true,
+            default: false,
             select: false,
         },
 

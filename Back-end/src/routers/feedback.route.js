@@ -19,6 +19,7 @@ const {
 } = require('../middlewares/auth');
 const ErrorHandler = require('../utils/error.hanlder');
 const { verifyGrant } = require('../middlewares/access-controll');
+const { multipartFormParserMiddleware } = require('../middlewares/multer');
 const grantVerifier = verifyGrant({ rbac });
 
 /**
@@ -38,6 +39,7 @@ FeedbackRouter.get('/', ErrorHandler(FeedbackController.getFeedback));
 FeedbackRouter.post(
     '/',
     grantVerifier({ resource: 'feedback', action: 'createOwn' }),
+    multipartFormParserMiddleware,
     ErrorHandler(FeedbackController.createFeedback)
 );
 
@@ -52,6 +54,7 @@ FeedbackRouter.delete(
 FeedbackRouter.patch(
     '/',
     grantVerifier({ resource: 'feedback', action: 'updateOwn' }),
+    multipartFormParserMiddleware,
     ErrorHandler(FeedbackController.updateFeedback)
 );
 

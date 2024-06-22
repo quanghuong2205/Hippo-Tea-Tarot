@@ -58,16 +58,14 @@ class FeedbackController {
             });
         }
 
-        const body = await FeedbackServices.createFeedback({
-            userID: req.clientID,
-            productID: req.query.pid,
-            request: req,
-            response: res,
-        });
-
         return new CREATED({
             message: 'Has been given the feedback successfully',
-            body,
+            body: await FeedbackServices.createFeedback({
+                userID: req.clientID,
+                productID: req.query.pid,
+                feedbackProps: req.body,
+                fileObjects: req.files,
+            }),
         }).sendResponse(res);
     }
 
@@ -82,16 +80,14 @@ class FeedbackController {
             });
         }
 
-        const body = await FeedbackServices.updateFeedback({
-            feedbackID: req.query.fid,
-            request: req,
-            response: res,
-            userID: req.clientID,
-        });
-
         return new OK({
             message: 'Updated the feedback successfuly',
-            body,
+            body: await FeedbackServices.updateFeedback({
+                feedbackID: req.query.fid,
+                feedbackProps: req.body,
+                fileObjects: req.files,
+                userID: req.clientID,
+            }),
         }).sendResponse(res);
     }
 
