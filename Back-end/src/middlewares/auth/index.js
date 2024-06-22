@@ -8,7 +8,7 @@ const {
     BadRequestError,
     UnauthorizedError,
 } = require('../../utils/error.response.util');
-const { checkID } = require('../../utils/mongoose.util');
+const { checkID, checkMongoID } = require('../../utils/mongoose.util');
 
 /* Define middlewares */
 const verifyClientID = async (req, res, next) => {
@@ -22,12 +22,10 @@ const verifyClientID = async (req, res, next) => {
     }
 
     /* Invalid ID format */
-    if (!checkID({ id: clientID })) {
-        throw new BadRequestError({
-            message: 'Invalid clientID',
-            code: CODES.MONGODB_INVALID_ID,
-        });
-    }
+    checkMongoID({
+        id: clientID,
+        message: 'Invalid clientID',
+    });
 
     /**
      * Verify clientID

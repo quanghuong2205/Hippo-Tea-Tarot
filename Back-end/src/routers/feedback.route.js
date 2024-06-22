@@ -25,46 +25,46 @@ const grantVerifier = verifyGrant({ rbac });
  * USER ROUTES
  */
 
-/* [GET] [/feedback/:pid] */
-FeedbackRouter.get('/:pid', ErrorHandler(FeedbackController.getFeedbacks));
+/* [GET] [/feedback/many?pid=] */
+FeedbackRouter.get('/many', ErrorHandler(FeedbackController.getFeedbacks));
 
 FeedbackRouter.use(ErrorHandler(verifyClientID));
 // FeedbackRouter.use(ErrorHandler(verifyAccessToken));
 
-/* [GET] [/feedback?product=] */
+/* [GET] [/feedback?pid=] */
 FeedbackRouter.get('/', ErrorHandler(FeedbackController.getFeedback));
 
-/* [POST] [/feedback] */
+/* [POST] [/feedback?pid = ] */
 FeedbackRouter.post(
     '/',
     grantVerifier({ resource: 'feedback', action: 'createOwn' }),
     ErrorHandler(FeedbackController.createFeedback)
 );
 
-/* [DELETE] [/feedback/:id] */
+/* [DELETE] [/feedback/?fid=] */
 FeedbackRouter.delete(
-    '/:id',
+    '/',
     grantVerifier({ resource: 'feedback', action: 'deleteOwn' }),
     ErrorHandler(FeedbackController.deleteFeedback)
 );
 
-/* [DELETE] [/feedback/:id] */
+/* [PATCH] [/feedback/?fid=] */
 FeedbackRouter.patch(
-    '/:id',
+    '/',
     grantVerifier({ resource: 'feedback', action: 'updateOwn' }),
     ErrorHandler(FeedbackController.updateFeedback)
 );
 
-/* [POST] [/feedback/:fid/like] */
+/* [POST] [/feedback/like?fid=] */
 FeedbackRouter.post(
-    '/:fid/like',
+    '/like',
     grantVerifier({ resource: 'like', action: 'createAny' }),
     ErrorHandler(FeedbackController.likeFeedback)
 );
 
-/* [DELETE] [/feedback/:fid/like] */
+/* [DELETE] [/feedback/like?fid=] */
 FeedbackRouter.delete(
-    '/:fid/like',
+    '/like',
     grantVerifier({ resource: 'like', action: 'deleteAny' }),
     ErrorHandler(FeedbackController.unlikeFeedback)
 );
@@ -73,25 +73,25 @@ FeedbackRouter.delete(
  * ADMIN ROUTES
  */
 
-/* [DELETE] [/feedback/:fid/reply] */
-FeedbackRouter.delete(
-    '/:fid/reply',
-    grantVerifier({ resource: 'reply', action: 'deleteAny' }),
-    ErrorHandler(FeedbackController.deleteReply)
-);
-
-/* [POST] [/feedback/:fid/reply] */
+/* [POST] [/feedback/reply?fid=] */
 FeedbackRouter.post(
-    '/:fid/reply',
+    '/reply',
     grantVerifier({ resource: 'reply', action: 'createAny' }),
     ErrorHandler(FeedbackController.createReply)
 );
 
-/* [PATCH] [/feedback/:id/reply] */
+/* [PATCH] [/feedbackreply?fid=] */
 FeedbackRouter.patch(
-    '/:fid/reply',
+    '/reply',
     grantVerifier({ resource: 'reply', action: 'updateAny' }),
     ErrorHandler(FeedbackController.updateReply)
+);
+
+/* [DELETE] [/feedback/reply?fid=] */
+FeedbackRouter.delete(
+    '/reply',
+    grantVerifier({ resource: 'reply', action: 'deleteAny' }),
+    ErrorHandler(FeedbackController.deleteReply)
 );
 
 /* Export the router */

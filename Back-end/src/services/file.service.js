@@ -2,6 +2,7 @@
 const fs = require('fs');
 const { ServerError } = require('../utils/error.response.util');
 const { getAbsolutePath } = require('../utils/multer.util');
+const CODES = require('../utils/code.http');
 
 /* Define the service */
 class FileServices {

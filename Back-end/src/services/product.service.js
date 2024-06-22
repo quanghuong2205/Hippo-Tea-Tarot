@@ -109,7 +109,7 @@ class ProductServices {
         if (!checkID({ id: productID })) {
             throw new BadRequestError({
                 message: 'Invalid productID',
-                code: CODES.INVALID_PRODUCT_ID,
+                code: CODES.MONGODB_INVALID_ID,
             });
         }
 
