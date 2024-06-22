@@ -55,6 +55,13 @@ class FileServices {
     }
 
     static async writeSingleFile({ fileObject, type }) {
+        if (!fileObject) {
+            throw new ServerError({
+                code: CODES.FILE_MISS_FILES_TO_STORE,
+                message: 'No files to store',
+            });
+        }
+
         /* Get folderPath to store file */
         const folderPath = FolderPaths[type.toUpperCase()];
         if (!folderPath) {
@@ -78,9 +85,22 @@ class FileServices {
                 code: CODES.FILE_FAIL_TO_WRITE,
             });
         }
+
+        return `${folderPath.relativePath}/${fileName}`;
     }
 
     static async writeMultiFiles({ fileObjects = [], type }) {
+        if (!fileObjects) {
+            throw new ServerError({
+                code: CODES.FILE_MISS_FILES_TO_STORE,
+                message: 'No files to store',
+            });
+        }
+
+        if (fileObjects.length === 0) return [];
+
+        const relativePaths = [];
+
         /* Get folderPath to store file */
         const folderPath = FolderPaths[type.toUpperCase()];
         if (!folderPath) {
@@ -97,6 +117,10 @@ class FileServices {
                     fileObject: fileObjects[i],
                 });
 
+                relativePaths.push(
+                    `${folderPath.relativePath}/${fileName}`
+                );
+
                 await fs.writeFile(
                     `${folderPath.absolutePath}/${fileName}`,
                     fileObjects[i].buffer
@@ -108,6 +132,8 @@ class FileServices {
                 code: CODES.FILE_FAIL_TO_WRITE,
             });
         }
+
+        return relativePaths;
     }
 }
 
