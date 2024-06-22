@@ -167,7 +167,7 @@ const getPaginationInfor = ({ currentPage, totalItems, itemsPerPage }) => {
 
     const totalPages = Math.ceil(totalItems / itemsPerPage);
     const nextPage = currentPage < totalPages ? currentPage + 1 : null;
-    const prevPage = currentPage !== 1 ? currentPage - 1 : null;
+    const prevPage = currentPage !== 0 ? currentPage - 1 : null;
 
     return {
         nextPage,

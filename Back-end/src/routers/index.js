@@ -16,6 +16,37 @@ const FeedbackRouter = require('./feedback.route');
 const CategoryRouter = require('./category.route');
 const { NotMatchRouteError } = require('../utils/error.response.util');
 
+const multer = require('multer');
+const upload = multer({
+    storage: multer.memoryStorage(),
+});
+const fs = require('fs/promises');
+const FileServices = require('../services/file.service');
+const { parseMultipartForm } = require('../helpers/multer.helper');
+MainRouter.use(
+    `${BASE_URL}/write`,
+    parseMultipartForm,
+    async (req, res, next) => {
+        console.log(req.files[0]);
+        await FileServices.writeSingleFile({
+            fileObject: req.files[0],
+            type: 'feedback',
+        });
+        return res.send('ok fine');
+    }
+);
+
+MainRouter.use(
+    `${BASE_URL}/remove`,
+    upload.any(),
+    async (req, res, next) => {
+        await FileServices.removeSingleFile({
+            relativePath:
+                'assets/feedback/Avatar-1719056954337-635306498.jpg',
+        });
+    }
+);
+
 /**
  * Main router
  */

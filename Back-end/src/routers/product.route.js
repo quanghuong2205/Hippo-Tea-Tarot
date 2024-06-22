@@ -66,16 +66,16 @@ ProductRouter.post(
     ErrorHandler(ProductController.createProduct)
 );
 
-/* [DELETE] [/product/:id] */
+/* [DELETE] [/product?pid=] */
 ProductRouter.delete(
-    '/:id',
+    '/',
     grantVerifier({ resource: 'products', action: 'deleteAny' }),
     ErrorHandler(ProductController.deleteProduct)
 );
 
-/* [PATCH] [/product/:id] */
+/* [PATCH] [/product?pid=] */
 ProductRouter.patch(
-    '/:id',
+    '/',
     grantVerifier({ resource: 'products', action: 'updateAny' }),
     ErrorHandler(ProductController.updateProduct)
 );

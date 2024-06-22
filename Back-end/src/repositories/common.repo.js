@@ -1,7 +1,5 @@
 'use strict';
 const { Types } = require('mongoose');
-const userModel = require('../models/user.model');
-const UserModel = require('../models/user.model');
 const MODELS = require('../models');
 const { unSelectProps, selectProps } = require('../utils');
 
