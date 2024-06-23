@@ -163,7 +163,7 @@ class FeedbackServices {
         }
 
         /* Remove undefined props and flatten the updated object */
-        removeNullOrUndefinedProps({ feedbackProps });
+        removeNullOrUndefinedProps(feedbackProps);
 
         /* Update the products */
         return await FeedbackRepo.updateFeedback({

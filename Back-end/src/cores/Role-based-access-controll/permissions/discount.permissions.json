@@ -1,0 +1,13 @@
+{
+    "admin": {
+        "discounts": ["createAny", "upateAny", "deleteAny", "readAny"]
+    },
+
+    "user": {
+        "discounts": [
+            "readAny",
+            "readDiscountAmount",
+            "applyDiscountAmount"
+        ]
+    }
+}

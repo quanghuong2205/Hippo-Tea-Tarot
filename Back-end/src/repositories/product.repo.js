@@ -5,6 +5,7 @@ const ProductModel = require('../models/product.model');
 const {
     convertToMultiFilterConditions,
     convertToRangeCondition,
+    convertToMongoID,
 } = require('../utils/mongoose.util');
 
 /* Define the repo */
@@ -29,7 +30,7 @@ class ProductRepo {
         selectedProps = [],
     }) {
         return await ProductModel.findOneAndDelete({
-            _id: new Types.ObjectId(productID),
+            _id: convertToMongoID({ id: productID }),
         })
             .select(unSelectProps(unselectedProps))
             .select(selectProps(selectedProps));
@@ -46,7 +47,7 @@ class ProductRepo {
     }) {
         return await ProductModel.findOneAndUpdate(
             {
-                _id: new Types.ObjectId(productID),
+                _id: convertToMongoID({ id: productID }),
             },
             updatedProps,
             {
@@ -212,7 +213,7 @@ class ProductRepo {
         selectedProps = [],
     }) {
         const productObject = await ProductModel.findOne({
-            _id: new Types.ObjectId(productID),
+            _id: convertToMongoID({ id: productID }),
             ...filters,
         })
             .select(unSelectProps(unselectedProps))
@@ -220,6 +221,30 @@ class ProductRepo {
             .lean();
 
         return productObject;
+    }
+
+    /**
+     * @desc get a single products in detail
+     *      based on id
+     * @returns
+     */
+    static async getProductByIds({
+        productIDs = [],
+        filters = {
+            is_public: true,
+            is_draft: false,
+        },
+    }) {
+        const projectObjectIds = productIDs.map((p) =>
+            convertToMongoID({ id: p })
+        );
+
+        const productObjects = await ProductModel.find({
+            _id: { $in: projectObjectIds },
+            ...filters,
+        });
+
+        return productObjects;
     }
 
     /**

@@ -202,8 +202,6 @@ class ProductServices {
 
     /**
      * @desc Create a new product based on the category
-     * @param {string} category product's category
-     * @param {object} productProps properties of the product
      */
     static async createProduct({ productProps, fileObjects }) {
         /* Check category */
@@ -307,7 +305,7 @@ class ProductServices {
         });
 
         /* Remove undefined props and flatten the updated object */
-        removeNullOrUndefinedProps({ productProps });
+        removeNullOrUndefinedProps(productProps);
         productProps = flattenObject({ prefix: null, obj: productProps });
 
         return await ProductRepo.updateProduct({

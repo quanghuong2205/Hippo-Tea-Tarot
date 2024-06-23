@@ -1,6 +1,6 @@
 {
     "admin": {
-        "feedback": ["deleteAny", "readAny"],
+        "feedback": ["readAny"],
         "reply": ["createAny", "updateAny", "deleteAny"],
         "like": ["createAny", "deleteAny"]
     },
@@ -9,5 +9,10 @@
         "feedback": ["deleteOwn", "createOwn", "readAny", "updateOwn"],
         "reply": ["readAny"],
         "like": ["createAny", "deleteAny"]
+    },
+
+    "guest": {
+        "feedback": ["readAny"],
+        "reply": ["readAny"]
     }
 }

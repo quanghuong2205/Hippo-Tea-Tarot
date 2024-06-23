@@ -1,5 +1,6 @@
 'use strict';
 
+const { Types } = require('mongoose');
 const CODES = require('./code.http');
 const { BadRequestError } = require('./error.response.util');
 
@@ -55,8 +56,11 @@ const checkMongoID = ({ id, message }) => {
     }
 };
 
+const convertToMongoID = ({ id }) => new Types.ObjectId(id);
+
 module.exports = {
     convertToMultiFilterConditions,
     convertToRangeCondition,
     checkMongoID,
+    convertToMongoID,
 };

@@ -105,7 +105,6 @@ const removeNullOrUndefinedProps = (obj = {}) => {
 };
 
 /**
- *
  * @desc Append the prefxix to each prop of the object
  */
 const appendPrefixToProps = (prefix, obj) => {
@@ -121,7 +120,6 @@ const appendPrefixToProps = (prefix, obj) => {
 };
 
 /**
- *
  * @desc Flatten the object
  */
 const flattenObject = ({ prefix = null, obj }) => {
@@ -156,6 +154,9 @@ const flattenObject = ({ prefix = null, obj }) => {
     return obj;
 };
 
+/**
+ * @desc Get pagination information
+ */
 const getPaginationInfor = ({ currentPage, totalItems, itemsPerPage }) => {
     if (!totalItems || totalItems === 0) {
         return {
@@ -176,6 +177,17 @@ const getPaginationInfor = ({ currentPage, totalItems, itemsPerPage }) => {
     };
 };
 
+/**
+ * @desc Check if an value has reached
+ *      the frequenty limit in an array
+ */
+
+const isBelowFrequencyLimit = ({ value, array = [], limit }) => {
+    let frequency = 0;
+    array.forEach((v) => v === value && frequency++);
+    return frequency < limit;
+};
+
 module.exports = {
     selectPropsInObject,
     selectProps,
@@ -187,4 +199,5 @@ module.exports = {
     removeNullOrUndefinedProps,
     flattenObject,
     getPaginationInfor,
+    isBelowFrequencyLimit,
 };

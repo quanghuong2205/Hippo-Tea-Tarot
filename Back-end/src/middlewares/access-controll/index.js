@@ -11,15 +11,8 @@ const verifyGrant =
     ({ rbac }) =>
     ({ resource, action }) =>
     (req, res, next) => {
-        if (!req?.role) {
-            throw new BadRequestError({
-                message: 'Not provide role',
-                code: CODES.AUTH_MISS_ROLE,
-            });
-        }
-
         const isGranted = rbac.granted({
-            role: req.role,
+            role: req.role || 'guest',
             resource,
             action,
         });

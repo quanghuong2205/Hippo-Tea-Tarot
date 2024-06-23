@@ -14,6 +14,7 @@ const ProductRouter = require('./product.route');
 const SearchRouter = require('./search.route');
 const FeedbackRouter = require('./feedback.route');
 const CategoryRouter = require('./category.route');
+const DiscountRouter = require('./discount.route');
 const { NotMatchRouteError } = require('../utils/error.response.util');
 
 /**
@@ -25,6 +26,7 @@ MainRouter.use(`${BASE_URL}/product`, ProductRouter);
 MainRouter.use(`${BASE_URL}/search`, SearchRouter);
 MainRouter.use(`${BASE_URL}/feedback`, FeedbackRouter);
 MainRouter.use(`${BASE_URL}/category`, CategoryRouter);
+MainRouter.use(`${BASE_URL}/discount`, DiscountRouter);
 
 /**
  * Route not match
